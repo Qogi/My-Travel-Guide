@@ -25,6 +25,8 @@ dependencies:
   google_maps_flutter: ^0.5.21+15
   location_permissions: ^2.0.4+1
   location: ^2.3.5
+  flutter_auth_buttons: ^0.6.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,6 +42,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/images/sign_in_page_bg.jpg
+    - assets/images/logo_white.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
