@@ -52,6 +52,10 @@ flutter:
     - assets/images/timeline_cropped.png
     - assets/images/sphinx.jpg
     - assets/images/camera.png
+    - assets/images/information.png
+    - assets/images/search.png
+    - assets/images/map.png
+    - assets/images/add_location.png
 
 
   # The following line ensures that the Material Icons font is

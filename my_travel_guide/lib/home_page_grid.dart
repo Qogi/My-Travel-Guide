@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/home_page.dart';
+import 'package:my_travel_guide/landmark.dart';
 import 'package:my_travel_guide/main.dart';
 
 class HomePageGrid extends StatelessWidget {
@@ -34,7 +35,8 @@ class _BuildGrid extends State<Grid> {
 
 class RowsAndColumns extends StatelessWidget {
   BuildContext context;
-  RowsAndColumns(BuildContext context){
+
+  RowsAndColumns(BuildContext context) {
     this.context = context;
   }
 
@@ -47,13 +49,15 @@ class RowsAndColumns extends StatelessWidget {
           Expanded(
             child: Column(children: [
               _buildCard('Landmark', 'assets/images/options.png', this.context),
-              _buildCard('Timeline', 'assets/images/timeline_cropped.png', this.context)
+              _buildCard('Timeline', 'assets/images/timeline_cropped.png',
+                  this.context)
             ]),
           ),
           Expanded(
               child: Column(
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png', this.context),
+              _buildCard('Cities', 'assets/images/near_by_landmarks.png',
+                  this.context),
               _buildCard('Camera', 'assets/images/camera.png', this.context)
             ],
           )),
@@ -71,27 +75,32 @@ class RowsAndColumns extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         elevation: 7.0,
-        child: InkWell(onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));}, child: Column(
-          children: <Widget>[
-            Stack(children: <Widget>[
-              Container(
-                height: 110.0,
-                width: 110.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: AssetImage(imageURL),
-                )),
-              )
-            ]),
-            Text(
-              name,
-              style: TextStyle(
-                  fontFamily: 'Pompiere',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0),
-            ),
-          ],
-        )),
+        child: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Landmark()));
+            },
+            child: Column(
+              children: <Widget>[
+                Stack(children: <Widget>[
+                  Container(
+                    height: 110.0,
+                    width: 110.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage(imageURL),
+                    )),
+                  )
+                ]),
+                Text(
+                  name,
+                  style: TextStyle(
+                      fontFamily: 'Pompiere',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0),
+                ),
+              ],
+            )),
       ),
     );
   }
