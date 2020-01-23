@@ -1,8 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:my_travel_guide/home_page_grid.dart';
-import 'package:my_travel_guide/image_slideshow.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ',
@@ -11,43 +9,52 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1503970999490-4404449dc349?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ'
 ];
 
-main() {
-  runApp(HomePage());
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class ImageSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      body: new ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          ImageSlideshow(),
-          SizedBox(
-            height: 2.0,
-          ),
-          Container(
-            height: 450.0,
-            width: double.infinity,
-            child: PageView(
-              children: <Widget>[HomePageGrid()],
-            ),
-          )
-        ],
-      ),
-    );
+    return autoPlayDemo1;
   }
-}
 
-final Widget placeholder = Container(
-  color: Colors.grey,
-);
+  //Auto playing carousel
+  final CarouselSlider autoPlayDemo1 = CarouselSlider(
+    viewportFraction: 0.9,
+    aspectRatio: 2.0,
+    autoPlay: true,
+    height: 300.0,
+    items: imgList.map(
+      (url) {
+        return Container(
+          margin: EdgeInsets.all(5.0),
+          child: Stack(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                child: Image.network(
+                  url,
+                  fit: BoxFit.fill,
+                  height: 1000.0,
+                  width: 600.0,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: RaisedButton(
+                  color: Colors.blue,
+                  child: Text(
+                    "Explore",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {},
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    ).toList(),
+  );
+}
 
 final List child = map<Widget>(imgList, (index, i) {
   return Container(
