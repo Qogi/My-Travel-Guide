@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/home_page.dart';
+import 'package:my_travel_guide/main.dart';
 
 class HomePageGrid extends StatelessWidget {
   @override
@@ -24,16 +26,18 @@ class _BuildGrid extends State<Grid> {
     return Scaffold(
       body: ListView(
         shrinkWrap: true,
-        children: <Widget>[
-          RowsAndColumns()
-        ],
+        children: <Widget>[RowsAndColumns(context)],
       ),
     );
   }
-
 }
 
 class RowsAndColumns extends StatelessWidget {
+  BuildContext context;
+  RowsAndColumns(BuildContext context){
+    this.context = context;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,15 +46,15 @@ class RowsAndColumns extends StatelessWidget {
         child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Expanded(
             child: Column(children: [
-              _buildCard('Landmark', 'assets/images/options.png'),
-              _buildCard('Timeline', 'assets/images/timeline_cropped.png')
+              _buildCard('Landmark', 'assets/images/options.png', this.context),
+              _buildCard('Timeline', 'assets/images/timeline_cropped.png', this.context)
             ]),
           ),
           Expanded(
               child: Column(
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png'),
-              _buildCard('Camera', 'assets/images/camera.png')
+              _buildCard('Cities', 'assets/images/near_by_landmarks.png', this.context),
+              _buildCard('Camera', 'assets/images/camera.png', this.context)
             ],
           )),
         ]),
@@ -58,7 +62,7 @@ class RowsAndColumns extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String name, String imageURL) {
+  Widget _buildCard(String name, String imageURL, BuildContext context) {
     return Container(
       height: 160.0,
       width: 160.0,
@@ -67,14 +71,16 @@ class RowsAndColumns extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         elevation: 7.0,
-        child: Column(
+        child: InkWell(onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));}, child: Column(
           children: <Widget>[
             Stack(children: <Widget>[
               Container(
                 height: 110.0,
                 width: 110.0,
                 decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(imageURL))),
+                    image: DecorationImage(
+                  image: AssetImage(imageURL),
+                )),
               )
             ]),
             Text(
@@ -85,7 +91,7 @@ class RowsAndColumns extends StatelessWidget {
                   fontSize: 15.0),
             ),
           ],
-        ),
+        )),
       ),
     );
   }

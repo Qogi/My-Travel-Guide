@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             height: 450.0,
             width: double.infinity,
             child: PageView(
-              children: <Widget>[HomePageGrid()],
+              children: <Widget>[RowsAndColumns(context)],
             ),
           )
         ],
