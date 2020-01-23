@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:my_travel_guide/home_page.dart';
 main() {
   runApp(MyApp());
 }
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginFields() {
     return Container(
-      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 80.0),
+      margin: EdgeInsets.only(bottom: 80.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,16 +65,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
   Widget _buildGoogleSignInButton() {
-    return RaisedButton(
-      onPressed: () {},
-      color: Colors.white,
-      child: Text(
-        'Google Sign In',
-        style: TextStyle(color: Colors.black),
-      ),
-    );
+    return Container(
+      margin: EdgeInsets.only(right: 100, left: 100),
+      child: RaisedButton(
+        onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage())),
+        color: Colors.white,
+        child: Text(
+          'Google Sign In',
+          style: TextStyle(color: Colors.black),
+        ),
+      ));
   }
 
   Widget _buildContinueWithoutSignInText() {
