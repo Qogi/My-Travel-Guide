@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/city.dart';
 import 'package:my_travel_guide/home_page.dart';
 import 'package:my_travel_guide/landmark.dart';
 import 'package:my_travel_guide/main.dart';
@@ -48,17 +49,15 @@ class RowsAndColumns extends StatelessWidget {
         child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Expanded(
             child: Column(children: [
-              _buildCard('Landmark', 'assets/images/options.png', this.context),
-              _buildCard('Timeline', 'assets/images/timeline_cropped.png',
-                  this.context)
+              _buildCard('Landmark', 'assets/images/options.png', Landmark()),
+              _buildCard('Timeline', 'assets/images/timeline_cropped.png', Landmark())
             ]),
           ),
           Expanded(
               child: Column(
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png',
-                  this.context),
-              _buildCard('Camera', 'assets/images/camera.png', this.context)
+              _buildCard('Cities', 'assets/images/near_by_landmarks.png', City()),
+              _buildCard('Camera', 'assets/images/camera.png', City())
             ],
           )),
         ]),
@@ -66,7 +65,7 @@ class RowsAndColumns extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String name, String imageURL, BuildContext context) {
+  Widget _buildCard(String name, String imageURL,StatefulWidget statefulWidget) {
     return Container(
       height: 160.0,
       width: 160.0,
@@ -78,7 +77,7 @@ class RowsAndColumns extends StatelessWidget {
         child: InkWell(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Landmark()));
+                  this.context, MaterialPageRoute(builder: (context) => statefulWidget));
             },
             child: Column(
               children: <Widget>[
