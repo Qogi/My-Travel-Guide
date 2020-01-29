@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
       body: new ListView(
         shrinkWrap: true,
         children: <Widget>[
-
           ImageSlideshow(),
           SizedBox(
             height: 30.0,
