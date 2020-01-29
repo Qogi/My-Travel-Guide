@@ -4,6 +4,7 @@ import 'package:my_travel_guide/city.dart';
 import 'package:my_travel_guide/home_page.dart';
 import 'package:my_travel_guide/landmark.dart';
 import 'package:my_travel_guide/main.dart';
+import 'package:my_travel_guide/settings_page.dart';
 import 'package:my_travel_guide/timeline.dart';
 
 class HomePageGrid extends StatelessWidget {
@@ -58,7 +59,7 @@ class RowsAndColumns extends StatelessWidget {
               child: Column(
             children: <Widget>[
               _buildCard('Cities', 'assets/images/near_by_landmarks.png', City()),
-              _buildCard('Camera', 'assets/images/camera.png', City())
+              _buildCard('Camera', 'assets/images/camera.png', SettingsScreen())
             ],
           )),
         ]),
