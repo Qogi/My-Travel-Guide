@@ -4,6 +4,7 @@ import 'package:my_travel_guide/city.dart';
 import 'package:my_travel_guide/home_page.dart';
 import 'package:my_travel_guide/landmark.dart';
 import 'package:my_travel_guide/main.dart';
+import 'package:my_travel_guide/timeline.dart';
 
 class HomePageGrid extends StatelessWidget {
   @override
@@ -50,7 +51,7 @@ class RowsAndColumns extends StatelessWidget {
           Expanded(
             child: Column(children: [
               _buildCard('Landmark', 'assets/images/options.png', Landmark()),
-              _buildCard('Timeline', 'assets/images/timeline_cropped.png', Landmark())
+              _buildCard('Timeline', 'assets/images/timeline_cropped.png', TimelinePage(title: 'Timeline'))
             ]),
           ),
           Expanded(
