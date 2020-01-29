@@ -29,6 +29,8 @@ dependencies:
   carousel_slider: ^1.4.1
   timeline_list: ^0.0.3
   settings_ui: ^0.2.0
+  google_sign_in: ^4.1.1
+  firebase_auth: ^0.15.4
 
 
   # The following adds the Cupertino Icons font to your application.
