@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:my_travel_guide/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 main() {
   runApp(MyApp());
 }
@@ -54,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20.0,
             ),
-            _buildGoogleSignInButton(),
+            _signInButton(),
             SizedBox(
               height: 10.0,
             ),
@@ -65,17 +69,33 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildGoogleSignInButton() {
-    return Container(
-      margin: EdgeInsets.only(right: 100, left: 100),
-      child: RaisedButton(
-        onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage())),
-        color: Colors.white,
-        child: Text(
-          'Google Sign In',
-          style: TextStyle(color: Colors.black),
+  Widget _signInButton() {
+    return Container(  margin: EdgeInsets.only(right: 100, left: 100), child: RaisedButton(
+      color: Colors.white,
+      onPressed: () {},
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      highlightElevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image(image: AssetImage("assets/images/google_logo.png"), height: 25.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                ),
+              ),
+            )
+          ],
         ),
-      ));
+      ),
+    ));
   }
 
   Widget _buildContinueWithoutSignInText() {
@@ -120,3 +140,31 @@ class Background extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

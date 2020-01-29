@@ -60,6 +60,7 @@ flutter:
     - assets/images/search.png
     - assets/images/map.png
     - assets/images/add_location.png
+    - assets/images/google_logo.png
 
 
   # The following line ensures that the Material Icons font is
