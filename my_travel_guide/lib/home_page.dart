@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_travel_guide/home_page_grid.dart';
 import 'package:my_travel_guide/image_slideshow.dart';
+import 'package:my_travel_guide/settings_page.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ',
@@ -25,12 +26,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(45.0),
+          child: AppBar(
+            elevation: 0.0,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsScreen()));
+                },
+              )
+            ],
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.grey),
+          )),
       body: new ListView(
         shrinkWrap: true,
         children: <Widget>[
-          SizedBox(
-            height: 40.0,
-          ),
+
           ImageSlideshow(),
           SizedBox(
             height: 30.0,
