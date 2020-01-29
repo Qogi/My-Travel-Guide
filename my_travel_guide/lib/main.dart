@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_travel_guide/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:my_travel_guide/authentication/google_sign_in.dart';
 
 main() {
+
   runApp(MyApp());
 }
 
@@ -23,6 +23,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +73,15 @@ class _LoginPageState extends State<LoginPage> {
   Widget _signInButton() {
     return Container(  margin: EdgeInsets.only(right: 100, left: 100), child: RaisedButton(
       color: Colors.white,
-      onPressed: () {},
+      onPressed: () {
+        signInWithGoogle().whenComplete(() {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return HomePage();
+            }
+          ));
+        });
+      },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       highlightElevation: 0,
       child: Padding(

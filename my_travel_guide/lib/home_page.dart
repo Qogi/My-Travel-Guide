@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(45.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.0,
             actions: <Widget>[
               IconButton(

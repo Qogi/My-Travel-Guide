@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 main() {
@@ -54,7 +55,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsSection(
             title: 'Logout',
             tiles: [
-              SettingsTile(title: 'Logout', leading: Icon(Icons.exit_to_app),)
+              SettingsTile(
+                title: 'Logout',
+                leading: Icon(Icons.exit_to_app),
+                onTap: () {signOutGoogle(context);} ,
+              )
             ],
           )
         ],
