@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+
 main() {
   runApp(SettingsScreen());
 }
 
-
 class SettingsScreen extends StatefulWidget {
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
+
 }
+
+
 
 class _SettingsScreenState extends State<SettingsScreen> {
 

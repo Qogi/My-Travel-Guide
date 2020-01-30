@@ -78,8 +78,7 @@ class RowsAndColumns extends StatelessWidget {
         elevation: 7.0,
         child: InkWell(
             onTap: () {
-              Navigator.push(
-                  this.context, MaterialPageRoute(builder: (context) => statefulWidget));
+              Navigator.push(this.context, MaterialPageRoute(builder: (context) => statefulWidget));
             },
             child: Column(
               children: <Widget>[
