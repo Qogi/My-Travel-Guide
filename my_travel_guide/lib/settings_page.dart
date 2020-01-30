@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 main() {
   runApp(SettingsScreen());
 }
+
+String email;
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -14,7 +15,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool value;
-  String email = "default";
+
+  String checkEmail() {
+    if(getEmail() == null){
+      return "Email";
+    }else {
+      return getEmail();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SettingsSection(title: 'Account', tiles: [
             SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
-            SettingsTile(title: getEmail(), leading: Icon(Icons.email)),
+            SettingsTile(title: checkEmail(), leading: Icon(Icons.email)),
           ]),
           SettingsSection(
             title: 'Logout',

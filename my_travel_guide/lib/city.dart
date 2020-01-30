@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/home_page.dart';
 import 'package:my_travel_guide/image_slideshow.dart';
 import 'package:my_travel_guide/landmark.dart';
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_travel_guide/home_page.dart';
@@ -10,9 +11,20 @@ main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(),
-    );
+    return FutureBuilder<FirebaseUser>(
+        future: FirebaseAuth.instance.currentUser(),
+        builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
+          if (snapshot.hasData) {
+            FirebaseUser user = snapshot.data; // this is your user instance
+            /// is because there is user already logged
+            return MaterialApp(home: HomePage(),);
+          }
+
+          /// other way there is no user logged.
+          return MaterialApp(
+            home: LoginPage(),
+          );
+        });
   }
 }
 
@@ -111,8 +123,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildContinueWithoutSignInText() {
     return InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
         },
         child: Text(
           'Continue without signing in',
