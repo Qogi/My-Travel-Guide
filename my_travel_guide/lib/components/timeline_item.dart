@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:timeline_list/timeline_model.dart';
-import '../data.dart';
+import '../firebase/data.dart';
+
+List<Doodle> landmarks = getTimelineLandmarks();
 
 TimelineModel centerTimelineBuilder(BuildContext context, int i){
-  final doodle = doodles[i];
-  
+
   final textTheme = Theme.of(context).textTheme;
-  
   return TimelineModel(
     Card(
       elevation: 10.0,
@@ -18,16 +19,15 @@ TimelineModel centerTimelineBuilder(BuildContext context, int i){
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Image.network(doodle.doodle),
             const SizedBox(
               height: 8.0,
             ),
-            Text(doodle.time, style: textTheme.caption),
+            Text(landmarks.elementAt(i).time, style: textTheme.caption),
             const SizedBox(
               height: 8.0,
             ),
             Text(
-              doodle.name,
+              landmarks.elementAt(i).name,
               style: TextStyle(fontFamily: 'Pompiere', fontWeight: FontWeight.bold, fontSize: 20.0),
               textAlign: TextAlign.center,
             ),
@@ -40,8 +40,8 @@ TimelineModel centerTimelineBuilder(BuildContext context, int i){
     ),
     position: i % 2 == 0 ? TimelineItemPosition.right : TimelineItemPosition.left,
     isFirst: i == 0,
-    isLast: i == doodles.length,
-    iconBackground: doodle.iconBackground,
+    isLast: i == 2,
+    iconBackground: Colors.lightBlue,
   );
 }
 
