@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 
 main() {
   runApp(SettingsScreen());
@@ -10,14 +10,11 @@ main() {
 class SettingsScreen extends StatefulWidget {
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
-
 }
 
-
-
 class _SettingsScreenState extends State<SettingsScreen> {
-
   bool value;
+  String email = "default";
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +42,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 subtitle: 'English',
                 leading: Icon(Icons.language),
               ),
-              SettingsTile.switchTile(title: 'Notifications', onToggle: (bool value) {}, switchValue: true, leading: Icon(Icons.notifications), )
+              SettingsTile.switchTile(
+                title: 'Notifications',
+                onToggle: (bool value) {},
+                switchValue: true,
+                leading: Icon(Icons.notifications),
+              )
             ],
           ),
-          SettingsSection(
-            title: 'Account',
-            tiles: [
-              SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
-              SettingsTile(title: 'Email', leading: Icon(Icons.email)),
-            ]
-          ),
+          SettingsSection(title: 'Account', tiles: [
+            SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
+            SettingsTile(title: getEmail(), leading: Icon(Icons.email)),
+          ]),
           SettingsSection(
             title: 'Logout',
             tiles: [
               SettingsTile(
                 title: 'Logout',
                 leading: Icon(Icons.exit_to_app),
-                onTap: () {signOutGoogle(context);} ,
+                onTap: () {
+                  signOutGoogle(context);
+                },
               )
             ],
           )
@@ -70,32 +71,3 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
