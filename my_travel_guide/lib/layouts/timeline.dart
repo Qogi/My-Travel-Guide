@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timeline_list/timeline.dart';
-import 'timeline_item.dart';
-import 'data.dart';
+import '../components/timeline_item.dart';
+import '../data.dart';
 
 class TimelinePage extends StatefulWidget {
   TimelinePage({Key key, this.title}) : super(key: key);

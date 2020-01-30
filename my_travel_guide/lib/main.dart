@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_travel_guide/home_page.dart';
+import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 
 main() {
