@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:my_travel_guide/home_page_grid.dart';
-import 'package:my_travel_guide/image_slideshow.dart';
-import 'package:my_travel_guide/settings_page.dart';
+import 'package:my_travel_guide/components/home_page_grid.dart';
+import 'package:my_travel_guide/components/image_slideshow.dart';
+import 'package:my_travel_guide/layouts/settings_page.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ',
@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(45.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.0,
             actions: <Widget>[
               IconButton(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timeline_list/timeline_model.dart';
-import 'data.dart';
+import '../data.dart';
 
 TimelineModel centerTimelineBuilder(BuildContext context, int i){
   final doodle = doodles[i];

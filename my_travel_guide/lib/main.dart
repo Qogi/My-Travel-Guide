@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/home_page.dart';
+import 'package:flutter/widgets.dart';
+import 'package:my_travel_guide/layouts/home_page.dart';
+import 'package:my_travel_guide/authentication/google_sign_in.dart';
+
 main() {
   runApp(MyApp());
 }
@@ -7,9 +11,20 @@ main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(),
-    );
+    return FutureBuilder<FirebaseUser>(
+        future: FirebaseAuth.instance.currentUser(),
+        builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
+          if (snapshot.hasData) {
+            FirebaseUser user = snapshot.data; // this is your user instance
+            /// is because there is user already logged
+            return MaterialApp(home: HomePage(),);
+          }
+
+          /// other way there is no user logged.
+          return MaterialApp(
+            home: LoginPage(),
+          );
+        });
   }
 }
 
@@ -54,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20.0,
             ),
-            _buildGoogleSignInButton(),
+            _signInButton(),
             SizedBox(
               height: 10.0,
             ),
@@ -65,25 +80,56 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildGoogleSignInButton() {
+  Widget _signInButton() {
     return Container(
-      margin: EdgeInsets.only(right: 100, left: 100),
-      child: RaisedButton(
-        onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage())),
-        color: Colors.white,
-        child: Text(
-          'Google Sign In',
-          style: TextStyle(color: Colors.black),
-        ),
-      ));
+        margin: EdgeInsets.only(right: 100, left: 100),
+        child: RaisedButton(
+          color: Colors.white,
+          onPressed: () {
+            signInWithGoogle().whenComplete(() {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return HomePage();
+              }));
+            });
+          },
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          highlightElevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image(
+                    image: AssetImage("assets/images/google_logo.png"),
+                    height: 25.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Sign in with Google',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget _buildContinueWithoutSignInText() {
-    return Text(
-      'Continue without signing in',
-      textAlign: TextAlign.center,
-      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-    );
+    return InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+        },
+        child: Text(
+          'Continue without signing in',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ));
   }
 }
 
@@ -94,13 +140,10 @@ class AppLogo extends StatelessWidget {
       margin: EdgeInsets.only(top: 10.0),
       width: 150.0,
       height: 150.0,
-      decoration:
-      BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/logo_white.png'),
-        )
-      ),
-
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        image: AssetImage('assets/images/logo_white.png'),
+      )),
     );
   }
 }
@@ -109,14 +152,10 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-      BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/sign_in_page_bg.jpg'),
-            fit: BoxFit.fill
-          )
-      ),
-
+              image: AssetImage('assets/images/sign_in_page_bg.jpg'),
+              fit: BoxFit.fill)),
     );
   }
 }
