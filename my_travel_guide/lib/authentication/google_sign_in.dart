@@ -10,6 +10,7 @@ FirebaseUser user;
 GoogleSignInAccount googleSignInAccount;
 
 String email;
+String id;
 
 Future<String> signInWithGoogle() async {
   googleSignInAccount = await googleSignIn.signIn();
@@ -25,8 +26,17 @@ Future<String> signInWithGoogle() async {
   assert(!user.isAnonymous);
   assert(await user.getIdToken() != null);
   final FirebaseUser currentUser = await _auth.currentUser();
+  setUserID(user.uid);
   assert(user.uid == currentUser.uid);
   return user.email;
+}
+
+void setUserID(String userID){
+  id = userID;
+}
+
+String getUserID(){
+  return id;
 }
 
 void setEmail(String googleEmail) {

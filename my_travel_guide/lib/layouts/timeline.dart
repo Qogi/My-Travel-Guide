@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:timeline_list/timeline.dart';
 import '../components/timeline_item.dart';
-import '../firebase/data.dart';
 
 class TimelinePage extends StatefulWidget {
   TimelinePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
-
   @override
   _TimelinePageState createState() => _TimelinePageState();
 }
 
 class _TimelinePageState extends State<TimelinePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +34,6 @@ class _TimelinePageState extends State<TimelinePage> {
 
   timelineModel() => Timeline.builder(
       itemBuilder: centerTimelineBuilder,
-      itemCount: getTimelineLandmarks().length,
+      itemCount: getTimelineLandmarks(context).length,
       position: TimelinePosition.Center);
 }

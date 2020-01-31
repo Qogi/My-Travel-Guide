@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
+import 'package:my_travel_guide/main.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 main() {
@@ -74,7 +75,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: 'Logout',
                 leading: Icon(Icons.exit_to_app),
                 onTap: () {
-                  getData();
+                  clearTimeline();
+                  signOutGoogle(context);
                 },
               )
             ],

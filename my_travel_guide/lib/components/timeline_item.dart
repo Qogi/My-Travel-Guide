@@ -3,10 +3,10 @@ import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:timeline_list/timeline_model.dart';
 import '../firebase/data.dart';
 
-List<Doodle> landmarks = getTimelineLandmarks();
 
-TimelineModel centerTimelineBuilder(BuildContext context, int i){
 
+TimelineModel centerTimelineBuilder(BuildContext context, int i) {
+  List<Doodle> landmarks = getTimelineLandmarks(context);
   final textTheme = Theme.of(context).textTheme;
   return TimelineModel(
     Card(
@@ -22,13 +22,16 @@ TimelineModel centerTimelineBuilder(BuildContext context, int i){
             const SizedBox(
               height: 8.0,
             ),
-            Text(landmarks.elementAt(i).time, style: textTheme.caption),
+            Text(landmarks.elementAt(i).name, style: textTheme.caption),
             const SizedBox(
               height: 8.0,
             ),
             Text(
-              landmarks.elementAt(i).name,
-              style: TextStyle(fontFamily: 'Pompiere', fontWeight: FontWeight.bold, fontSize: 20.0),
+              landmarks.elementAt(i).time,
+              style: TextStyle(
+                  fontFamily: 'Pompiere',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -38,52 +41,10 @@ TimelineModel centerTimelineBuilder(BuildContext context, int i){
         ),
       ),
     ),
-    position: i % 2 == 0 ? TimelineItemPosition.right : TimelineItemPosition.left,
+    position:
+        i % 2 == 0 ? TimelineItemPosition.right : TimelineItemPosition.left,
     isFirst: i == 0,
     isLast: i == 2,
     iconBackground: Colors.lightBlue,
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
