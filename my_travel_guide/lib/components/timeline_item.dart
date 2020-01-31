@@ -6,7 +6,7 @@ import '../firebase/landmark.dart';
 
 
 TimelineModel centerTimelineBuilder(BuildContext context, int i) {
-  List<Doodle> landmarks = getTimelineLandmarks(context);
+  List<Landmark> landmarks = getTimelineLandmarks(context);
   final textTheme = Theme.of(context).textTheme;
   return TimelineModel(
     Card(

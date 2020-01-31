@@ -6,9 +6,9 @@ import '../firebase/landmark.dart';
 
 
 final databaseReference = Firestore.instance;
-List<Doodle> list = new List();
+List<Landmark> list = new List();
 
-List<Doodle> getData() {
+List<Landmark> getData() {
   print(getUserID());
   databaseReference
       .collection("VisitedPlaces")
@@ -16,7 +16,7 @@ List<Doodle> getData() {
       .collection("MyPlaces")
       .getDocuments()
       .then((QuerySnapshot snapshot) {
-    snapshot.documents.forEach((docs) => list.add(Doodle(
+    snapshot.documents.forEach((docs) => list.add(Landmark(
           name: docs.data.values.toList().elementAt(0),
           time: docs.data.values.toList().elementAt(1),
         )));
@@ -28,7 +28,7 @@ void clearTimeline(){
   list.clear();
 }
 
-List<Doodle> getTimelineLandmarks(BuildContext context){
+List<Landmark> getTimelineLandmarks(BuildContext context){
   if(list.isEmpty){
     list = getData();
     return list;
