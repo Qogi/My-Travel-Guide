@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/city.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
-import 'package:my_travel_guide/layouts/landmark.dart';
+import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:my_travel_guide/main.dart';
 import 'package:my_travel_guide/layouts/settings_page.dart';
 import 'package:my_travel_guide/layouts/timeline.dart';

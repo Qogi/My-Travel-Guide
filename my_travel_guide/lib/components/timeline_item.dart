@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:timeline_list/timeline_model.dart';
-import '../firebase/data.dart';
+import '../firebase/landmark.dart';
 
 
 

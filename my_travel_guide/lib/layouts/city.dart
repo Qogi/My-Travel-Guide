@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
-import 'package:my_travel_guide/layouts/landmark.dart';
+import 'package:my_travel_guide/layouts/landmark_page.dart';
 
 main() {
   runApp(City());
