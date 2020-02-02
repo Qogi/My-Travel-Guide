@@ -25,11 +25,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  void testData() {
-    getData();
-  }
-
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
