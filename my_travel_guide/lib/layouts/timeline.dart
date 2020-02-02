@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:timeline_list/timeline.dart';
 import '../components/timeline_item.dart';
-import '../data.dart';
 
 class TimelinePage extends StatefulWidget {
   TimelinePage({Key key, this.title}) : super(key: key);
@@ -34,6 +34,6 @@ class _TimelinePageState extends State<TimelinePage> {
 
   timelineModel() => Timeline.builder(
       itemBuilder: centerTimelineBuilder,
-      itemCount: doodles.length,
+      itemCount: getTimelineLandmarks(context).length,
       position: TimelinePosition.Center);
 }
