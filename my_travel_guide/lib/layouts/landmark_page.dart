@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
+import 'package:place_picker/place_picker.dart';
 
 main() {
   runApp(Landmark());
@@ -14,6 +15,14 @@ class Landmark extends StatefulWidget {
 
 class _LandmarkState extends State<Landmark> {
   BuildContext context;
+
+  void showPlacePicker() async {
+    LocationResult result = await Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PlacePicker("AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q")));
+
+    // Handle the result in your way
+    print(result.placeId);
+  }
 
   @override
   Widget build(BuildContext context) {
