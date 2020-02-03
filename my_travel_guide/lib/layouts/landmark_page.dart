@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/google_places_api.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:place_picker/place_picker.dart';
+import "package:google_maps_webservice/places.dart";
 
 main() {
   runApp(Landmark());
@@ -15,14 +17,6 @@ class Landmark extends StatefulWidget {
 
 class _LandmarkState extends State<Landmark> {
   BuildContext context;
-
-  void showPlacePicker() async {
-    LocationResult result = await Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => PlacePicker("AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q")));
-
-    // Handle the result in your way
-    print(result.placeId);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +57,10 @@ class _LandmarkState extends State<Landmark> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            _buildOption("assets/images/search.png", HomePage()),
-            _buildOption("assets/images/information.png", HomePage()),
-            _buildOption("assets/images/map.png", HomePage()),
-            _buildOption("assets/images/add_location.png", HomePage())
+            _buildOption("assets/images/search.png", MaterialPageRoute(builder: (context) => placePickerIntent(context))),
+//            _buildOption("assets/images/information.png", HomePage()),
+//            _buildOption("assets/images/map.png", HomePage()),
+//            _buildOption("assets/images/add_location.png", HomePage())
           ],
         ),
       ),
@@ -123,11 +117,11 @@ class _LandmarkState extends State<Landmark> {
         ));
   }
 
-  Widget _buildOption(String url, StatefulWidget statefulWidget) {
+  Widget _buildOption(String url, MaterialPageRoute materialPageRoute) {
     return InkWell(
         onTap: () {
           Navigator.push(this.context,
-              MaterialPageRoute(builder: (context) => statefulWidget));
+              materialPageRoute);
         },
         child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
