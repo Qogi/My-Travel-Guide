@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/landmark_information.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 
@@ -43,20 +44,21 @@ class _LandmarkState extends State<City> {
   }
 
   Widget _buildRow(BuildContext context) {
+    final data = Data( text: "Lorem ipsum");
     return Container(
       width: 160,
       padding: EdgeInsets.all(5),
       child:  Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildCard("Map", Landmark()),
-          _buildCard("Landmarks", Landmark())
+          _buildCard("Map", MaterialPageRoute(builder: (context) => LandmarkPage(data: data,))),
+          _buildCard("Landmarks", MaterialPageRoute(builder: (context) => LandmarkPage(data: data,)))
         ],
       ),
     );
   }
 
-  Widget _buildCard(String name, StatefulWidget statefulWidget) {
+  Widget _buildCard(String name, MaterialPageRoute materialPageRoute) {
     return Container(
       width: 160.0,
       padding: EdgeInsets.all(10),
@@ -67,7 +69,7 @@ class _LandmarkState extends State<City> {
         child: InkWell(
             onTap: () {
               Navigator.push(
-                  this.context, MaterialPageRoute(builder: (context) => statefulWidget));
+                  this.context, materialPageRoute);
             },
             child: Column(
               children: <Widget>[
