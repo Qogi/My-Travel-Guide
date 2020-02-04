@@ -37,7 +37,7 @@ class _BuildGrid extends State<Grid> {
 
 class RowsAndColumns extends StatelessWidget {
   BuildContext context;
-  Data data = new Data(text: "Landmark", address:"Address", number: "Number", website: "Website", rating: "Rating");
+  Data data = new Data(text: "Landmark", address:" ", number: " ", website: " ", rating: " ", openingHours: " ");
 
   RowsAndColumns(BuildContext context) {
     this.context = context;

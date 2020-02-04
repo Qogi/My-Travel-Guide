@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/landmark_information.dart';
-import 'package:my_travel_guide/google_places_api.dart';
+import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 
 class LandmarkPage extends StatelessWidget {
@@ -15,6 +15,7 @@ class LandmarkPage extends StatelessWidget {
     this.context = context;
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(40.0),
           child: AppBar(
@@ -24,6 +25,7 @@ class LandmarkPage extends StatelessWidget {
             ),
             backgroundColor: Colors.white,
             centerTitle: true,
+            elevation: 0.0,
             iconTheme: IconThemeData(color: Colors.black),
           )),
       body: new ListView(
@@ -88,10 +90,10 @@ class LandmarkPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 _buildRow("Information", ""),
-                _buildRow("Opening Hours:", "12:00"),
-                _buildRow("Address", data.address),
+                _buildRow("Opening Hours:", data.openingHours),
+                _buildRow("Address:", data.address),
                 _buildRow("Rating:", data.rating),
-                _buildRow("Number", data.number),
+                _buildRow("Number:", data.number),
                 _buildRow("Website:", data.website),
               ],
             )
@@ -103,7 +105,7 @@ class LandmarkPage extends StatelessWidget {
 
   Widget _buildRow(String rowName, String rowValue) {
     return Padding(
-        padding: EdgeInsets.only(left: 25, top: 20),
+        padding: EdgeInsets.only(left: 15, top: 20),
         child: Row(
           children: <Widget>[
             Text(
@@ -113,7 +115,7 @@ class LandmarkPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 20,
+              width: 5,
             ),
             Text(
               rowValue,

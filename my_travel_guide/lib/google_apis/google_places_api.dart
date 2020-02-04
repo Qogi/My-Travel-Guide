@@ -9,25 +9,26 @@ String landmarkName,
     landmarkWebsite,
     landmarkNumber,
     landmarkAddress,
-    landmarkRating = "Rating";
+    landmarkRating,
+    landmarkOpeningHours;
 Data data;
 
 PlacePicker placePickerIntent(BuildContext context) {
   return PlacePicker(
     apiKey: 'AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q',
     onPlacePicked: (result) {
-
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => LandmarkPage(
                     data: Data(
-                      text: result.name,
-                      address: result.formattedAddress,
-                      number: result.internationalPhoneNumber,
-                      website: result.website,
-                      rating: landmarkRating
-                    ),
+                        text: result.name,
+                        address: result.formattedAddress,
+                        number: result.internationalPhoneNumber,
+                        website: result.website,
+                        rating: result.rating.toString() ?? "No Rating",
+                        openingHours:
+                            result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1)),
                   )));
     },
     initialPosition: LatLng(48.858372, 2.294481),

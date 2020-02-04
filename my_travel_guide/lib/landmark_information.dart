@@ -4,6 +4,7 @@ class Data {
   String rating = " ";
   String number = " ";
   String website = " ";
+  String openingHours;
 
-  Data({this.text, this.website, this.rating, this.address, this.number});
+  Data({this.text, this.website, this.rating, this.address, this.number, this.openingHours});
 }
