@@ -5,8 +5,16 @@ import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 
 main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/' : (BuildContext context) => MyApp(),
+      '/home': (BuildContext context) => new HomePage()
+    },
+  ));
 }
+
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,12 +24,12 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
           if (snapshot.hasData) {
             /// is because there is user already logged
-            return MaterialApp(home: HomePage(),);
+            return Scaffold(body: HomePage(),);
           }
 
           /// other way there is no user logged.
-          return MaterialApp(
-            home: LoginPage(),
+          return Scaffold(
+            body: LoginPage(),
           );
         });
   }
@@ -37,12 +45,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomPaint(
-        child: _buildLoginLayout(),
+        child: _buildLoginLayout(context,
       ),
-    );
+    ));
   }
 
-  Widget _buildLoginLayout() {
+  Widget _buildLoginLayout(BuildContext context) {
     return Stack(
       children: <Widget>[
         Background(),
@@ -52,13 +60,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: _buildLoginFields(),
+          child: _buildLoginFields(context),
         ),
       ],
     );
   }
 
-  Widget _buildLoginFields() {
+  Widget _buildLoginFields(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 80.0),
       child: SingleChildScrollView(
@@ -68,27 +76,25 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20.0,
             ),
-            _signInButton(),
+            _signInButton(context),
             SizedBox(
               height: 10.0,
             ),
-            _buildContinueWithoutSignInText(),
+            _buildContinueWithoutSignInText(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _signInButton() {
+  Widget _signInButton(BuildContext buildContext) {
     return Container(
-        margin: EdgeInsets.only(right: 100, left: 100),
+        margin: EdgeInsets.only(right: 85, left: 80),
         child: RaisedButton(
           color: Colors.white,
           onPressed: () {
             signInWithGoogle().whenComplete(() {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return HomePage();
-              }));
+              Navigator.of(buildContext).popAndPushNamed('/home');
             });
           },
           shape:
@@ -119,10 +125,10 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  Widget _buildContinueWithoutSignInText() {
+  Widget _buildContinueWithoutSignInText(BuildContext buildContext) {
     return InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(buildContext, MaterialPageRoute(builder: (context) => HomePage()));
         },
         child: Text(
           'Continue without signing in',

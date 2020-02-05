@@ -17,14 +17,18 @@ class LandmarkPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(preferredSize: Size.fromHeight(40.0), child: Appbar(title: data.text,)),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(40.0),
+          child: Appbar(
+            title: data.text,
+          )),
       body: new ListView(
         shrinkWrap: true,
         children: <Widget>[
           SizedBox(
             height: 10.0,
           ),
-          ImageSlideshow(),
+          ImageSlideshow(isVisible: false,),
           _buildOptionsCard(context),
           _buildCard()
         ],

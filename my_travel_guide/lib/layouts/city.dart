@@ -32,7 +32,7 @@ class _LandmarkState extends State<City> {
           SizedBox(
             height: 10.0,
           ),
-          ImageSlideshow(),
+          ImageSlideshow(isVisible: false,),
           _buildRow(context),
         ],
       ),

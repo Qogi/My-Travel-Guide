@@ -38,7 +38,7 @@ dependencies:
   http: ^0.12.0+4
   google_maps_place_picker: ^0.5.1
   date_format: ^1.0.8
-
+  firebase_remote_config: ^0.3.0+1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -56,6 +56,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - .env
     - assets/images/sign_in_page_bg.jpg
     - assets/images/logo_white.png
     - assets/images/options.png

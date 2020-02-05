@@ -14,8 +14,9 @@ String landmarkName,
 Data data;
 
 PlacePicker placePickerIntent(BuildContext context) {
+
   return PlacePicker(
-    apiKey: 'AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q',
+    apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q",
     onPlacePicked: (result) {
       Navigator.push(
           context,

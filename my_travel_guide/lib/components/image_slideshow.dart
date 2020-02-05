@@ -10,50 +10,53 @@ final List<String> imgList = [
 ];
 
 class ImageSlideshow extends StatelessWidget {
+  bool isVisible = true;
+
+  ImageSlideshow({this.isVisible});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return autoPlayDemo1;
-  }
-
-  //Auto playing carousel
-  final CarouselSlider autoPlayDemo1 = CarouselSlider(
-    viewportFraction: 0.9,
-    aspectRatio: 2.0,
-    autoPlay: true,
-    height: 300.0,
-    items: imgList.map(
-      (url) {
-        return Container(
-          margin: EdgeInsets.all(5.0),
-          child: Stack(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                child: Image.network(
-                  url,
-                  fit: BoxFit.fill,
-                  height: 1000.0,
-                  width: 600.0,
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    "Explore",
-                    style: TextStyle(color: Colors.white),
+    return CarouselSlider(
+      viewportFraction: 0.9,
+      aspectRatio: 2.0,
+      autoPlay: true,
+      height: 300.0,
+      items: imgList.map(
+        (url) {
+          return Container(
+            margin: EdgeInsets.all(5.0),
+            child: Stack(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  child: Image.network(
+                    url,
+                    fit: BoxFit.fill,
+                    height: 1000.0,
+                    width: 600.0,
                   ),
-                  onPressed: () {},
                 ),
-              )
-            ],
-          ),
-        );
-      },
-    ).toList(),
-  );
+                Visibility(
+                    visible: isVisible ?? true,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: RaisedButton(
+                        color: Colors.blue,
+                        child: Text(
+                          "Explore",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ))
+              ],
+            ),
+          );
+        },
+      ).toList(),
+    );
+  }
 }
 
 final List child = map<Widget>(imgList, (index, i) {
