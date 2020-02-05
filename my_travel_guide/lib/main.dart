@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
+import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 
 main() {
   runApp(MaterialApp(
@@ -94,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
           onPressed: () {
             signInWithGoogle().whenComplete(() {
+              getData();
               Navigator.of(buildContext).popAndPushNamed('/home');
             });
           },

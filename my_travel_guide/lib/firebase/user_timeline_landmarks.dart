@@ -3,10 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import '../firebase/landmark.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 final databaseReference = Firestore.instance;
 List<Landmark> list = new List();
+
+saveList(List<String> list) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  print('Saved');
+  await prefs.setStringList('timeline_data', list);
+}
 
 List<Landmark> getData() {
   print(getUserID());
@@ -29,10 +35,12 @@ void clearTimeline(){
 }
 
 List<Landmark> getTimelineLandmarks(BuildContext context){
-  if(list.isEmpty){
-    list = getData();
-    return list;
-  }else {
-    return list;
-  }
+//  if(list.isEmpty){
+//    list = getData();
+//    return list;
+//  }else {
+//    return list;
+//  }
+
+  return list;
 }
