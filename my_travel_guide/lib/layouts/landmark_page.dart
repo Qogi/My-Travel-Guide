@@ -1,34 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/layouts/home_page.dart';
+import 'package:my_travel_guide/landmark_information.dart';
+import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
+import 'package:my_travel_guide/components/app_bar.dart';
 
-main() {
-  runApp(Landmark());
-}
-
-class Landmark extends StatefulWidget {
-  @override
-  _LandmarkState createState() => _LandmarkState();
-}
-
-class _LandmarkState extends State<Landmark> {
+class LandmarkPage extends StatelessWidget {
   BuildContext context;
+  final Data data;
+
+  LandmarkPage({this.data});
 
   @override
   Widget build(BuildContext context) {
     this.context = context;
     // TODO: implement build
     return Scaffold(
-      appBar: PreferredSize( preferredSize: Size.fromHeight(40.0), child: AppBar(
-        title: Text(
-          "Landmark",
-          style: TextStyle(color: Colors.black, fontSize: 17.0),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.black),
-      )),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(preferredSize: Size.fromHeight(40.0), child: Appbar(title: data.text,)),
       body: new ListView(
         shrinkWrap: true,
         children: <Widget>[
@@ -54,10 +43,22 @@ class _LandmarkState extends State<Landmark> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            _buildOption("assets/images/search.png", HomePage()),
-            _buildOption("assets/images/information.png", HomePage()),
-            _buildOption("assets/images/map.png", HomePage()),
-            _buildOption("assets/images/add_location.png", HomePage())
+            _buildOption(
+                "assets/images/search.png",
+                MaterialPageRoute(
+                    builder: (context) => placePickerIntent(context))),
+            _buildOption(
+                "assets/images/information.png",
+                MaterialPageRoute(
+                    builder: (context) => placePickerIntent(context))),
+            _buildOption(
+                "assets/images/map.png",
+                MaterialPageRoute(
+                    builder: (context) => placePickerIntent(context))),
+            _buildOption(
+                "assets/images/add_location.png",
+                MaterialPageRoute(
+                    builder: (context) => placePickerIntent(context)))
           ],
         ),
       ),
@@ -79,11 +80,11 @@ class _LandmarkState extends State<Landmark> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 _buildRow("Information", ""),
-                _buildRow("Opening Hours:", "12:00"),
-                _buildRow("Address:", "Ireland, Dublin"),
-                _buildRow("Rating:", "4.5"),
-                _buildRow("Phone Number:", "01 098 123"),
-                _buildRow("Website:", "www.google.com"),
+                _buildRow("Opening Hours:", data.openingHours),
+                _buildRow("Address:", data.address),
+                _buildRow("Rating:", data.rating),
+                _buildRow("Number:", data.number),
+                _buildRow("Website:", data.website),
               ],
             )
           ],
@@ -94,7 +95,7 @@ class _LandmarkState extends State<Landmark> {
 
   Widget _buildRow(String rowName, String rowValue) {
     return Padding(
-        padding: EdgeInsets.only(left: 25, top: 20),
+        padding: EdgeInsets.only(left: 15, top: 20),
         child: Row(
           children: <Widget>[
             Text(
@@ -104,7 +105,7 @@ class _LandmarkState extends State<Landmark> {
               ),
             ),
             SizedBox(
-              width: 20,
+              width: 5,
             ),
             Text(
               rowValue,
@@ -114,11 +115,10 @@ class _LandmarkState extends State<Landmark> {
         ));
   }
 
-  Widget _buildOption(String url, StatefulWidget statefulWidget) {
+  Widget _buildOption(String url, MaterialPageRoute materialPageRoute) {
     return InkWell(
         onTap: () {
-          Navigator.push(this.context,
-              MaterialPageRoute(builder: (context) => statefulWidget));
+          Navigator.push(this.context, materialPageRoute);
         },
         child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
