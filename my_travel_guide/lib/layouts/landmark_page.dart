@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_travel_guide/landmark_information.dart';
 import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
+import 'package:my_travel_guide/components/app_bar.dart';
 
 class LandmarkPage extends StatelessWidget {
   BuildContext context;
@@ -16,18 +17,7 @@ class LandmarkPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(40.0),
-          child: AppBar(
-            title: Text(
-              '${data.text}',
-              style: TextStyle(color: Colors.black, fontSize: 17.0),
-            ),
-            backgroundColor: Colors.white,
-            centerTitle: true,
-            elevation: 0.0,
-            iconTheme: IconThemeData(color: Colors.black),
-          )),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(40.0), child: Appbar(title: data.text,)),
       body: new ListView(
         shrinkWrap: true,
         children: <Widget>[

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
+import 'package:my_travel_guide/components/app_bar.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:settings_ui/settings_ui.dart';
-
 
 main() {
   runApp(SettingsScreen());
@@ -18,7 +18,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool value;
 
-
   String checkEmail() {
     if (getEmail() == null) {
       return "Email";
@@ -31,17 +30,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.0),
-        child: AppBar(
-          title: Text(
-            "Settings",
-            style: TextStyle(color: Colors.black, fontSize: 17.0),
-          ),
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black),
-        ),
+        child: Appbar(title: "Settings",),
       ),
       body: SettingsList(
         sections: [
