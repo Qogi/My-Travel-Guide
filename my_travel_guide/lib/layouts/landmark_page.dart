@@ -1,15 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_travel_guide/landmark_information.dart';
 import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
+import 'package:my_travel_guide/layouts/home_page.dart';
 
 class LandmarkPage extends StatelessWidget {
   BuildContext context;
   final Data data;
 
   LandmarkPage({this.data});
+
+  Future<bool> pop() async{
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,9 @@ class LandmarkPage extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          ImageSlideshow(isVisible: false,),
+          ImageSlideshow(
+            isVisible: false,
+          ),
           _buildOptionsCard(context),
           _buildCard()
         ],
@@ -85,7 +96,16 @@ class LandmarkPage extends StatelessWidget {
               children: <Widget>[
                 _buildRow("Information", ""),
                 _buildRow("Opening Hours:", data.openingHours),
-                _buildRow("Address:", data.address),
+                _buildRow(
+                    "Address:",
+                    data.address
+                            .substring(0, data.address.length.toInt() ~/ 1.5)
+                            .toString() +
+                        "\n" +
+                        data.address
+                            .substring(data.address.length.toInt() ~/ 2 + 1,
+                                data.address.length.toInt())
+                            .toString()),
                 _buildRow("Rating:", data.rating),
                 _buildRow("Number:", data.number),
                 _buildRow("Website:", data.website),
@@ -104,16 +124,14 @@ class LandmarkPage extends StatelessWidget {
           children: <Widget>[
             Text(
               rowName,
-              style: TextStyle(
-                color: Colors.grey,
-              ),
+              style: TextStyle(color: Colors.grey, fontSize: 12.0),
             ),
             SizedBox(
               width: 5,
             ),
             Text(
               rowValue,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black, fontSize: 12.0),
             )
           ],
         ));

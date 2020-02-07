@@ -3,16 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import '../firebase/landmark.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final databaseReference = Firestore.instance;
 List<Landmark> list = new List();
-
-saveList(List<String> list) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  print('Saved');
-  await prefs.setStringList('timeline_data', list);
-}
 
 List<Landmark> getData() {
   print(getUserID());

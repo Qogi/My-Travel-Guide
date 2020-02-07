@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/layouts/home_page.dart';
 
 class Appbar extends StatelessWidget {
   final String title;
@@ -16,6 +17,7 @@ class Appbar extends StatelessWidget {
       centerTitle: true,
       elevation: 0.0,
       iconTheme: IconThemeData(color: Colors.black),
+      leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()))),
     );
   }
 

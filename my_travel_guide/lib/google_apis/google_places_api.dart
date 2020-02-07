@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
@@ -30,7 +31,7 @@ PlacePicker placePickerIntent(BuildContext context) {
                         rating: result.rating.toString() ?? "No Rating",
                         openingHours:
                             result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1)),
-                  )));
+                  ))).whenComplete(() {SystemNavigator.pop();});
     },
     initialPosition: LatLng(48.858372, 2.294481),
     useCurrentLocation: true,
