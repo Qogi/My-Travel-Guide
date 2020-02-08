@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/landmark_information.dart';
+import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
@@ -54,7 +54,7 @@ class _LandmarkPage extends State<LandmarkPage> {
       prefs.setString("name", name);
       openingHours = widget.data.openingHours;
       prefs.setString("openingHours", openingHours);
-      address = _buildAddres();
+      address = _buildAddress();
       prefs.setString("address", address);
       rating = widget.data.rating;
       prefs.setString("rating", rating);
@@ -62,11 +62,11 @@ class _LandmarkPage extends State<LandmarkPage> {
       prefs.setString("number", number);
       website = widget.data.website;
       prefs.setString("website", website);
-      _buildCard(openingHours, rating, number, _buildAddres(), website);
+      _buildCard(openingHours, rating, number, _buildAddress(), website);
     }
   }
 
-  String _buildAddres() {
+  String _buildAddress() {
     return widget.data.address
             .substring(0, widget.data.address.length.toInt() ~/ 1.5)
             .toString() +
