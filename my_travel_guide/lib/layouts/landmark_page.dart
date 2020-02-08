@@ -1,35 +1,97 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_travel_guide/landmark_information.dart';
 import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LandmarkPage extends StatelessWidget {
-  BuildContext context;
+void main() => runApp(new LandmarkPage());
+
+String name = "Landmark",
+    openingHours = " ",
+    address = " ",
+    rating = " ",
+    number = " ",
+    website = " ";
+
+class LandmarkPage extends StatefulWidget {
   final Data data;
 
   LandmarkPage({this.data});
 
-  Future<bool> pop() async{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+    return _LandmarkPage();
+  }
+}
 
+class _LandmarkPage extends State<LandmarkPage> {
+  SharedPreferences prefs;
+
+  initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    prefs = await SharedPreferences.getInstance();
+    _saveValues();
+    setPreviousState();
+  }
+
+  void setPreviousState() {
+    setState(() {});
+  }
+
+  void _saveValues() {
+    print(widget.data.text);
+    if (widget.data.text != "Landmark") {
+      name = widget.data.text;
+      prefs.setString("name", name);
+      openingHours = widget.data.openingHours;
+      prefs.setString("openingHours", openingHours);
+      address = _buildAddres();
+      prefs.setString("address", address);
+      rating = widget.data.rating;
+      prefs.setString("rating", rating);
+      number = widget.data.number;
+      prefs.setString("number", number);
+      website = widget.data.website;
+      prefs.setString("website", website);
+      _buildCard(openingHours, rating, number, _buildAddres(), website);
+    }
+  }
+
+  String _buildAddres() {
+    return widget.data.address
+            .substring(0, widget.data.address.length.toInt() ~/ 1.5)
+            .toString() +
+        "\n" +
+        widget.data.address
+            .substring(widget.data.address.length.toInt() ~/ 2 + 1,
+                widget.data.address.length.toInt())
+            .toString();
+  }
+
+  Future<bool> pop() async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
     return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(40.0),
           child: Appbar(
-            title: data.text,
+            title: name,
           )),
       body: new ListView(
         shrinkWrap: true,
@@ -41,7 +103,7 @@ class LandmarkPage extends StatelessWidget {
             isVisible: false,
           ),
           _buildOptionsCard(context),
-          _buildCard()
+          _buildCard(openingHours, rating, number, address, website)
         ],
       ),
     );
@@ -80,7 +142,8 @@ class LandmarkPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard() {
+  Widget _buildCard(String openingHours, String rating, String number,
+      String address, String website) {
     return Container(
       height: 260.0,
       width: 160.0,
@@ -95,20 +158,11 @@ class LandmarkPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 _buildRow("Information", ""),
-                _buildRow("Opening Hours:", data.openingHours),
-                _buildRow(
-                    "Address:",
-                    data.address
-                            .substring(0, data.address.length.toInt() ~/ 1.5)
-                            .toString() +
-                        "\n" +
-                        data.address
-                            .substring(data.address.length.toInt() ~/ 2 + 1,
-                                data.address.length.toInt())
-                            .toString()),
-                _buildRow("Rating:", data.rating),
-                _buildRow("Number:", data.number),
-                _buildRow("Website:", data.website),
+                _buildRow("Opening Hours:", openingHours),
+                _buildRow("Address:", address),
+                _buildRow("Rating:", rating),
+                _buildRow("Number:", number),
+                _buildRow("Website:", website),
               ],
             )
           ],

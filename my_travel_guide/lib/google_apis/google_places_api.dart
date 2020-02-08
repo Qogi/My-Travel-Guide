@@ -14,8 +14,9 @@ String landmarkName,
     landmarkOpeningHours;
 Data data;
 
-PlacePicker placePickerIntent(BuildContext context) {
+List<String> landmarkInformation;
 
+PlacePicker placePickerIntent(BuildContext context) {
   return PlacePicker(
     apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q",
     onPlacePicked: (result) {
@@ -29,9 +30,11 @@ PlacePicker placePickerIntent(BuildContext context) {
                         number: result.internationalPhoneNumber,
                         website: result.website,
                         rating: result.rating.toString() ?? "No Rating",
-                        openingHours:
-                            result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1)),
-                  ))).whenComplete(() {SystemNavigator.pop();});
+                        openingHours: result.openingHours.weekdayText
+                            .elementAt(DateTime.now().weekday - 1)),
+                  ))).whenComplete(() {
+        SystemNavigator.pop();
+      });
     },
     initialPosition: LatLng(48.858372, 2.294481),
     useCurrentLocation: true,
