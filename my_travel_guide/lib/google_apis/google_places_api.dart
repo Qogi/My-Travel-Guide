@@ -25,6 +25,7 @@ PlacePicker placePickerIntent(BuildContext context) {
           MaterialPageRoute(
               builder: (context) => LandmarkPage(
                     data: Data(
+                        id: result.placeId,
                         text: result.name,
                         address: result.formattedAddress,
                         number: result.internationalPhoneNumber,

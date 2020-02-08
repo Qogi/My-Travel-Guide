@@ -1,4 +1,5 @@
 class Data {
+  String id = " ";
   String text = " ";
   String address = " ";
   String rating = " ";
@@ -6,5 +7,5 @@ class Data {
   String website = " ";
   String openingHours;
 
-  Data({this.text, this.website, this.rating, this.address, this.number, this.openingHours});
+  Data({this.id, this.text, this.website, this.rating, this.address, this.number, this.openingHours});
 }
