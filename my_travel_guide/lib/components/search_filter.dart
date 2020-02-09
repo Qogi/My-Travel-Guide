@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:my_travel_guide/components/app_bar.dart';
+import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchFilter extends StatefulWidget {
@@ -19,8 +20,7 @@ class _SearchFilter extends State<SearchFilter> {
     "Bar",
     "Cafe",
     "Restaurant",
-    "Supermarket",
-    "Landmark"
+    "Supermarket"
   ];
 
   static const String _KEY_SELECTED_POSITION = "position";
@@ -43,13 +43,13 @@ class _SearchFilter extends State<SearchFilter> {
     // TODO: implement build
     return Drawer(
       child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(40.0),
-            child: Appbar(
-              title: "City",
-            )),
         body: ListView(
           children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.search),
+              title: Text("Search"),
+              onTap: () { Navigator.push(this.context, MaterialPageRoute(builder: (context) => placePickerIntent(context, "city")));},
+            ),
             ListTile(
               selected: _selectedPosition == 0,
               leading: Icon(Icons.cake),
@@ -95,15 +95,6 @@ class _SearchFilter extends State<SearchFilter> {
               },
               trailing: _getIcon(4),
             ),
-            ListTile(
-              selected: _selectedPosition == 5,
-              leading: Icon(Icons.local_grocery_store),
-              title: Text(filterOptions[5]),
-              onTap: () {
-                _saveKeywordPreference(5);
-              },
-              trailing: _getIcon(5),
-            )
           ],
         ),
       ),
@@ -141,34 +132,3 @@ class _SearchFilter extends State<SearchFilter> {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

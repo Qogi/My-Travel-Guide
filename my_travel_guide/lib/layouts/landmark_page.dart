@@ -123,19 +123,23 @@ class _LandmarkPage extends State<LandmarkPage> {
             _buildOption(
                 "assets/images/search.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context))),
+                    builder: (context) =>
+                        placePickerIntent(context, "landmark"))),
             _buildOption(
                 "assets/images/information.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context))),
+                    builder: (context) =>
+                        placePickerIntent(context, "landmark"))),
             _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context))),
+                    builder: (context) =>
+                        placePickerIntent(context, "landmark"))),
             _buildOption(
                 "assets/images/add_location.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context)))
+                    builder: (context) =>
+                        placePickerIntent(context, "landmark")))
           ],
         ),
       ),

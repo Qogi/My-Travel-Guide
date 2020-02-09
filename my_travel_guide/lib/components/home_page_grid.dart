@@ -59,7 +59,7 @@ class RowsAndColumns extends StatelessWidget {
           Expanded(
               child: Column(
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png', MaterialPageRoute(builder: (context) => GoogleMap())),
+              _buildCard('Cities', 'assets/images/near_by_landmarks.png', MaterialPageRoute(builder: (context) => CityPage(lat: 0.0, lng: 0.0,))),
               _buildCard('Camera', 'assets/images/camera.png', MaterialPageRoute(builder: (context) => SettingsScreen()))
             ],
           )),

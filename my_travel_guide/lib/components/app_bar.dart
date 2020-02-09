@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 
 class Appbar extends StatelessWidget {
+
   final String title;
   Appbar({this.title});
 

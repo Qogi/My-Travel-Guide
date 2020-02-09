@@ -11,20 +11,41 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlacesSearchMap extends StatefulWidget {
   final String keyword;
+  final double lat;
+  final double lng;
 
-  PlacesSearchMap(this.keyword);
+  PlacesSearchMap({this.keyword, this.lat, this.lng});
 
   @override
-  State<PlacesSearchMap> createState() {
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    _PlaceSearchMap();
     return _PlaceSearchMap();
   }
 }
 
 class _PlaceSearchMap extends State<PlacesSearchMap> {
   static const String _API_KEY = 'AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q';
+  static double latitude;
+  static double longitude;
 
-  static double latitude = 40.7484405;
-  static double longitude = -73.9878531;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setLatLng();
+  }
+
+  void setLatLng(){
+    if(widget.lat != null){
+      longitude = widget.lng;
+      latitude = widget.lat;
+    }else {
+      longitude = 0.00;
+      longitude = 0.00;
+    }
+
+  }
 
   static const String baseUrl =
       "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
@@ -38,10 +59,10 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _myLocation = CameraPosition(
-    target: LatLng(latitude, longitude),
-    zoom: 12,
-    bearing: 15.0,
-    tilt: 75.0
+      target: LatLng(latitude, longitude),
+      zoom: 12,
+      bearing: 15.0,
+      tilt: 75.0
   );
 
 
