@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/google_apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
@@ -132,10 +133,7 @@ class _LandmarkPage extends State<LandmarkPage> {
                 "assets/images/map.png",
                 MaterialPageRoute(
                     builder: (context) => placePickerIntent(context))),
-            _buildOption(
-                "assets/images/add_location.png",
-                MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context)))
+            _buildAddToLandmark("assets/images/add_location.png")
           ],
         ),
       ),
@@ -195,6 +193,25 @@ class _LandmarkPage extends State<LandmarkPage> {
     return InkWell(
         onTap: () {
           Navigator.push(this.context, materialPageRoute);
+        },
+        child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            child: Stack(children: <Widget>[
+              Container(
+                height: 23.5,
+                width: 23.5,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: AssetImage(url),
+                )),
+              )
+            ])));
+  }
+
+  Widget _buildAddToLandmark(String url) {
+    return InkWell(
+        onTap: () {
+          addLandmarkToTimeline(widget.data.id, name, "12/10/2010");
         },
         child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
