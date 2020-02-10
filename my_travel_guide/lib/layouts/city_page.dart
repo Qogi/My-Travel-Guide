@@ -8,22 +8,24 @@ void main() => runApp(CityPage());
 class CityPage extends StatefulWidget {
   final double lat;
   final double lng;
-
-  CityPage({this.lat, this.lng});
+  final String keyword;
+  CityPage({this.lat, this.lng, this.keyword});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-
+    print(lat);
     return _CityPage();
   }
 }
 
 class _CityPage extends State<CityPage> {
   static String keyword = "Bakery";
+  static double lat;
+  static double lng;
 
-  void updateKeyWord(String newKeyWord) {
-    print(newKeyWord);
+  void updateKeyWord(String newKeyWord, double newLat, double newLng) {
+    print(newKeyWord + widget.lat.toString());
     setState(() {
       keyword = newKeyWord;
     });

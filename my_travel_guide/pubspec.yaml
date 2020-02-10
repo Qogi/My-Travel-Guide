@@ -72,6 +72,7 @@ flutter:
     - assets/images/map.png
     - assets/images/add_location.png
     - assets/images/google_logo.png
+    - assets/maps_style.json
 
 
   # The following line ensures that the Material Icons font is

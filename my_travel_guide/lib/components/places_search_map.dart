@@ -80,6 +80,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          print(latitude);
           searchNearby(latitude, longitude);
         },
         label: Text('Places Nearby'),

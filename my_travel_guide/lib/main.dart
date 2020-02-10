@@ -9,12 +9,11 @@ main() {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/' : (BuildContext context) => MyApp(),
+      '/': (BuildContext context) => MyApp(),
       '/home': (BuildContext context) => new HomePage()
     },
   ));
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -24,7 +23,9 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
           if (snapshot.hasData) {
             /// is because there is user already logged
-            return Scaffold(body: HomePage(),);
+            return Scaffold(
+              body: HomePage(),
+            );
           }
 
           /// other way there is no user logged.
@@ -41,13 +42,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomPaint(
-        child: _buildLoginLayout(context,
+        body: CustomPaint(
+      child: _buildLoginLayout(
+        context,
       ),
     ));
   }
@@ -131,7 +131,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildContinueWithoutSignInText(BuildContext buildContext) {
     return InkWell(
         onTap: () {
-          Navigator.push(buildContext, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(buildContext,
+              MaterialPageRoute(builder: (context) => HomePage()));
         },
         child: Text(
           'Continue without signing in',

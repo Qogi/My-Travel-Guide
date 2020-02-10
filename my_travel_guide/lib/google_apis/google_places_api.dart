@@ -18,8 +18,7 @@ Data data;
 List<String> landmarkInformation;
 
 PlacePicker placePickerIntent(BuildContext context, String searchType) {
-
-  if(searchType == "landmark") {
+  if (searchType == "landmark") {
     return PlacePicker(
       apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q",
       onPlacePicked: (result) {
@@ -27,37 +26,32 @@ PlacePicker placePickerIntent(BuildContext context, String searchType) {
             context,
             MaterialPageRoute(
                 builder: (context) => LandmarkPage(
-                  data: Data(
-                      text: result.name,
-                      address: result.formattedAddress,
-                      number: result.internationalPhoneNumber,
-                      website: result.website,
-                      rating: result.rating.toString() ?? "No Rating",
-                      openingHours: result.openingHours.weekdayText
-                          .elementAt(DateTime.now().weekday - 1)),
-                ))).whenComplete(() {
+                      data: Data(
+                          text: result.name,
+                          address: result.formattedAddress,
+                          number: result.internationalPhoneNumber,
+                          website: result.website,
+                          rating: result.rating.toString() ?? "No Rating",
+                          openingHours: result.openingHours.weekdayText
+                              .elementAt(DateTime.now().weekday - 1)),
+                    ))).whenComplete(() {
           SystemNavigator.pop();
         });
       },
       initialPosition: LatLng(48.858372, 2.294481),
       useCurrentLocation: true,
     );
-  }else if(searchType == "city") {
+  } else if (searchType == "city") {
     print("city search");
     return PlacePicker(
       apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q",
       onPlacePicked: (result) {
         Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => CityPage(lat: 40.7484405, lng:-73.9878531,))).whenComplete(() {
-          SystemNavigator.pop();
-        });
+            MaterialPageRoute(builder: (context) => CityPage(lat: 48.8566,lng: 2.3522,)));
       },
       initialPosition: LatLng(48.858372, 2.294481),
       useCurrentLocation: true,
     );
   }
-
-
 }
