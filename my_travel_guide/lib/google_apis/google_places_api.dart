@@ -52,12 +52,12 @@ PlacePicker placePickerIntent(BuildContext context, String searchType) {
 
 void searchCity(BuildContext context) async {
   print("city search");
-//  final places =
-//      new GoogleMapsPlaces(apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q");
-//  PlacesSearchResponse reponse = await places.searchByText("Paris");
+  final places =
+      new GoogleMapsPlaces(apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q");
+  PlacesSearchResponse reponse = await places.searchByText("Paris");
   Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => CityPage(lat: 48.856614, lng: 2.17474, keyword: "Bakery",
+          builder: (context) => CityPage(lat: reponse.results.elementAt(0).geometry.location.lat, lng: reponse.results.elementAt(0).geometry.location.lng, keyword: "Bakery",
               )));
 }
