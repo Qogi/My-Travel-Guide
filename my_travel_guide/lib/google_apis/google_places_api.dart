@@ -6,6 +6,12 @@ import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
+import 'package:google_maps_webservice/directions.dart';
+import 'package:google_maps_webservice/distance.dart';
+import 'package:google_maps_webservice/geocoding.dart';
+import 'package:google_maps_webservice/geolocation.dart';
+import 'package:google_maps_webservice/places.dart';
+import 'package:google_maps_webservice/timezone.dart';
 
 String landmarkName,
     landmarkWebsite,
@@ -41,17 +47,17 @@ PlacePicker placePickerIntent(BuildContext context, String searchType) {
       initialPosition: LatLng(48.858372, 2.294481),
       useCurrentLocation: true,
     );
-  } else if (searchType == "city") {
-    print("city search");
-    return PlacePicker(
-      apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q",
-      onPlacePicked: (result) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CityPage(lat: 48.8566,lng: 2.3522,)));
-      },
-      initialPosition: LatLng(48.858372, 2.294481),
-      useCurrentLocation: true,
-    );
   }
+}
+
+void searchCity(BuildContext context) async {
+  print("city search");
+//  final places =
+//      new GoogleMapsPlaces(apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q");
+//  PlacesSearchResponse reponse = await places.searchByText("Paris");
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => CityPage(lat: 48.856614, lng: 2.17474, keyword: "Bakery",
+              )));
 }

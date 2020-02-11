@@ -38,7 +38,13 @@ class _BuildGrid extends State<Grid> {
 
 class RowsAndColumns extends StatelessWidget {
   BuildContext context;
-  Data data = new Data(text: "Landmark", address:" ", number: " ", website: " ", rating: " ", openingHours: " ");
+  Data data = new Data(
+      text: "Landmark",
+      address: " ",
+      number: " ",
+      website: " ",
+      rating: " ",
+      openingHours: " ");
 
   RowsAndColumns(BuildContext context) {
     this.context = context;
@@ -52,15 +58,30 @@ class RowsAndColumns extends StatelessWidget {
         child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Expanded(
             child: Column(children: [
-              _buildCard('Landmark', 'assets/images/options.png', MaterialPageRoute(builder: (context) => LandmarkPage(data: data,))),
-              _buildCard('Timeline', 'assets/images/timeline_cropped.png', MaterialPageRoute(builder: (context) => TimelinePage()))
+              _buildCard(
+                  'Landmark',
+                  'assets/images/options.png',
+                  MaterialPageRoute(
+                      builder: (context) => LandmarkPage(
+                            data: data,
+                          ))),
+              _buildCard('Timeline', 'assets/images/timeline_cropped.png',
+                  MaterialPageRoute(builder: (context) => TimelinePage()))
             ]),
           ),
           Expanded(
               child: Column(
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png', MaterialPageRoute(builder: (context) => CityPage(lat: 0.0,lng: 0.0,))),
-              _buildCard('Camera', 'assets/images/camera.png', MaterialPageRoute(builder: (context) => SettingsScreen()))
+              _buildCard(
+                  'Cities',
+                  'assets/images/near_by_landmarks.png',
+                  MaterialPageRoute(
+                      builder: (context) => CityPage(
+                            lat: 0.0000,
+                            lng: 0.0000,
+                          ))),
+              _buildCard('Camera', 'assets/images/camera.png',
+                  MaterialPageRoute(builder: (context) => SettingsScreen()))
             ],
           )),
         ]),
@@ -68,7 +89,8 @@ class RowsAndColumns extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String name, String imageURL,MaterialPageRoute materialPageRoute) {
+  Widget _buildCard(
+      String name, String imageURL, MaterialPageRoute materialPageRoute) {
     return Container(
       height: 160.0,
       width: 160.0,
@@ -79,7 +101,7 @@ class RowsAndColumns extends StatelessWidget {
         elevation: 7.0,
         child: InkWell(
             onTap: () {
-              Navigator.push(this.context,materialPageRoute);
+              Navigator.push(this.context, materialPageRoute);
             },
             child: Column(
               children: <Widget>[

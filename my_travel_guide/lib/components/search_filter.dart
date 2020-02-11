@@ -48,7 +48,7 @@ class _SearchFilter extends State<SearchFilter> {
             ListTile(
               leading: Icon(Icons.search),
               title: Text("Search"),
-              onTap: () { Navigator.push(this.context, MaterialPageRoute(builder: (context) => placePickerIntent(context, "city")));},
+              onTap: () { searchCity(context);},
             ),
             ListTile(
               selected: _selectedPosition == 0,

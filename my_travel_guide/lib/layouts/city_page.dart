@@ -27,6 +27,7 @@ class _CityPage extends State<CityPage> {
   void updateKeyWord(String newKeyWord, double newLat, double newLng) {
     print(newKeyWord + widget.lat.toString());
     setState(() {
+      print("here");
       keyword = newKeyWord;
     });
   }

@@ -19,7 +19,8 @@ class PlacesSearchMap extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    _PlaceSearchMap();
+    print("in map");
+    print(lat);
     return _PlaceSearchMap();
   }
 }
@@ -33,18 +34,20 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     setLatLng();
   }
 
-  void setLatLng(){
-    if(widget.lat != null){
+  void setLatLng() {
+    print("setting");
+    if (widget.lat != null) {
       longitude = widget.lng;
       latitude = widget.lat;
-    }else {
-      longitude = 0.00;
+    } else {
+      latitude = 0.00;
       longitude = 0.00;
     }
-
+    print(latitude);
   }
 
   static const String baseUrl =
@@ -58,13 +61,8 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _myLocation = CameraPosition(
-      target: LatLng(latitude, longitude),
-      zoom: 12,
-      bearing: 15.0,
-      tilt: 75.0
-  );
-
+  CameraPosition _myLocation = new CameraPosition(
+      target: LatLng(latitude, longitude), zoom: 12, bearing: 15.0, tilt: 75.0);
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +72,8 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
         initialCameraPosition: _myLocation,
         onMapCreated: (GoogleMapController controller) {
           _setStyle(controller);
+          print("map created");
+          print(latitude);
           _controller.complete(controller);
         },
         markers: Set<Marker>.of(markers),
@@ -90,14 +90,16 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   }
 
   void _setStyle(GoogleMapController controller) async {
-    String value = await DefaultAssetBundle.of(context).loadString('assets/maps_style.json');
+    String value = await DefaultAssetBundle.of(context)
+        .loadString('assets/maps_style.json');
     controller.setMapStyle(value);
   }
 
-
   void searchNearby(double latitude, double longitude) async {
+    print(latitude);
     setState(() {
       markers.clear();
+      print(latitude);
     });
     String url =
         '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=10000&keyword=${widget.keyword}';
@@ -117,7 +119,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     });
   }
 
-  void _handleResponse(data){
+  void _handleResponse(data) {
     // bad api key or otherwise
     if (data['status'] == "REQUEST_DENIED") {
       setState(() {
@@ -144,45 +146,4 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       print(data);
     }
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
