@@ -29,25 +29,22 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   static const String _API_KEY = 'AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q';
   static double latitude;
   static double longitude;
+  CameraPosition _myLocation;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
     setLatLng();
   }
 
   void setLatLng() {
     print("setting");
-    if (widget.lat != null) {
-      longitude = widget.lng;
-      latitude = widget.lat;
-    } else {
-      latitude = 0.00;
-      longitude = 0.00;
-    }
+    longitude = widget.lng;
+    latitude = widget.lat;
     print(latitude);
+    _myLocation = new CameraPosition(
+        target: LatLng(latitude, longitude), zoom: 12, bearing: 15.0, tilt: 75.0);
   }
 
   static const String baseUrl =
@@ -61,8 +58,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  CameraPosition _myLocation = new CameraPosition(
-      target: LatLng(latitude, longitude), zoom: 12, bearing: 15.0, tilt: 75.0);
+
 
   @override
   Widget build(BuildContext context) {
