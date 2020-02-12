@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:my_travel_guide/models/result.dart';
 import 'package:my_travel_guide/models/error.dart';
 import 'package:my_travel_guide/models/place_response.dart';
-import 'package:my_travel_guide/models/result.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';

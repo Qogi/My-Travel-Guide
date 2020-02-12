@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/layouts/settings_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
-import 'package:my_travel_guide/layouts/city.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:my_travel_guide/layouts/timeline.dart';
 
