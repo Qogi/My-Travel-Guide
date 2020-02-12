@@ -37,6 +37,14 @@ class _SearchFilter extends State<SearchFilter> {
     super.initState();
     _loadPreferences();
   }
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +55,11 @@ class _SearchFilter extends State<SearchFilter> {
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.search),
-              title: Text("Search"),
-              onTap: () { searchCity(context);},
+              title: TextField(
+                controller: myController ,
+                decoration: new InputDecoration.collapsed(hintText: 'City'),
+              ),
+              onTap: () { searchCity(context, myController.text);},
             ),
             ListTile(
               selected: _selectedPosition == 0,
