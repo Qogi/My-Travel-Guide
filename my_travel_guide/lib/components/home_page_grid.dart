@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/layouts/settings_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
-import 'package:my_travel_guide/layouts/city.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:my_travel_guide/layouts/timeline.dart';
 
@@ -58,7 +58,7 @@ class RowsAndColumns extends StatelessWidget {
           Expanded(
               child: Column(
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png', MaterialPageRoute(builder: (context) => City())),
+              _buildCard('Cities', 'assets/images/near_by_landmarks.png', MaterialPageRoute(builder: (context) => CityPage(lat: 0.0,lng: 0.0,))),
               _buildCard('Camera', 'assets/images/camera.png', MaterialPageRoute(builder: (context) => SettingsScreen()))
             ],
           )),
