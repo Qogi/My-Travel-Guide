@@ -4,13 +4,17 @@ import 'package:flutter/widgets.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
+import 'package:my_travel_guide/layouts/video_splash_screen.dart';
+import 'package:my_travel_guide/Constant/Constant.dart';
 
 main() {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
       '/': (BuildContext context) => MyApp(),
-      '/home': (BuildContext context) => new HomePage()
+      HOME_SCREEN: (BuildContext context) => new HomePage(),
+      LOGIN_SCREEN: (BuildContext context) => LoginPage(),
+      VIDEO_SPLASH: (BuildContext context) => VideoSplashScreen()
     },
   ));
 }
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
 
           /// other way there is no user logged.
           return Scaffold(
-            body: LoginPage(),
+            body: VideoSplashScreen(),
           );
         });
   }
@@ -46,9 +50,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomPaint(
-      child: _buildLoginLayout(
-        context,
-      ),
+            child: _buildLoginLayout(context),
     ));
   }
 

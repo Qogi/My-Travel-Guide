@@ -18,11 +18,10 @@ Data data;
 
 List<String> landmarkInformation;
 
-
 PlacePicker placePickerIntent(BuildContext context, String searchType) {
   if (searchType == "landmark") {
     return PlacePicker(
-      apiKey: "AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q",
+      apiKey: "AIzaSyAqcP5mwNElnbv51O6oHdG83jwn6LTaV24",
       onPlacePicked: (result) {
         Navigator.push(
             context,
@@ -50,13 +49,12 @@ void searchCity(BuildContext context, String cityName) async {
   print("city search");
   final places =
       new GoogleMapsPlaces(apiKey: "AIzaSyAqcP5mwNElnbv51O6oHdG83jwn6LTaV24");
-  PlacesSearchResponse reponse = await places.searchByText(cityName);
+  PlacesSearchResponse response = await places.searchByText(cityName);
   Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => CityPage(
-                lat: reponse.results.elementAt(0).geometry.location.lat,
-                lng: reponse.results.elementAt(0).geometry.location.lng,
+                lat: response.results.elementAt(0).geometry.location.lat,
+                lng: response.results.elementAt(0).geometry.location.lng,
               )));
-
 }
