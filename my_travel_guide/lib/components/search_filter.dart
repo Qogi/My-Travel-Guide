@@ -36,6 +36,7 @@ class _SearchFilter extends State<SearchFilter> {
     super.initState();
     _loadPreferences();
   }
+
   final myController = TextEditingController();
 
   @override

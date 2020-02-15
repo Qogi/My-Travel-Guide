@@ -21,13 +21,9 @@ class CityPage extends StatefulWidget {
 
 class _CityPage extends State<CityPage> {
   static String keyword = "Bakery";
-  static double lat;
-  static double lng;
 
-  void updateKeyWord(String newKeyWord, double newLat, double newLng) {
-    print(newKeyWord + widget.lat.toString());
+  void updateKeyWord(String newKeyWord) {
     setState(() {
-      print("here");
       keyword = newKeyWord;
     });
   }
