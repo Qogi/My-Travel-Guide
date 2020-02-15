@@ -14,12 +14,13 @@ class SearchFilter extends StatefulWidget {
 }
 
 class _SearchFilter extends State<SearchFilter> {
-  static final List<String> filterOptions = <String>[
+  List<String> filterOptions = <String>[
     "Bakery",
     "Bar",
     "Cafe",
     "Restaurant",
-    "Supermarket"
+    "Supermarket",
+    "tourist_attraction"
   ];
 
   static const String _KEY_SELECTED_POSITION = "position";
@@ -105,6 +106,15 @@ class _SearchFilter extends State<SearchFilter> {
                 _saveKeywordPreference(4);
               },
               trailing: _getIcon(4),
+            ),
+            ListTile(
+              selected: _selectedPosition == 5,
+              leading: Icon(Icons.place),
+              title: Text("Tourist Attractions"),
+              onTap: () {
+                _saveKeywordPreference(5);
+              },
+              trailing: _getIcon(5),
             ),
           ],
         ),
