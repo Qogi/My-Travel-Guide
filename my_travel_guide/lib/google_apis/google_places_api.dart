@@ -18,6 +18,7 @@ Data data;
 
 List<String> landmarkInformation;
 
+
 PlacePicker placePickerIntent(BuildContext context, String searchType) {
   if (searchType == "landmark") {
     return PlacePicker(
@@ -57,4 +58,5 @@ void searchCity(BuildContext context, String cityName) async {
                 lat: reponse.results.elementAt(0).geometry.location.lat,
                 lng: reponse.results.elementAt(0).geometry.location.lng,
               )));
+
 }
