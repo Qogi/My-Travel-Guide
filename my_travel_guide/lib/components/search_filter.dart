@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:my_travel_guide/google_apis/google_places_api.dart';
+import 'package:my_travel_guide/apis/google_places_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchFilter extends StatefulWidget {

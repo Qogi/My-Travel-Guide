@@ -14,7 +14,6 @@ class CityPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    print(lat);
     return _CityPage();
   }
 }

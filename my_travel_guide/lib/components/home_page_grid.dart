@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
-import 'package:my_travel_guide/layouts/settings_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:my_travel_guide/layouts/timeline.dart';
+
+main() {
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (BuildContext context) => HomePageGrid(),
+      '/camera': (BuildContext context) => main(),
+    },
+  ));
+}
 
 class HomePageGrid extends StatelessWidget {
   @override
@@ -37,7 +46,13 @@ class _BuildGrid extends State<Grid> {
 
 class RowsAndColumns extends StatelessWidget {
   BuildContext context;
-  Data data = new Data(text: "Landmark", address:" ", number: " ", website: " ", rating: " ", openingHours: " ");
+  Data data = new Data(
+      text: "Landmark",
+      address: " ",
+      number: " ",
+      website: " ",
+      rating: " ",
+      openingHours: " ");
 
   RowsAndColumns(BuildContext context) {
     this.context = context;
@@ -48,29 +63,46 @@ class RowsAndColumns extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 2.0),
       child: IntrinsicHeight(
-        child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Expanded(
-            child: Column(children: [
-              _buildCard('Landmark', 'assets/images/options.png', MaterialPageRoute(builder: (context) => LandmarkPage(data: data,))),
-              _buildCard('Timeline', 'assets/images/timeline_cropped.png', MaterialPageRoute(builder: (context) => TimelinePage()))
-            ]),
-          ),
-          Expanded(
-              child: Column(
+        child: Column(children: [
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _buildCard('Cities', 'assets/images/near_by_landmarks.png', MaterialPageRoute(builder: (context) => CityPage(lat: 0.0,lng: 0.0,))),
-              _buildCard('Camera', 'assets/images/camera.png', MaterialPageRoute(builder: (context) => SettingsScreen()))
+              _buildCard(
+                  'Landmark',
+                  'assets/images/options.png',
+                  MaterialPageRoute(
+                      builder: (context) => LandmarkPage()),
+                  160.0, 160.0, 110.0, 110.0),
+              _buildCard(
+                  'Cities',
+                  'assets/images/near_by_landmarks.png',
+                  MaterialPageRoute(
+                      builder: (context) => CityPage(
+                            lat: 0.0,
+                            lng: 0.0,
+                          )),
+                  160.0, 160.0, 110.0, 110.0),
             ],
-          )),
+          ),
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            _buildCard(
+                'Timeline',
+                'assets/images/timeline.png',
+                MaterialPageRoute(builder: (context) => TimelinePage()), 320.0, 140.0, 100.0, 300.0)
+          ]),
+
+
         ]),
       ),
     );
   }
 
-  Widget _buildCard(String name, String imageURL,MaterialPageRoute materialPageRoute) {
+  Widget _buildCard(String name, String imageURL,
+      MaterialPageRoute materialPageRoute, double width, double height, double imageHeight, double imageWidth) {
     return Container(
-      height: 160.0,
-      width: 160.0,
+      height: height,
+      width: width,
       padding: EdgeInsets.only(top: 10),
       child: Card(
         shape:
@@ -78,14 +110,14 @@ class RowsAndColumns extends StatelessWidget {
         elevation: 7.0,
         child: InkWell(
             onTap: () {
-              Navigator.push(this.context,materialPageRoute);
+              Navigator.push(this.context, materialPageRoute);
             },
             child: Column(
               children: <Widget>[
                 Stack(children: <Widget>[
                   Container(
-                    height: 110.0,
-                    width: 110.0,
+                    height: imageHeight,
+                    width: imageWidth,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       image: AssetImage(imageURL),

@@ -41,6 +41,9 @@ dependencies:
   firebase_remote_config: ^0.3.0+1
   shared_preferences: ^0.5.6+1
   video_player: ^0.10.7
+  path_provider: ^1.6.0
+  path: ^1.6.4
+  image_picker: ^0.6.3+1
 
 
 

@@ -11,6 +11,7 @@ if (flutterRoot == null) {
     throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
+
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
     flutterVersionCode = '1'
@@ -20,6 +21,8 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+
+
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -36,10 +39,11 @@ android {
         disable 'InvalidPackage'
     }
 
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.qogi.my_travel_guide"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -62,10 +66,10 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
-    implementation 'com.google.gms:google-services:4.2.0'
+    implementation 'com.google.firebase:firebase-ml-vision-image-label-model:17.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

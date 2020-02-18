@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:my_travel_guide/Constant/Constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoSplashScreen extends StatefulWidget {
@@ -37,12 +38,12 @@ class VideoState extends State<VideoSplashScreen> {
     playerController.setVolume(0.0);
     playerController.removeListener(listener);
     Navigator.of(context).pop(VIDEO_SPLASH);
-    Navigator.of(context).pushReplacementNamed(LOGIN_SCREEN);
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   void initializeVideo() {
-    playerController =
-    VideoPlayerController.asset('assets/videos/simple.mp4')
+    playerController = VideoPlayerController.asset('assets/videos/simple.mp4')
       ..addListener(listener)
       ..setVolume(1.0)
       ..initialize()
@@ -69,15 +70,15 @@ class VideoState extends State<VideoSplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(fit: StackFit.expand, children: <Widget>[
-          new AspectRatio(
-              aspectRatio: 9 / 16,
-              child: Container(
-                child: (playerController != null
-                    ? VideoPlayer(
-                  playerController,
-                )
-                    : Container()),
-              )),
-        ]));
+      new AspectRatio(
+          aspectRatio: 9 / 16,
+          child: Container(
+            child: (playerController != null
+                ? VideoPlayer(
+                    playerController,
+                  )
+                : Container()),
+          )),
+    ]));
   }
 }
