@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
+import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 main() {
@@ -32,7 +33,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.0),
-        child: Appbar(title: "Settings",),
+        child: Appbar(
+          title: "Settings",
+        ),
       ),
       body: SettingsList(
         sections: [
@@ -63,8 +66,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: 'Logout',
                 leading: Icon(Icons.exit_to_app),
                 onTap: () {
-//                  clearTimeline();
-//                  signOutGoogle(context);
+                  clearTimeline();
+                  signOutGoogle(context);
                 },
               )
             ],
@@ -74,27 +77,3 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -72,7 +72,7 @@ class RowsAndColumns extends StatelessWidget {
                   'Landmark',
                   'assets/images/options.png',
                   MaterialPageRoute(
-                      builder: (context) => LandmarkPage()),
+                      builder: (context) => LandmarkPage(data: data,)),
                   160.0, 160.0, 110.0, 110.0),
               _buildCard(
                   'Cities',
@@ -103,7 +103,7 @@ class RowsAndColumns extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      padding: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 10, left: 5, right: 5),
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -129,7 +129,7 @@ class RowsAndColumns extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Pompiere',
                       fontWeight: FontWeight.bold,
-                      fontSize: 15.0),
+                      fontSize: 17.0),
                 ),
               ],
             )),
