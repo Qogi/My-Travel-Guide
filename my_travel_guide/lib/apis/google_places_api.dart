@@ -18,7 +18,7 @@ Data data;
 
 List<String> landmarkInformation;
 
-PlacePicker placePickerIntent(BuildContext context) {
+PlacePicker googlePlacePicker(BuildContext context){
   return PlacePicker(
     apiKey: "AIzaSyAqcP5mwNElnbv51O6oHdG83jwn6LTaV24",
     onPlacePicked: (result) {
@@ -26,19 +26,18 @@ PlacePicker placePickerIntent(BuildContext context) {
           context,
           MaterialPageRoute(
               builder: (context) => LandmarkPage(
-                    data: Data(
-                        text: result.name,
-                        address: result.formattedAddress,
-                        number: result.internationalPhoneNumber,
-                        website: result.website,
-                        rating: result.rating.toString() ?? "No Rating",
-                        openingHours: result.openingHours.weekdayText
-                            .elementAt(DateTime.now().weekday - 1)),
-                  ))).whenComplete(() {
+                data: Data(
+                    text: result.name,
+                    address: result.formattedAddress,
+                    number: result.internationalPhoneNumber,
+                    website: result.website,
+                    rating: result.rating.toString() ?? "No Rating",
+                    openingHours: result.openingHours.weekdayText
+                        .elementAt(DateTime.now().weekday - 1)),
+              ))).whenComplete(() {
         SystemNavigator.pop();
       });
     },
-    initialPosition: LatLng(48.858372, 2.294481),
     useCurrentLocation: true,
   );
 }

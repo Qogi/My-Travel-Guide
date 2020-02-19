@@ -232,7 +232,7 @@ packages:
       name: google_maps_place_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.2"
   google_maps_webservice:
     dependency: "direct main"
     description:
@@ -359,13 +359,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
-  place_picker:
-    dependency: "direct main"
-    description:
-      name: place_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.11"
   platform:
     dependency: transitive
     description:
