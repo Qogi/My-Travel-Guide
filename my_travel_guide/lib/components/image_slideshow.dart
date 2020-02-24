@@ -5,7 +5,7 @@ import 'package:my_travel_guide/Constant/SlideshowConstants.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
 
 final List<String> imgList = [
-  'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ',
+  'assets/images/pyramids.jpg',
   'https://images.unsplash.com/photo-1542743408-218cc173cda0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ',
   'https://images.unsplash.com/photo-1501232060322-aa87215ab531?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ',
   'https://images.unsplash.com/photo-1503970999490-4404449dc349?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjgzMjIyfQ'
@@ -39,11 +39,12 @@ class ImageSlideshow extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  child: Image.network(
-                    getPlaceURL(placeName),
-                    fit: BoxFit.fill,
-                    height: 1000.0,
-                    width: 600.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(getPlaceURL(placeName)),
+                          fit: BoxFit.fill
+                        )),
                   ),
                 ),
                 Visibility(
@@ -51,7 +52,7 @@ class ImageSlideshow extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: RaisedButton(
-                        color: Colors.blue,
+                        color: Colors.lightBlue,
                         child: Text(
                           placeName,
                           style: TextStyle(color: Colors.white),

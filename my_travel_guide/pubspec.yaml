@@ -70,7 +70,11 @@ flutter:
     - assets/images/timeline.png
     - assets/images/timeline_cropped.png
     - assets/images/sphinx.jpg
+    - assets/images/petra.jpg
+    - assets/images/jerusalem.jpg
     - assets/images/camera.png
+    - assets/images/pyramids.jpg
+    - assets/images/trevi.jpg
     - assets/images/information.png
     - assets/images/search.png
     - assets/images/map.png
