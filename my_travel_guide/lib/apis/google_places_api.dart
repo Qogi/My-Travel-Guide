@@ -34,6 +34,7 @@ PlacePicker placePickerIntent(BuildContext context) {
                         rating: result.rating.toString() ?? "No Rating",
                         openingHours: result.openingHours.weekdayText
                             .elementAt(DateTime.now().weekday - 1)),
+                        isVisible: true,
                   ))).whenComplete(() {
         SystemNavigator.pop();
       });

@@ -19,8 +19,9 @@ String name = "Landmark",
 
 class LandmarkPage extends StatefulWidget {
   final Data data;
+  bool isVisible = true;
 
-  LandmarkPage({this.data});
+  LandmarkPage({this.data, this.isVisible});
 
   @override
   State<StatefulWidget> createState() {
@@ -32,6 +33,7 @@ class LandmarkPage extends StatefulWidget {
 
 class _LandmarkPage extends State<LandmarkPage> {
   SharedPreferences prefs;
+
 
   initState() {
     super.initState();
@@ -51,6 +53,7 @@ class _LandmarkPage extends State<LandmarkPage> {
   void _saveValues() {
     print(widget.data.text);
     if (widget.data.text != "Landmark") {
+      widget.isVisible = true;
       name = widget.data.text;
       prefs.setString("name", name);
       openingHours = widget.data.openingHours;
@@ -104,7 +107,11 @@ class _LandmarkPage extends State<LandmarkPage> {
             isVisible: false,
           ),
           _buildOptionsCard(context),
-          _buildCard(openingHours, rating, number, address, website)
+          Visibility(
+            visible: widget.isVisible ?? true,
+            child:  _buildCard(openingHours, rating, number, address, website)
+          )
+
         ],
       ),
     );
