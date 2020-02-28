@@ -95,9 +95,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       markers.clear();
       print(latitude);
     });
-    String url =
-        '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=10000&keyword=${widget.keyword}';
-    print(url);
+    String url = '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=10000&keyword=${widget.keyword}';
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

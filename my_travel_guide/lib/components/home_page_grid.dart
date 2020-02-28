@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/apis/google_place_photos_api.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
@@ -89,7 +90,7 @@ class RowsAndColumns extends StatelessWidget {
             _buildCard(
                 'Timeline',
                 'assets/images/timeline.png',
-                MaterialPageRoute(builder: (context) => TimelinePage()), 320.0, 140.0, 100.0, 300.0)
+                MaterialPageRoute(builder: (context) => PhotosApi()), 320.0, 140.0, 100.0, 300.0)
           ]),
 
 

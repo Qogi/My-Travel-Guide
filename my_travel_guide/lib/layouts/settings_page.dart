@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/apis/google_place_photos_api.dart';
+import 'package:my_travel_guide/apis/google_places_api.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
@@ -67,7 +69,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 leading: Icon(Icons.exit_to_app),
                 onTap: () {
                   clearTimeline();
-                  signOutGoogle(context);
+                  PhotosApi();
+//                  placePhoto();
+//                  signOutGoogle(context);
                 },
               )
             ],
