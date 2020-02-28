@@ -14,6 +14,9 @@ import 'package:my_travel_guide/models/place_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_travel_guide/models/result.dart';
 
+String baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=';
+String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
+
 String landmarkName,
     landmarkWebsite,
     landmarkNumber,
@@ -28,7 +31,7 @@ PlacePicker placePickerIntent(BuildContext context) {
   return PlacePicker(
     apiKey: "AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A",
     onPlacePicked: (result) {
-      print(result.photos.elementAt(0));
+      print(baseURL + result.photos.elementAt(0).photoReference + apiKEY);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -39,9 +42,10 @@ PlacePicker placePickerIntent(BuildContext context) {
                         number: result.internationalPhoneNumber,
                         website: result.website,
                         rating: result.rating.toString() ?? "No Rating",
-                        openingHours: result.openingHours.weekdayText
-                            .elementAt(DateTime.now().weekday - 1)),
+                        openingHours: result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1),
+                        photoURL:  baseURL + result.photos.elementAt(0).photoReference + apiKEY),
                     isVisible: true,
+
                   ))).whenComplete(() {
         SystemNavigator.pop();
       });
@@ -64,6 +68,11 @@ void searchCity(BuildContext context, String cityName) async {
                 lng: response.results.elementAt(0).geometry.location.lng,
               )));
 }
+
+String contructPhotoURL(){
+
+}
+
 //
 //void placePhoto() async {
 //  print("here2");

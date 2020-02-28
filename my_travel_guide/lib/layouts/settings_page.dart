@@ -69,9 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 leading: Icon(Icons.exit_to_app),
                 onTap: () {
                   clearTimeline();
-                  PhotosApi();
-//                  placePhoto();
-//                  signOutGoogle(context);
+                  signOutGoogle(context);
                 },
               )
             ],

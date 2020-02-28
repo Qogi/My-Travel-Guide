@@ -15,13 +15,15 @@ String name = "Landmark",
     address = " ",
     rating = " ",
     number = " ",
-    website = " ";
+    website = " ",
+    photoURL = " ";
 
 class LandmarkPage extends StatefulWidget {
   final Data data;
   bool isVisible = true;
+  String landmarkImageURL =  '';
 
-  LandmarkPage({this.data, this.isVisible});
+  LandmarkPage({this.data, this.isVisible, this.landmarkImageURL});
 
   @override
   State<StatefulWidget> createState() {
@@ -33,7 +35,6 @@ class LandmarkPage extends StatefulWidget {
 
 class _LandmarkPage extends State<LandmarkPage> {
   SharedPreferences prefs;
-
 
   initState() {
     super.initState();
@@ -66,6 +67,9 @@ class _LandmarkPage extends State<LandmarkPage> {
       prefs.setString("number", number);
       website = widget.data.website;
       prefs.setString("website", website);
+      photoURL = widget.data.photoURL;
+      prefs.setString("photoURL", photoURL);
+      _buildLandmarkImage(photoURL);
       _buildCard(openingHours, rating, number, _buildAddress(), website);
     }
   }
@@ -103,16 +107,28 @@ class _LandmarkPage extends State<LandmarkPage> {
           SizedBox(
             height: 10.0,
           ),
-          ImageSlideshow(
-            isVisible: false,
-          ),
+          _buildLandmarkImage(photoURL),
           _buildOptionsCard(context),
           Visibility(
-            visible: widget.isVisible ?? true,
-            child:  _buildCard(openingHours, rating, number, address, website)
-          )
-
+              visible: widget.isVisible ?? true,
+              child: _buildCard(openingHours, rating, number, address, website))
         ],
+      ),
+    );
+  }
+
+  Widget _buildLandmarkImage(String url){
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+
+        child: Image.network(
+          url,
+          width: 200,
+          height: 350,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
@@ -131,23 +147,19 @@ class _LandmarkPage extends State<LandmarkPage> {
             _buildOption(
                 "assets/images/search.png",
                 MaterialPageRoute(
-                    builder: (context) =>
-                        placePickerIntent(context))),
+                    builder: (context) => placePickerIntent(context))),
             _buildOption(
                 "assets/images/information.png",
                 MaterialPageRoute(
-                    builder: (context) =>
-                        placePickerIntent(context))),
+                    builder: (context) => placePickerIntent(context))),
             _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
-                    builder: (context) =>
-                        placePickerIntent(context))),
+                    builder: (context) => placePickerIntent(context))),
             _buildOption(
                 "assets/images/add_location.png",
                 MaterialPageRoute(
-                    builder: (context) =>
-                        placePickerIntent(context)))
+                    builder: (context) => placePickerIntent(context)))
           ],
         ),
       ),

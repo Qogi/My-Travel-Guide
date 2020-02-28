@@ -73,7 +73,7 @@ class RowsAndColumns extends StatelessWidget {
                   'Landmark',
                   'assets/images/options.png',
                   MaterialPageRoute(
-                      builder: (context) => LandmarkPage(data: data, isVisible: false,)),
+                      builder: (context) => LandmarkPage(data: data, isVisible: false, landmarkImageURL: '',)),
                   160.0, 160.0, 110.0, 110.0),
               _buildCard(
                   'Cities',
@@ -90,7 +90,7 @@ class RowsAndColumns extends StatelessWidget {
             _buildCard(
                 'Timeline',
                 'assets/images/timeline.png',
-                MaterialPageRoute(builder: (context) => PhotosApi()), 320.0, 140.0, 100.0, 300.0)
+                MaterialPageRoute(builder: (context) => TimelinePage()), 320.0, 140.0, 100.0, 300.0)
           ]),
 
 
