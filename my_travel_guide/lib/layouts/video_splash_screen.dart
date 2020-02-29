@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:my_travel_guide/Constant/layout_constants.dart';
+import 'package:my_travel_guide/constants/layout_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';

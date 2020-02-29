@@ -5,7 +5,7 @@ import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
 import 'package:my_travel_guide/layouts/video_splash_screen.dart';
-import 'package:my_travel_guide/Constant/layout_constants.dart';
+import 'package:my_travel_guide/constants/layout_constants.dart';
 
 main() {
   runApp(MaterialApp(
@@ -13,7 +13,7 @@ main() {
     routes: {
       '/': (BuildContext context) => MyApp(),
       '/home': (BuildContext context) => HomePage(),
-      LOGIN_SCREEN: (BuildContext context) => LoginPage(),
+      '/LoginPage': (BuildContext context) => LoginPage(),
       VIDEO_SPLASH: (BuildContext context) => VideoSplashScreen()
     },
   ));

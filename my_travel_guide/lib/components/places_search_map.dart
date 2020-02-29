@@ -24,7 +24,7 @@ class PlacesSearchMap extends StatefulWidget {
 }
 
 class _PlaceSearchMap extends State<PlacesSearchMap> {
-  static const String _API_KEY = 'AIzaSyDVuZm4ZWwkzJdxeSOFEBWk37srFby2e4Q';
+  static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   static double latitude;
   static double longitude;
   CameraPosition _myLocation;
@@ -71,6 +71,8 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
           _controller.complete(controller);
         },
         markers: Set<Marker>.of(markers),
+        myLocationButtonEnabled: true,
+        onTap: _mapTapped,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -82,6 +84,10 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       ),
     );
   }
+  void _mapTapped(LatLng location) {
+    print(location);
+  }
+
 
   void _setStyle(GoogleMapController controller) async {
     String value = await DefaultAssetBundle.of(context)
@@ -129,7 +135,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
                   places[i].geometry.location.long),
               infoWindow: InfoWindow(
                   title: places[i].name, snippet: places[i].vicinity),
-              onTap: () {},
+              onTap: () {print(places[i].name + 'here');},
             ),
           );
         }

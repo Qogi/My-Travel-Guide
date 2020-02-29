@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:my_travel_guide/Constant/layout_constants.dart';
+import 'package:my_travel_guide/constants/layout_constants.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -50,7 +50,7 @@ String getEmail() {
 void signOutGoogle(BuildContext context) async {
   _auth.signOut();
   await googleSignIn.signOut().whenComplete(() {
-    Navigator.popAndPushNamed(context, LOGIN_SCREEN);
+    Navigator.popAndPushNamed(context, '/LoginPage');
   });
   print("User Sign Out");
 }
