@@ -1,5 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fancy_dialog/FancyAnimation.dart';
+import 'package:fancy_dialog/FancyGif.dart';
+import 'package:fancy_dialog/fancy_dialog.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:my_travel_guide/models/result.dart';
 import 'package:my_travel_guide/models/error.dart';
 import 'package:my_travel_guide/models/place_response.dart';
@@ -77,7 +82,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           print(latitude);
-          searchNearby(latitude, longitude);
+          searchNearby(latitude, longitude, context);
         },
         label: Text('Places Nearby'),
         icon: Icon(Icons.place),
@@ -95,7 +100,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     controller.setMapStyle(value);
   }
 
-  void searchNearby(double latitude, double longitude) async {
+  void searchNearby(double latitude, double longitude, BuildContext context) async {
     print(latitude);
     setState(() {
       markers.clear();
@@ -106,7 +111,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      _handleResponse(data);
+      _handleResponse(data, context);
     } else {
       throw Exception('An error occurred getting places nearby');
     }
@@ -117,7 +122,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     });
   }
 
-  void _handleResponse(data) {
+  void _handleResponse(data, BuildContext context) {
     // bad api key or otherwise
     if (data['status'] == "REQUEST_DENIED") {
       setState(() {
@@ -134,8 +139,10 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
               position: LatLng(places[i].geometry.location.lat,
                   places[i].geometry.location.long),
               infoWindow: InfoWindow(
-                  title: places[i].name, snippet: places[i].vicinity),
-              onTap: () {print(places[i].name + 'here');},
+                  title: places[i].name,),
+              onTap: () {
+                showAlertDialog(context, places[i].name, places[i].rating.toString() + '\n' + places[i].vicinity.toString(), places[i].photos.elementAt(0).photoReference);
+              },
             ),
           );
         }
@@ -144,4 +151,53 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       print(data);
     }
   }
+
+  showAlertDialog(BuildContext context, String placeName, String details, String url) {
+
+//    showDialog(
+//        context: context,
+//        builder: (BuildContext context) => AssetGiffyDialog(
+//          image: Image.asset("assets/images/logo_white.png", width: 100, height: 100,),
+//          title: Text(placeName, style: TextStyle(fontSize: 25.0, fontFamily: 'Pompiere',),),
+//          description: Text(details, style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center,),
+//          entryAnimation: EntryAnimation.BOTTOM,
+//          onlyOkButton: true,
+//          buttonOkColor: Colors.blueAccent,
+//          buttonOkText: Text("Visit", style: TextStyle(color: Colors.white),),
+//        )
+//    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => NetworkGiffyDialog(
+          image: Image.network("https://media.giphy.com/media/xUOwG3nVH6Of928xJm/source.gif", width: 100, height: 100,),
+          title: Text(placeName, style: TextStyle(fontSize: 25.0, fontFamily: 'Pompiere',),),
+          description: Text(details, style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center,),
+          entryAnimation: EntryAnimation.BOTTOM,
+          onlyOkButton: true,
+          buttonOkColor: Colors.blueAccent,
+          buttonOkText: Text("Visit", style: TextStyle(color: Colors.white),),
+        )
+    );
+
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
