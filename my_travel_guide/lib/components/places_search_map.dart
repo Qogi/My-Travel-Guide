@@ -106,7 +106,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       markers.clear();
       print(latitude);
     });
-    String url = '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=10000&keyword=${widget.keyword}';
+    String url = '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=${widget.keyword}';
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -153,19 +153,6 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   }
 
   showAlertDialog(BuildContext context, String placeName, String details, String url) {
-
-//    showDialog(
-//        context: context,
-//        builder: (BuildContext context) => AssetGiffyDialog(
-//          image: Image.asset("assets/images/logo_white.png", width: 100, height: 100,),
-//          title: Text(placeName, style: TextStyle(fontSize: 25.0, fontFamily: 'Pompiere',),),
-//          description: Text(details, style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center,),
-//          entryAnimation: EntryAnimation.BOTTOM,
-//          onlyOkButton: true,
-//          buttonOkColor: Colors.blueAccent,
-//          buttonOkText: Text("Visit", style: TextStyle(color: Colors.white),),
-//        )
-//    );
 
     showDialog(
         context: context,

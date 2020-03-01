@@ -20,7 +20,8 @@ class _SearchFilter extends State<SearchFilter> {
     "Cafe",
     "Restaurant",
     "Supermarket",
-    "tourist_attraction"
+    "point+of+interest",
+    "museum"
   ];
 
   static const String _KEY_SELECTED_POSITION = "position";
@@ -62,15 +63,7 @@ class _SearchFilter extends State<SearchFilter> {
               ),
               onTap: () { searchCity(context, myController.text);},
             ),
-            ListTile(
-              selected: _selectedPosition == 0,
-              leading: Icon(Icons.cake),
-              title: Text(filterOptions[0]),
-              onTap: () {
-                _saveKeywordPreference(0);
-              },
-              trailing: _getIcon(0),
-            ),
+
             ListTile(
               selected: _selectedPosition == 1,
               leading: Icon(Icons.local_bar),
@@ -115,6 +108,15 @@ class _SearchFilter extends State<SearchFilter> {
                 _saveKeywordPreference(5);
               },
               trailing: _getIcon(5),
+            ),
+            ListTile(
+              selected: _selectedPosition == 6,
+              leading: Icon(Icons.place),
+              title: Text("Museum"),
+              onTap: () {
+                _saveKeywordPreference(6);
+              },
+              trailing: _getIcon(6),
             ),
           ],
         ),
