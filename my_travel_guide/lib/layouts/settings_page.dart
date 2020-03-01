@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
-import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
+import 'package:my_travel_guide/firebase/cloud_firestore.dart';
+import 'package:my_travel_guide/locales/locales.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 main() {
@@ -20,7 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   String checkEmail() {
     if (getEmail() == null) {
-      return "Email";
+      return AppLocalizations.of(context).email;
     } else {
       return getEmail();
     }
@@ -34,17 +35,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.0),
         child: Appbar(
-          title: "Settings",
+          title: AppLocalizations.of(context).settings,
         ),
       ),
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: 'Common',
+            title: AppLocalizations.of(context).common,
             tiles: [
               SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
+                title: AppLocalizations.of(context).language,
+                subtitle: "English",
+
                 leading: Icon(Icons.language),
               ),
               SettingsTile.switchTile(
@@ -55,15 +57,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )
             ],
           ),
-          SettingsSection(title: 'Account', tiles: [
-            SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
+          SettingsSection(title: AppLocalizations.of(context).account, tiles: [
+            SettingsTile(title: AppLocalizations.of(context).phone, leading: Icon(Icons.phone)),
             SettingsTile(title: checkEmail(), leading: Icon(Icons.email)),
           ]),
           SettingsSection(
-            title: 'Logout',
+            title: AppLocalizations.of(context).logout,
             tiles: [
               SettingsTile(
-                title: 'Logout',
+                title: AppLocalizations.of(context).logout,
                 leading: Icon(Icons.exit_to_app),
                 onTap: () {
                   clearTimeline();

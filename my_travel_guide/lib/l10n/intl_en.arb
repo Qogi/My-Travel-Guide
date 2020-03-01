@@ -1,0 +1,93 @@
+{
+  "timeline": "Timeline",
+  "@timeline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cities": "Cities",
+  "@cities": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "landmark": "Landmark",
+  "@landmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Settings",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logout": "Logout",
+  "@logout": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "email": "Email",
+    "@email": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "account": "Account",
+    "@account": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "common": "Common",
+    "@common": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "language": "Language",
+    "@language": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "city": "City",
+    "@city": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "continue_without_sign_in": "Continue without signing in",
+    "@continue_without_sign_in": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "phone": "Phone Number",
+    "@phone": {
+      "type": "text",
+      "placeholders": {}
+    },
+      "rating": "Rating:",
+      "@rating": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "address": "Address:",
+      "@address": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "number": "Number:",
+      "@number": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "information": "Information:",
+      "@information": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "website": "Website:",
+      "@website": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "opening_hours": "Opening Hours:",
+      "@opening_hours": {
+        "type": "text",
+        "placeholders": {}
+      }
+
+}

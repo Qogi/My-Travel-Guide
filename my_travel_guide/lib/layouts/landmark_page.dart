@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
+import 'package:my_travel_guide/firebase/cloud_firestore.dart';
+import 'package:my_travel_guide/locales/locales.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
@@ -109,9 +110,7 @@ class _LandmarkPage extends State<LandmarkPage> {
           ),
           _buildLandmarkImage(photoURL),
           _buildOptionsCard(context),
-          Visibility(
-              visible: widget.isVisible ?? true,
-              child: _buildCard(openingHours, rating, number, address, website))
+          _buildCard(openingHours, rating, number, address, website)
         ],
       ),
     );
@@ -181,12 +180,12 @@ class _LandmarkPage extends State<LandmarkPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _buildRow("Information", ""),
-                _buildRow("Opening Hours:", openingHours),
-                _buildRow("Address:", address),
-                _buildRow("Rating:", rating),
-                _buildRow("Number:", number),
-                _buildRow("Website:", website),
+                _buildRow(AppLocalizations.of(context).information, ""),
+                _buildRow(AppLocalizations.of(context).opening_hours, openingHours),
+                _buildRow(AppLocalizations.of(context).address, address),
+                _buildRow(AppLocalizations.of(context).rating, rating),
+                _buildRow(AppLocalizations.of(context).number, number),
+                _buildRow(AppLocalizations.of(context).website, website),
               ],
             )
           ],

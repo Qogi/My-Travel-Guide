@@ -3,12 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
-import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
+import 'package:my_travel_guide/firebase/cloud_firestore.dart';
 import 'package:my_travel_guide/layouts/video_splash_screen.dart';
 import 'package:my_travel_guide/constants/layout_constants.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_travel_guide/locales/locales.dart';
 
 main() {
   runApp(MaterialApp(
+    localizationsDelegates: [
+      AppLocalizationsDelegate(),
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: [
+      Locale('en', ""),
+      Locale("es", ""),
+      Locale('ja', ''),
+    ],
     initialRoute: '/',
     routes: {
       '/': (BuildContext context) => MyApp(),
@@ -137,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
               MaterialPageRoute(builder: (context) => HomePage()));
         },
         child: Text(
-          'Continue without signing in',
+          AppLocalizations.of(context).continue_without_sign_in,
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ));

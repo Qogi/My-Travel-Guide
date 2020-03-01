@@ -19,6 +19,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
   cloud_firestore: ^0.13.0+1
   device_info: ^0.4.1+4
   font_awesome_flutter: ^8.5.0
@@ -63,6 +67,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  intl_translation: ^0.17.9
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -91,6 +96,8 @@ flutter:
     - assets/videos/simple.mp4
     - assets/maps_style.json
     - assets/launcher/ic_launcher.png
+    - assets/locales/en.json
+    - assets/locales/sk.json
 
 
   # The following line ensures that the Material Icons font is

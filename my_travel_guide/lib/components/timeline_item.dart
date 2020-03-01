@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/firebase/user_timeline_landmarks.dart';
+import 'package:my_travel_guide/firebase/cloud_firestore.dart';
 import 'package:timeline_list/timeline_model.dart';
 import '../models/landmark.dart';
 

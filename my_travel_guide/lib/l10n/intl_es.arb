@@ -1,0 +1,92 @@
+{
+  "timeline": "Línea de Tiempo",
+  "@timeline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cities": "Ciudades",
+  "@cities": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "landmark": "Punto de Referencia",
+  "@landmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "settings": "Configuración",
+    "@settings": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "logout": "Cerrar sesión",
+    "@logout": {
+      "type": "text",
+      "placeholders": {}
+    },
+      "email": "Correo electrónico",
+      "@email": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "account": "Cuenta",
+      "@account": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "common": "Común",
+      "@common": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "language": "Idioma",
+      "@language": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "city": "Ciudad",
+      "@city": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "continue_without_sign_in": "Continuar sin iniciar sesión",
+      "@continue_without_sign_in": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "phone": "Phone Número:",
+      "@phone": {
+        "type": "text",
+        "placeholders": {}
+      },
+        "rating": "Clasificación:",
+        "@rating": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "address": "Dirección:",
+        "@address": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "number": "Number:",
+        "@number": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "information": "Información",
+        "@information": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "website": "Sitio web:",
+        "@website": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "opening_hours": "Horario:",
+        "@opening_hours": {
+          "type": "text",
+          "placeholders": {}
+        }
+}
