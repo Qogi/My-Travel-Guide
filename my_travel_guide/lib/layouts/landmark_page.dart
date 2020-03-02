@@ -108,7 +108,24 @@ class _LandmarkPage extends State<LandmarkPage> {
           SizedBox(
             height: 10.0,
           ),
-          _buildLandmarkImage(photoURL),
+          Stack(
+
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 30.0, top: 10.0),
+                child: Text(
+                  "Choose \nYour \nDestination",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Pompiere",
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              _buildLandmarkImage(photoURL),
+            ],
+          ),
           _buildOptionsCard(context),
           _buildCard(openingHours, rating, number, address, website)
         ],
@@ -118,13 +135,13 @@ class _LandmarkPage extends State<LandmarkPage> {
 
   Widget _buildLandmarkImage(String url){
     return Container(
+      alignment: Alignment.center,
       padding: EdgeInsets.only(left: 20, right: 20),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-
         child: Image.network(
           url,
-          width: 200,
+          width: 350,
           height: 350,
           fit: BoxFit.cover,
         ),
