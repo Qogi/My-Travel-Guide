@@ -49,9 +49,21 @@ class _HomePageState extends State<HomePage> {
       body: new ListView(
         shrinkWrap: true,
         children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left: 10.0, bottom: 5.0),
+            child: Text(
+              "Top Destinations",
+              style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                  fontFamily: "Pompiere"
+              ),
+            ),
+          ),
           ImageSlideshow(),
           SizedBox(
-            height: 30.0,
+            height: 25.0,
           ),
           Container(
             height: 450.0,
