@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_travel_guide/animation/FadeAnimation.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/firebase/cloud_firestore.dart';
@@ -104,46 +105,48 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _signInButton(BuildContext buildContext) {
-    return Container(
-        margin: EdgeInsets.only(right: 85, left: 80),
-        child: RaisedButton(
-          color: Colors.white,
-          onPressed: () {
-            signInWithGoogle().whenComplete(() {
-              getData();
-              Navigator.of(buildContext).popAndPushNamed('/home');
-            });
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          highlightElevation: 0,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image(
-                    image: AssetImage("assets/images/google_logo.png"),
-                    height: 25.0),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    'Sign in with Google',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ));
+    return FadeAnimation(
+        1.6,
+        Container(
+            margin: EdgeInsets.only(right: 85, left: 80),
+            child: RaisedButton(
+              color: Colors.white,
+              onPressed: () {
+                signInWithGoogle().whenComplete(() {
+                  getData();
+                  Navigator.of(buildContext).popAndPushNamed('/home');
+                });
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              highlightElevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image(
+                        image: AssetImage("assets/images/google_logo.png"),
+                        height: 25.0),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Sign in with Google',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )));
   }
 
   Widget _buildContinueWithoutSignInText(BuildContext buildContext) {
-    return InkWell(
+    return FadeAnimation(2, InkWell(
         onTap: () {
           Navigator.push(buildContext,
               MaterialPageRoute(builder: (context) => HomePage()));
@@ -152,14 +155,14 @@ class _LoginPageState extends State<LoginPage> {
           AppLocalizations.of(context).continue_without_sign_in,
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ));
+        )));
   }
 }
 
 class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return FadeAnimation(1.2,  Container(
       margin: EdgeInsets.only(top: 10.0),
       width: 150.0,
       height: 150.0,
@@ -167,7 +170,7 @@ class AppLogo extends StatelessWidget {
           image: DecorationImage(
         image: AssetImage('assets/images/logo_white.png'),
       )),
-    );
+    ));
   }
 }
 
