@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_travel_guide/apis/google_places_api.dart';
 
 class CityPage extends StatefulWidget {
   @override
@@ -7,6 +8,8 @@ class CityPage extends StatefulWidget {
 }
 
 class _CityPageState extends State<CityPage> {
+  final myController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -37,16 +40,37 @@ class _CityPageState extends State<CityPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 50.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.arrow_back),
                       iconSize: 30.0,
-                      color: Colors.black,
+                      color: Colors.white,
                       onPressed: () => Navigator.pop(context),
                     ),
+                    Container(
+                      width: 100,
+                      child: TextField(
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                        ),
+                        cursorColor: Colors.white,
+                        onSubmitted: (String cityName) {
+                          searchCity(context,cityName );
+                        },
+                        decoration: InputDecoration.collapsed(
+                            hintText: "Search...",
+                            hintStyle: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            )),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -88,7 +112,7 @@ class _CityPageState extends State<CityPage> {
                 right: 20.0,
                 bottom: 20.0,
                 child: IconButton(
-                  icon: Icon( Icons.map),
+                  icon: Icon(Icons.map),
                   color: Colors.white,
                   iconSize: 30.0,
                   onPressed: () => {print("pressed")},
@@ -125,9 +149,8 @@ class _CityPageState extends State<CityPage> {
                                   child: Text(
                                     "Petra",
                                     style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600
-                                    ),
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w600),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                   ),
@@ -147,15 +170,11 @@ class _CityPageState extends State<CityPage> {
                             ),
                             Text(
                               "Opening Hours",
-                              style: TextStyle(
-                                color: Colors.grey
-                              ),
+                              style: TextStyle(color: Colors.grey),
                             ),
                             Text(
                               "⭐⭐⭐⭐",
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),
+                              style: TextStyle(color: Colors.grey),
                             ),
                           ],
                         ),
@@ -169,9 +188,7 @@ class _CityPageState extends State<CityPage> {
                         borderRadius: BorderRadius.circular(20.0),
                         child: Image(
                           width: 110.0,
-                          image: AssetImage(
-                            "assets/images/sphinx.jpg"
-                          ),
+                          image: AssetImage("assets/images/sphinx.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -186,34 +203,3 @@ class _CityPageState extends State<CityPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

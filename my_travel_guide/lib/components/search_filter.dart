@@ -57,15 +57,6 @@ class _SearchFilter extends State<SearchFilter> {
         body: ListView(
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.search),
-              title: TextField(
-                controller: myController ,
-                decoration: new InputDecoration.collapsed(hintText: 'City'),
-              ),
-              onTap: () { searchCity(context, myController.text);},
-            ),
-
-            ListTile(
               selected: _selectedPosition == 1,
               leading: Icon(Icons.local_bar),
               title: Text(filterOptions[1]),
