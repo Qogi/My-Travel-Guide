@@ -4,7 +4,6 @@ import 'package:my_travel_guide/firebase/cloud_firestore.dart';
 import 'package:my_travel_guide/locales/locales.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
-import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -198,7 +197,7 @@ class _LandmarkPage extends State<LandmarkPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 _buildRow(AppLocalizations.of(context).information, ""),
-                _buildRow(AppLocalizations.of(context).opening_hours, openingHours),
+                _buildRow(AppLocalizations.of(context).openingHours, openingHours),
                 _buildRow(AppLocalizations.of(context).address, address),
                 _buildRow(AppLocalizations.of(context).rating, rating),
                 _buildRow(AppLocalizations.of(context).number, number),

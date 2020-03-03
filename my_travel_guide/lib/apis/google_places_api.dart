@@ -1,18 +1,14 @@
-import 'dart:convert';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
-import 'package:my_travel_guide/layouts/city_page.dart';
+import 'package:my_travel_guide/layouts/city_map_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:my_travel_guide/models/place_response.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:my_travel_guide/models/result.dart';
 
 String baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=';
 String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
@@ -63,7 +59,7 @@ void searchCity(BuildContext context, String cityName) async {
   Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => CityPage(
+          builder: (context) => CityMapPage(
                 lat: response.results.elementAt(0).geometry.location.lat,
                 lng: response.results.elementAt(0).geometry.location.lng,
               )));

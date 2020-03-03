@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
               MaterialPageRoute(builder: (context) => HomePage()));
         },
         child: Text(
-          AppLocalizations.of(context).continue_without_sign_in,
+          AppLocalizations.of(context).continueWithoutSignin,
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         )));

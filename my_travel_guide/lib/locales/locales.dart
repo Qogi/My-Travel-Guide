@@ -86,7 +86,7 @@ class AppLocalizations {
       name: 'city',
     );
   }
-  String get continue_without_sign_in {
+  String get continueWithoutSignin {
     return Intl.message(
       'Continue without signing in',
       name: 'continue_without_sign_in',
@@ -129,7 +129,7 @@ class AppLocalizations {
     );
   }
 
-  String get opening_hours {
+  String get openingHours {
     return Intl.message(
       'Opening Hours:',
       name: 'opening_hours',

@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:fancy_dialog/FancyAnimation.dart';
-import 'package:fancy_dialog/FancyGif.dart';
-import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:my_travel_guide/models/result.dart';

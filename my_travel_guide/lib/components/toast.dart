@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
-import 'package:my_travel_guide/layouts/home_page.dart';
 
 class ToastMessage extends StatelessWidget {
   final String message;

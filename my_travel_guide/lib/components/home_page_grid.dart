@@ -79,10 +79,7 @@ class RowsAndColumns extends StatelessWidget {
                   AppLocalizations.of(context).cities,
                   'assets/images/near_by_landmarks.png',
                   MaterialPageRoute(
-                      builder: (context) => CityPage(
-                            lat: 0.0,
-                            lng: 0.0,
-                          )),
+                      builder: (context) => CityPage()),
                   160.0, 160.0, 110.0, 110.0),
             ],
           ),
