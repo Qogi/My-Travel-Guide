@@ -1,14 +1,53 @@
+import 'dart:convert';
+
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
+import 'package:my_travel_guide/models/place_response.dart';
+import 'package:my_travel_guide/models/result.dart';
+import 'package:http/http.dart' as http;
 
 class CityPage extends StatefulWidget {
+
+  String imageRef;
+  String name;
+  final double lat;
+  final double lng;
+
+  CityPage({this.lat, this.lng, this.imageRef, this.name});
+
   @override
-  _CityPageState createState() => _CityPageState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _CityPageState();
+  }
 }
 
 class _CityPageState extends State<CityPage> {
   final myController = TextEditingController();
+
+  List<Result> landmarks = new List();
+  static const String baseUrl =
+      "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+  static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
+  String imageURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=';
+  static double latitude;
+  static double longitude;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setLatLng();
+    landmarks.add(new Result(name: "Landmark", vicinity: "Address"));
+    loadLandmarks(widget.lat, widget.lng, context);
+  }
+
+  void setLatLng() {
+    longitude = widget.lng;
+    latitude = widget.lat;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +71,9 @@ class _CityPageState extends State<CityPage> {
                   tag: "assets/images/petra.jpg",
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30.0),
-                    child: Image(
-                      image: AssetImage("assets/images/petra.jpg"),
+                    child: Image.network(
+                      widget.imageRef,
+                      height: 300,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -60,7 +100,8 @@ class _CityPageState extends State<CityPage> {
                         ),
                         cursorColor: Colors.white,
                         onSubmitted: (String cityName) {
-                          searchCity(context,cityName );
+//                          searchCity(context,cityName );
+                          searchCity(context, cityName);
                         },
                         decoration: InputDecoration.collapsed(
                             hintText: "Search...",
@@ -81,10 +122,10 @@ class _CityPageState extends State<CityPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Petra",
+                      widget.name ?? "City",
                       style: TextStyle(
                           fontSize: 35.0,
-                          color: Colors.white70,
+                          color: Colors.white,
                           letterSpacing: 1.2,
                           fontWeight: FontWeight.w600),
                     ),
@@ -125,6 +166,7 @@ class _CityPageState extends State<CityPage> {
               padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
+                Result result = landmarks.elementAt(index) ??  new Result();
                 return Stack(
                   children: <Widget>[
                     Container(
@@ -147,7 +189,7 @@ class _CityPageState extends State<CityPage> {
                                 Container(
                                   width: 120.0,
                                   child: Text(
-                                    "Petra",
+                                    result.name,
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w600),
@@ -169,7 +211,7 @@ class _CityPageState extends State<CityPage> {
                               ],
                             ),
                             Text(
-                              "Opening Hours",
+                              result.vicinity,
                               style: TextStyle(color: Colors.grey),
                             ),
                             Text(
@@ -188,8 +230,8 @@ class _CityPageState extends State<CityPage> {
                         borderRadius: BorderRadius.circular(20.0),
                         child: Image(
                           width: 110.0,
-                          image: AssetImage("assets/images/sphinx.jpg"),
                           fit: BoxFit.cover,
+                          image: AssetImage('assets/images/sphinx.jpg'),
                         ),
                       ),
                     )
@@ -202,4 +244,60 @@ class _CityPageState extends State<CityPage> {
       ),
     );
   }
+
+  void loadLandmarks(double latitude, double longitude, BuildContext context) async {
+    String url =
+        '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=point+of+interest';
+    final response = await http.get(url);
+
+    if(response.statusCode == 200){
+      final data = json.decode(response.body);
+      _handleData(data);
+    }
+  }
+
+  void _handleData(data){
+    if(data['status'] == "REQUEST_DENIED"){
+      print('error');
+    }else if(data['status'] ==  "OK"){
+      setState(() {
+        landmarks = PlaceResponse.parseResults(data['results']);
+        print(landmarks.elementAt(0).name);
+      });
+    }
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

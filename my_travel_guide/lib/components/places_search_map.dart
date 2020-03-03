@@ -19,8 +19,6 @@ class PlacesSearchMap extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    print("in map");
-    print(lat);
     return _PlaceSearchMap();
   }
 }
@@ -39,12 +37,13 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   }
 
   void setLatLng() {
-    print("setting");
     longitude = widget.lng;
     latitude = widget.lat;
-    print(latitude);
     _myLocation = new CameraPosition(
-        target: LatLng(latitude, longitude), zoom: 12, bearing: 15.0, tilt: 75.0);
+        target: LatLng(latitude, longitude),
+        zoom: 12,
+        bearing: 15.0,
+        tilt: 75.0);
   }
 
   static const String baseUrl =
@@ -58,8 +57,6 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -68,8 +65,6 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
         initialCameraPosition: _myLocation,
         onMapCreated: (GoogleMapController controller) {
           _setStyle(controller);
-          print("map created");
-          print(latitude);
           _controller.complete(controller);
         },
         markers: Set<Marker>.of(markers),
@@ -78,7 +73,6 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          print(latitude);
           searchNearby(latitude, longitude, context);
         },
         label: Text('Places Nearby'),
@@ -86,10 +80,10 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       ),
     );
   }
+
   void _mapTapped(LatLng location) {
     print(location);
   }
-
 
   void _setStyle(GoogleMapController controller) async {
     String value = await DefaultAssetBundle.of(context)
@@ -97,13 +91,13 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     controller.setMapStyle(value);
   }
 
-  void searchNearby(double latitude, double longitude, BuildContext context) async {
-    print(latitude);
+  void searchNearby(
+      double latitude, double longitude, BuildContext context) async {
     setState(() {
       markers.clear();
-      print(latitude);
     });
-    String url = '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=${widget.keyword}';
+    String url =
+        '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=${widget.keyword}';
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -136,9 +130,16 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
               position: LatLng(places[i].geometry.location.lat,
                   places[i].geometry.location.long),
               infoWindow: InfoWindow(
-                  title: places[i].name,),
+                title: places[i].name,
+              ),
               onTap: () {
-                showAlertDialog(context, places[i].name, places[i].rating.toString() + '\n' + places[i].vicinity.toString(), places[i].photos.elementAt(0).photoReference);
+                showAlertDialog(
+                    context,
+                    places[i].name,
+                    places[i].rating.toString() +
+                        '\n' +
+                        places[i].vicinity.toString(),
+                    places[i].photos.elementAt(0).photoReference);
               },
             ),
           );
@@ -149,39 +150,35 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     }
   }
 
-  showAlertDialog(BuildContext context, String placeName, String details, String url) {
-
+  showAlertDialog(
+      BuildContext context, String placeName, String details, String url) {
     showDialog(
         context: context,
         builder: (BuildContext context) => NetworkGiffyDialog(
-          image: Image.network("https://media.giphy.com/media/xUOwG3nVH6Of928xJm/source.gif", width: 100, height: 100,),
-          title: Text(placeName, style: TextStyle(fontSize: 25.0, fontFamily: 'Pompiere',),),
-          description: Text(details, style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center,),
-          entryAnimation: EntryAnimation.BOTTOM,
-          onlyOkButton: true,
-          buttonOkColor: Colors.blueAccent,
-          buttonOkText: Text("Visit", style: TextStyle(color: Colors.white),),
-        )
-    );
-
+              image: Image.network(
+                "https://media.giphy.com/media/xUOwG3nVH6Of928xJm/source.gif",
+                width: 100,
+                height: 100,
+              ),
+              title: Text(
+                placeName,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontFamily: 'Pompiere',
+                ),
+              ),
+              description: Text(
+                details,
+                style: TextStyle(fontSize: 16.0),
+                textAlign: TextAlign.center,
+              ),
+              entryAnimation: EntryAnimation.BOTTOM,
+              onlyOkButton: true,
+              buttonOkColor: Colors.blueAccent,
+              buttonOkText: Text(
+                "Visit",
+                style: TextStyle(color: Colors.white),
+              ),
+            ));
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

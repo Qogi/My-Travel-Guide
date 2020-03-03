@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:my_travel_guide/layouts/city_map_page.dart';
+import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -59,15 +60,14 @@ void searchCity(BuildContext context, String cityName) async {
   Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => CityMapPage(
+          builder: (context) => CityPage(
                 lat: response.results.elementAt(0).geometry.location.lat,
                 lng: response.results.elementAt(0).geometry.location.lng,
+                imageRef: baseURL + response.results.elementAt(0).photos.elementAt(0).photoReference + apiKEY,
+                name: response.results.elementAt(0).name,
               )));
 }
 
-String contructPhotoURL(){
-
-}
 
 //
 //void placePhoto() async {
