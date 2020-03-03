@@ -64,7 +64,7 @@ void searchCity(BuildContext context, String cityName) async {
                 lat: response.results.elementAt(0).geometry.location.lat,
                 lng: response.results.elementAt(0).geometry.location.lng,
                 imageRef: baseURL + response.results.elementAt(0).photos.elementAt(0).photoReference + apiKEY,
-                name: response.results.elementAt(0).name,
+                name: response.results.elementAt(0).formattedAddress,
               )));
 }
 

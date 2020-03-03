@@ -35,6 +35,15 @@ class _CityPageState extends State<CityPage> {
   static double latitude;
   static double longitude;
 
+  Text _buildRatingStars(int rating) {
+    String stars = '';
+    for (int i = 0; i < rating; i++) {
+      stars += '⭐ ';
+    }
+    stars.trim();
+    return Text(stars);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -121,14 +130,6 @@ class _CityPageState extends State<CityPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      widget.name ?? "City",
-                      style: TextStyle(
-                          fontSize: 35.0,
-                          color: Colors.white,
-                          letterSpacing: 1.2,
-                          fontWeight: FontWeight.w600),
-                    ),
                     Row(
                       children: <Widget>[
                         Icon(
@@ -140,7 +141,7 @@ class _CityPageState extends State<CityPage> {
                           width: 5.0,
                         ),
                         Text(
-                          "Jordan",
+                            widget.name ?? "City",
                           style:
                               TextStyle(color: Colors.white70, fontSize: 20.0),
                         )
@@ -197,27 +198,13 @@ class _CityPageState extends State<CityPage> {
                                     maxLines: 2,
                                   ),
                                 ),
-                                Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "\$30",
-                                      style: TextStyle(
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                )
                               ],
                             ),
                             Text(
                               result.vicinity,
                               style: TextStyle(color: Colors.grey),
                             ),
-                            Text(
-                              "⭐⭐⭐⭐",
-                              style: TextStyle(color: Colors.grey),
-                            ),
+                            _buildRatingStars(result.rating.toInt()),
                           ],
                         ),
                       ),
