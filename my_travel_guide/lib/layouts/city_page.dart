@@ -4,6 +4,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
+import 'package:my_travel_guide/layouts/city_map_page.dart';
 import 'package:my_travel_guide/models/place_response.dart';
 import 'package:my_travel_guide/models/result.dart';
 import 'package:http/http.dart' as http;
@@ -157,7 +158,7 @@ class _CityPageState extends State<CityPage> {
                   icon: Icon(Icons.map),
                   color: Colors.white,
                   iconSize: 30.0,
-                  onPressed: () => {print("pressed")},
+                  onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => CityMapPage(lat: widget.lat, lng: widget.lng, keyword: "Restaurant",)))},
                 ),
               )
             ],
