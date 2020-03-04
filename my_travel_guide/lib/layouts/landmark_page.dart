@@ -164,10 +164,6 @@ class _LandmarkPage extends State<LandmarkPage> {
                 MaterialPageRoute(
                     builder: (context) => placePickerIntent(context))),
             _buildOption(
-                "assets/images/information.png",
-                MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context))),
-            _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
                     builder: (context) => placePickerIntent(context))),

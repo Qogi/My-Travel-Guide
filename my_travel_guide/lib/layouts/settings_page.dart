@@ -43,12 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsSection(
             title: AppLocalizations.of(context).common,
             tiles: [
-              SettingsTile(
-                title: AppLocalizations.of(context).language,
-                subtitle: "English",
 
-                leading: Icon(Icons.language),
-              ),
               SettingsTile.switchTile(
                 title: 'Notifications',
                 onToggle: (bool value) {},
@@ -58,7 +53,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           SettingsSection(title: AppLocalizations.of(context).account, tiles: [
-            SettingsTile(title: AppLocalizations.of(context).phone, leading: Icon(Icons.phone)),
             SettingsTile(title: checkEmail(), leading: Icon(Icons.email)),
           ]),
           SettingsSection(
