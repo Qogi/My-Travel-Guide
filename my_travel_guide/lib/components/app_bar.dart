@@ -18,7 +18,7 @@ class Appbar extends StatelessWidget {
       centerTitle: true,
       elevation: 0.0,
       iconTheme: IconThemeData(color: Colors.black),
-      leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()))),
+      leading: new IconButton(icon: new Icon(Icons.arrow_back_ios), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()))),
     );
   }
 

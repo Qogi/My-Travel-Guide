@@ -1,13 +1,15 @@
 import 'dart:convert';
-
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
+import 'package:my_travel_guide/components/home_page_grid.dart';
 import 'package:my_travel_guide/layouts/city_map_page.dart';
+import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/models/place_response.dart';
 import 'package:my_travel_guide/models/result.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class CityPage extends StatefulWidget {
 
@@ -26,6 +28,8 @@ class CityPage extends StatefulWidget {
 }
 
 class _CityPageState extends State<CityPage> {
+
+  SharedPreferences sharedPreferences;
   final myController = TextEditingController();
 
   List<Result> landmarks = new List();
@@ -49,6 +53,7 @@ class _CityPageState extends State<CityPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    init();
     setLatLng();
     loadLandmarks(widget.lat, widget.lng, context);
   }
@@ -56,6 +61,15 @@ class _CityPageState extends State<CityPage> {
   void setLatLng() {
     longitude = widget.lng;
     latitude = widget.lat;
+  }
+
+  void init() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    _saveValues();
+  }
+
+  void _saveValues() {
+    sharedPreferences.setString("cityName", widget.name);
   }
 
   @override
@@ -94,10 +108,15 @@ class _CityPageState extends State<CityPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.arrow_back),
+                      icon: Icon(Icons.arrow_back_ios),
                       iconSize: 30.0,
                       color: Colors.white,
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage()
+                        )
+                      ),
                     ),
                     Container(
                       width: 100,
