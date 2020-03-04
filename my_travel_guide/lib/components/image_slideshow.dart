@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/slideshow_values.dart';
-import 'package:my_travel_guide/layouts/city_map_page.dart';
 
 final List<String> slideshowList = [
   'Petra',
@@ -54,10 +54,11 @@ class ImageSlideshow extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CityMapPage(
+                                  builder: (context) => CityPage(
                                         lat: getPlaceLatLng(placeName).elementAt(0),
                                         lng: getPlaceLatLng(placeName).elementAt(1),
-                                        keyword: "bakery",
+                                        name: placeName,
+                                        imageRef: getPlaceNetworkURL(placeName),
                                       )));
                         },
                       ),
