@@ -36,9 +36,9 @@ class _CityPageState extends State<CityPage> {
   static double latitude;
   static double longitude;
 
-  Text _buildRatingStars(int rating) {
+  Text _buildRatingStars(double rating) {
     String stars = '';
-    for (int i = 0; i < rating; i++) {
+    for (int i = 0; i < rating.round(); i++) {
       stars += '⭐ ';
     }
     stars.trim();
@@ -50,7 +50,6 @@ class _CityPageState extends State<CityPage> {
     // TODO: implement initState
     super.initState();
     setLatLng();
-    landmarks.add(new Result(name: "Landmark", vicinity: "Address"));
     loadLandmarks(widget.lat, widget.lng, context);
   }
 
@@ -168,7 +167,7 @@ class _CityPageState extends State<CityPage> {
               padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
-                Result result = landmarks.elementAt(index) ??  new Result();
+                Result result = getLandmark(index);
                 return Stack(
                   children: <Widget>[
                     Container(
@@ -205,7 +204,7 @@ class _CityPageState extends State<CityPage> {
                               result.vicinity,
                               style: TextStyle(color: Colors.grey),
                             ),
-                            _buildRatingStars(result.rating.toInt()),
+                            _buildRatingStars(result.rating ?? 0.00),
                           ],
                         ),
                       ),
@@ -231,6 +230,14 @@ class _CityPageState extends State<CityPage> {
         ],
       ),
     );
+  }
+
+  Result getLandmark(int index){
+    if(landmarks.isEmpty){
+      return new Result(name: " ", vicinity: " ");
+    }else{
+      return landmarks.elementAt(index);
+    }
   }
 
   void loadLandmarks(double latitude, double longitude, BuildContext context) async {
