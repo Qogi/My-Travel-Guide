@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             child: Text(
               "Top Destinations",
               style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize: 23.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5,
                   fontFamily: "Pompiere"
