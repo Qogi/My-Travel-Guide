@@ -32,7 +32,7 @@ class _CityPageState extends State<CityPage> {
   static const String baseUrl =
       "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
   static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
-  String imageURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=';
+  String imageURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
   static double latitude;
   static double longitude;
 
@@ -165,7 +165,7 @@ class _CityPageState extends State<CityPage> {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-              itemCount: 10,
+              itemCount: getLandmarkListSize(landmarks),
               itemBuilder: (BuildContext context, int index) {
                 Result result = getLandmark(index);
                 return Stack(
@@ -237,6 +237,14 @@ class _CityPageState extends State<CityPage> {
       return new Result(name: " ", vicinity: " ");
     }else{
       return landmarks.elementAt(index);
+    }
+  }
+
+  int getLandmarkListSize(List<Result> list){
+    if(list.isEmpty){
+      return 0;
+    }else{
+      return 10;
     }
   }
 
