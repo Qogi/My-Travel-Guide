@@ -38,6 +38,7 @@ class _CityPageState extends State<CityPage> {
   static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   String imageURL =
       'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
+  String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   static double latitude;
   static double longitude;
 
@@ -75,11 +76,11 @@ class _CityPageState extends State<CityPage> {
       cityName = widget.name;
       sharedPreferences.setString("cityImageUrl", widget.imageRef);
       cityImageUrl = widget.imageRef;
-      _buildCityCard(cityName, cityImageUrl);
       sharedPreferences.setDouble("cityLat", widget.lat);
       cityLat = widget.lat;
       sharedPreferences.setDouble("cityLng", widget.lng);
       cityLng = widget.lng;
+      _buildCityCard(cityName, cityImageUrl, cityLat, cityLng);
       loadLandmarks(cityLat, cityLng, context);
       _buildListOfLandmark(landmarks);
     }
@@ -92,14 +93,14 @@ class _CityPageState extends State<CityPage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          _buildCityCard(cityName, cityImageUrl),
+          _buildCityCard(cityName, cityImageUrl, cityLat, cityLng),
           _buildListOfLandmark(landmarks)
         ],
       ),
     );
   }
 
-  Widget _buildCityCard(String name, String cityImageUrl) {
+  Widget _buildCityCard(String name, String cityImageUrl, double latitude, double longitude) {
     return Stack(
       children: <Widget>[
         Container(
@@ -196,8 +197,8 @@ class _CityPageState extends State<CityPage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => CityMapPage(
-                            lat: widget.lat,
-                            lng: widget.lng,
+                            lat: latitude,
+                            lng: longitude,
                             keyword: "Restaurant",
                           )))
             },
@@ -263,7 +264,7 @@ class _CityPageState extends State<CityPage> {
                   child: Image(
                     width: 110.0,
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/images/sphinx.jpg'),
+                    image: NetworkImage(imageURL+result.photos.elementAt(0).photoReference+apiKEY),
                   ),
                 ),
               )
