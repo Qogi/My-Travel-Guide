@@ -11,7 +11,7 @@ import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:google_maps_webservice/places.dart';
 
-String baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=';
+String baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
 String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
 
 String landmarkName,

@@ -4,7 +4,7 @@ import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/locales/locales.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
-import 'package:my_travel_guide/layouts/timeline.dart';
+import 'package:my_travel_guide/layouts/timeline_page.dart';
 
 main() {
   runApp(MaterialApp(

@@ -5,7 +5,7 @@ import 'package:my_travel_guide/animation/FadeAnimation.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/authentication/google_sign_in.dart';
 import 'package:my_travel_guide/firebase/cloud_firestore.dart';
-import 'package:my_travel_guide/layouts/video_splash_screen.dart';
+import 'package:my_travel_guide/components/video_splash_screen.dart';
 import 'package:my_travel_guide/constants/layout_constants.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_travel_guide/locales/locales.dart';

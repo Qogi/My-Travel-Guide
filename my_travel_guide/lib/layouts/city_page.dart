@@ -126,7 +126,7 @@ class _CityPageState extends State<CityPage> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 50.0),
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -171,14 +171,14 @@ class _CityPageState extends State<CityPage> {
                   Icon(
                     FontAwesomeIcons.locationArrow,
                     size: 15.0,
-                    color: Colors.white70,
+                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 5.0,
                   ),
                   Text(
                     cityName,
-                    style: TextStyle(color: Colors.white70, fontSize: 20.0),
+                    style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
                   )
                 ],
               )
@@ -264,7 +264,7 @@ class _CityPageState extends State<CityPage> {
                   child: Image(
                     width: 110.0,
                     fit: BoxFit.cover,
-                    image: NetworkImage(imageURL+result.photos.elementAt(0).photoReference+apiKEY),
+                    image: NetworkImage(getLandmarkImage(result)),
                   ),
                 ),
               )
@@ -280,6 +280,14 @@ class _CityPageState extends State<CityPage> {
       return new Result(name: " ", vicinity: " ");
     } else {
       return landmarks.elementAt(index);
+    }
+  }
+
+  String getLandmarkImage(Result result){
+    if(result.photos != null){
+      return imageURL+result.photos.elementAt(0).photoReference+apiKEY;
+    }else{
+      return "";
     }
   }
 
