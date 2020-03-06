@@ -42,12 +42,11 @@ class MyApp extends StatelessWidget {
             return Scaffold(
               body: HomePage(),
             );
+          } else {
+            return Scaffold(
+              body: LoginPage(),
+            );
           }
-
-          /// other way there is no user logged.
-          return Scaffold(
-            body: VideoSplashScreen(),
-          );
         });
   }
 }
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomPaint(
-            child: _buildLoginLayout(context),
+          child: _buildLoginLayout(context),
     ));
   }
 

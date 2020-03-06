@@ -23,7 +23,6 @@ class PlacesSearchMap extends StatefulWidget {
   }
 }
 
-
 class _PlaceSearchMap extends State<PlacesSearchMap> {
   static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   static double latitude;
@@ -36,7 +35,6 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     super.initState();
     setLatLng();
   }
-
 
   void setLatLng() {
     longitude = widget.lng;
@@ -85,7 +83,6 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       ),
     );
   }
-
 
   void _mapTapped(LatLng location) {
     print(location);
