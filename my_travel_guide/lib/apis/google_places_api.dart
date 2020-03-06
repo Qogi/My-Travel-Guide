@@ -24,6 +24,15 @@ Data data;
 
 List<String> landmarkInformation;
 
+String _buildRatingStars(double rating) {
+  String stars = '';
+  for (int i = 0; i < rating.round(); i++) {
+    stars += '⭐ ';
+  }
+  stars.trim();
+  return stars;
+}
+
 PlacePicker placePickerIntent(BuildContext context) {
   return PlacePicker(
     apiKey: "AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A",
@@ -38,7 +47,7 @@ PlacePicker placePickerIntent(BuildContext context) {
                         address: result.formattedAddress,
                         number: result.internationalPhoneNumber,
                         website: result.website,
-                        rating: result.rating.toString() ?? "No Rating",
+                        rating: _buildRatingStars(result.rating.toDouble()) ?? " ",
                         openingHours: result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1),
                         photoURL:  baseURL + result.photos.elementAt(0).photoReference + apiKEY),
                     isVisible: true,

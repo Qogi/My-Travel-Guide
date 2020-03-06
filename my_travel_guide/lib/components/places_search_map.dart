@@ -23,6 +23,7 @@ class PlacesSearchMap extends StatefulWidget {
   }
 }
 
+
 class _PlaceSearchMap extends State<PlacesSearchMap> {
   static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   static double latitude;
@@ -35,6 +36,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     super.initState();
     setLatLng();
   }
+
 
   void setLatLng() {
     longitude = widget.lng;
@@ -62,14 +64,17 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
+        myLocationEnabled: true,
+        compassEnabled: true,
+        tiltGesturesEnabled: false,
         initialCameraPosition: _myLocation,
+        markers: Set<Marker>.of(markers),
+        myLocationButtonEnabled: true,
+        onTap: _mapTapped,
         onMapCreated: (GoogleMapController controller) {
           _setStyle(controller);
           _controller.complete(controller);
         },
-        markers: Set<Marker>.of(markers),
-        myLocationButtonEnabled: true,
-        onTap: _mapTapped,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -80,6 +85,7 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
       ),
     );
   }
+
 
   void _mapTapped(LatLng location) {
     print(location);

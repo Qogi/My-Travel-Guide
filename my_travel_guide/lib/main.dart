@@ -20,7 +20,6 @@ main() {
     supportedLocales: [
       Locale('en', ""),
       Locale("es", ""),
-      Locale('ja', ''),
     ],
     initialRoute: '/',
     routes: {
@@ -63,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomPaint(
-      child: _buildLoginLayout(context),
+            child: _buildLoginLayout(context),
     ));
   }
 
@@ -146,31 +145,36 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildContinueWithoutSignInText(BuildContext buildContext) {
-    return FadeAnimation(2, InkWell(
-        onTap: () {
-          Navigator.push(buildContext,
-              MaterialPageRoute(builder: (context) => HomePage()));
-        },
-        child: Text(
-          AppLocalizations.of(context).continueWithoutSignin,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        )));
+    return FadeAnimation(
+        2,
+        InkWell(
+            onTap: () {
+              Navigator.push(buildContext,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+            },
+            child: Text(
+              AppLocalizations.of(context).continueWithoutSignin,
+              textAlign: TextAlign.center,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            )));
   }
 }
 
 class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FadeAnimation(1.2,  Container(
-      margin: EdgeInsets.only(top: 10.0),
-      width: 150.0,
-      height: 150.0,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage('assets/images/logo_white.png'),
-      )),
-    ));
+    return FadeAnimation(
+        1.2,
+        Container(
+          margin: EdgeInsets.only(top: 10.0),
+          width: 150.0,
+          height: 150.0,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/logo_white.png'),
+          )),
+        ));
   }
 }
 

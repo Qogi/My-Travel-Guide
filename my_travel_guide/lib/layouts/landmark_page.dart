@@ -7,6 +7,7 @@ import 'package:my_travel_guide/apis/google_places_api.dart';
 import 'package:my_travel_guide/components/app_bar.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(new LandmarkPage());
 
@@ -21,7 +22,7 @@ String name = "Landmark",
 class LandmarkPage extends StatefulWidget {
   final Data data;
   bool isVisible = true;
-  String landmarkImageURL =  '';
+  String landmarkImageURL = '';
 
   LandmarkPage({this.data, this.isVisible, this.landmarkImageURL});
 
@@ -76,12 +77,12 @@ class _LandmarkPage extends State<LandmarkPage> {
 
   String _buildAddress() {
     return widget.data.address
-            .substring(0, widget.data.address.length.toInt() ~/ 1.5)
-            .toString() +
+        .substring(0, widget.data.address.length.toInt() ~/ 1.5)
+        .toString() +
         "\n" +
         widget.data.address
             .substring(widget.data.address.length.toInt() ~/ 2 + 1,
-                widget.data.address.length.toInt())
+            widget.data.address.length.toInt())
             .toString();
   }
 
@@ -132,7 +133,7 @@ class _LandmarkPage extends State<LandmarkPage> {
     );
   }
 
-  Widget _buildLandmarkImage(String url){
+  Widget _buildLandmarkImage(String url) {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.only(left: 20, right: 20),
@@ -154,7 +155,7 @@ class _LandmarkPage extends State<LandmarkPage> {
       padding: EdgeInsets.all(10),
       child: Card(
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         elevation: 7.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,19 +186,39 @@ class _LandmarkPage extends State<LandmarkPage> {
       padding: EdgeInsets.all(10),
       child: Card(
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         elevation: 7.0,
         child: Column(
           children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _buildRow(AppLocalizations.of(context).information, ""),
-                _buildRow(AppLocalizations.of(context).openingHours, openingHours),
-                _buildRow(AppLocalizations.of(context).address, address),
-                _buildRow(AppLocalizations.of(context).rating, rating),
-                _buildRow(AppLocalizations.of(context).number, number),
-                _buildRow(AppLocalizations.of(context).website, website),
+                _buildRow(AppLocalizations
+                    .of(context)
+                    .information, "",
+                    TextStyle(color: Colors.black, fontSize: 12.0)),
+                _buildRow(AppLocalizations
+                    .of(context)
+                    .openingHours, openingHours,
+                    TextStyle(color: Colors.black, fontSize: 12.0)),
+                _buildRow(AppLocalizations
+                    .of(context)
+                    .address, address,
+                    TextStyle(color: Colors.black, fontSize: 12.0)),
+                _buildRow(AppLocalizations
+                    .of(context)
+                    .rating, rating,
+                    TextStyle(color: Colors.black, fontSize: 12.0)),
+                _buildRow(AppLocalizations
+                    .of(context)
+                    .number, number,
+                    TextStyle(color: Colors.black, fontSize: 12.0)),
+                _buildRow(AppLocalizations
+                    .of(context)
+                    .website, website, TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                    fontSize: 12.0)),
               ],
             )
           ],
@@ -206,11 +227,12 @@ class _LandmarkPage extends State<LandmarkPage> {
     );
   }
 
-  Widget _buildRow(String rowName, String rowValue) {
+  Widget _buildRow(String rowName, String rowValue, TextStyle textStyle) {
     return Padding(
         padding: EdgeInsets.only(left: 15, top: 20),
         child: Row(
           children: <Widget>[
+
             Text(
               rowName,
               style: TextStyle(color: Colors.grey, fontSize: 12.0),
@@ -218,10 +240,14 @@ class _LandmarkPage extends State<LandmarkPage> {
             SizedBox(
               width: 5,
             ),
-            Text(
-              rowValue,
-              style: TextStyle(color: Colors.black, fontSize: 12.0),
+            InkWell(
+              onTap: (){if(rowName == "Website"){_launchURL(rowValue);};},
+              child: Text(
+                rowValue,
+                style: textStyle,
+              ),
             )
+
           ],
         ));
   }
@@ -239,10 +265,18 @@ class _LandmarkPage extends State<LandmarkPage> {
                 width: 23.5,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage(url),
-                )),
+                      image: AssetImage(url),
+                    )),
               )
             ])));
+  }
+
+  _launchURL(String landmarkURL) async {
+    if (await canLaunch(landmarkURL)) {
+      await launch(landmarkURL);
+    } else {
+      throw 'Could not launch $landmarkURL';
+    }
   }
 
   Widget _buildAddToLandmark(String url) {
@@ -258,8 +292,8 @@ class _LandmarkPage extends State<LandmarkPage> {
                 width: 23.5,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage(url),
-                )),
+                      image: AssetImage(url),
+                    )),
               )
             ])));
   }
