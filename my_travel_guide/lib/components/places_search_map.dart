@@ -74,13 +74,13 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: Container( margin: EdgeInsets.only(bottom: 40), child: FloatingActionButton.extended(
         onPressed: () {
           searchNearby(latitude, longitude, context);
         },
         label: Text('Places Nearby'),
         icon: Icon(Icons.place),
-      ),
+      )),
     );
   }
 

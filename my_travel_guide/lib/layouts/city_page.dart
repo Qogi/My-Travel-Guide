@@ -308,7 +308,8 @@ class _CityPageState extends State<CityPage> {
     }
   }
 
-  void loadLandmarks(double latitude, double longitude, BuildContext context) async {
+  void loadLandmarks(
+      double latitude, double longitude, BuildContext context) async {
     print(latitude);
     String url =
         '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=point+of+interest';

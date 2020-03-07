@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/firebase/cloud_firestore.dart';
@@ -23,8 +24,9 @@ class LandmarkPage extends StatefulWidget {
 
   final Data data;
   String landmarkImageURL = '';
+  BannerAd banner;
 
-  LandmarkPage({this.data, this.landmarkImageURL});
+  LandmarkPage({this.data, this.landmarkImageURL, this.banner});
 
   @override
   State<StatefulWidget> createState() {
@@ -44,6 +46,7 @@ class _LandmarkPage extends State<LandmarkPage> {
 
   void init() async {
     prefs = await SharedPreferences.getInstance();
+
     _saveValues();
   }
 
@@ -100,10 +103,9 @@ class _LandmarkPage extends State<LandmarkPage> {
         shrinkWrap: true,
         children: <Widget>[
           SizedBox(
-            height: 10.0,
+            height: 5.0,
           ),
           Stack(
-
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(left: 30.0, top: 10.0),
@@ -146,7 +148,7 @@ class _LandmarkPage extends State<LandmarkPage> {
   Widget _buildOptionsCard(BuildContext context) {
     return Container(
       width: 160,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(left: 10, right: 10),
       child: Card(
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),

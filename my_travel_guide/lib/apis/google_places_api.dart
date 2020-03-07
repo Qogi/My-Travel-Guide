@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -83,8 +81,8 @@ void searchCity(BuildContext context, String cityName) async {
                         .elementAt(0)
                         .photos
                         .elementAt(0)
-                        .photoReference + apiKEY,
+                        .photoReference +
+                    apiKEY,
                 name: response.results.elementAt(0).formattedAddress,
               )));
 }
-

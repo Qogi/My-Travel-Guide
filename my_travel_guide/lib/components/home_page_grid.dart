@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
@@ -39,7 +40,7 @@ class _BuildGrid extends State<Grid> {
     return Scaffold(
       body: ListView(
         shrinkWrap: true,
-        children: <Widget>[RowsAndColumns(context)],
+        children: <Widget>[RowsAndColumns(context: context,)],
       ),
     );
   }
@@ -47,6 +48,7 @@ class _BuildGrid extends State<Grid> {
 
 class RowsAndColumns extends StatelessWidget {
   BuildContext context;
+  BannerAd bannerAd;
   Data data = new Data(
       text: "Landmark",
       address: " ",
@@ -55,9 +57,7 @@ class RowsAndColumns extends StatelessWidget {
       rating: " ",
       openingHours: " ");
 
-  RowsAndColumns(BuildContext context) {
-    this.context = context;
-  }
+  RowsAndColumns({this.context, this.bannerAd});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class RowsAndColumns extends StatelessWidget {
                   AppLocalizations.of(context).landmark,
                   'assets/images/options.png',
                   MaterialPageRoute(
-                      builder: (context) => LandmarkPage(data: data,  landmarkImageURL: '',)),
+                      builder: (context) => LandmarkPage(data: data,  landmarkImageURL: '', banner: bannerAd,)),
                   160.0, 160.0, 110.0, 110.0),
               _buildCard(
                   AppLocalizations.of(context).cities,

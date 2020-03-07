@@ -41,8 +41,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    _bannerAd.dispose();
+    hideAdBanner();
     super.dispose();
+  }
+
+  void hideAdBanner() {
+    print("hidng");
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _bannerAd?.dispose();
+      _bannerAd= null;
+
+    });
   }
 
   BannerAd createBannerAd() {
@@ -102,7 +111,7 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,
             child: PageView(
               children: <Widget>[
-                RowsAndColumns(context),
+                RowsAndColumns(context: context, bannerAd: _bannerAd,),
               ],
             ),
           ),
