@@ -11,7 +11,7 @@ import 'package:my_travel_guide/models/result.dart';
 
 String baseURL =
     'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
-String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
+String apiKeyBase = '&key=';
 const String baseUrl =
     "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 
@@ -35,11 +35,10 @@ String _buildRatingStars(double rating) {
   return stars;
 }
 
-PlacePicker placePickerIntent(BuildContext context) {
+PlacePicker placePickerIntent(BuildContext context, String apiKey) {
   return PlacePicker(
-    apiKey: "AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A",
+    apiKey: apiKey,
     onPlacePicked: (result) {
-      print(baseURL + result.photos.elementAt(0).photoReference + apiKEY);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -53,9 +52,7 @@ PlacePicker placePickerIntent(BuildContext context) {
                             _buildRatingStars(result.rating.toDouble()) ?? " ",
                         openingHours: result.openingHours.weekdayText
                             .elementAt(DateTime.now().weekday - 1),
-                        photoURL: baseURL +
-                            result.photos.elementAt(0).photoReference +
-                            apiKEY),
+                        photoURL: baseURL + result.photos.elementAt(0).photoReference+"&key="+apiKey),
                   ))).whenComplete(() {
         SystemNavigator.pop();
       });
@@ -65,10 +62,10 @@ PlacePicker placePickerIntent(BuildContext context) {
   );
 }
 
-void searchCity(BuildContext context, String cityName) async {
+void searchCity(BuildContext context, String cityName, String apiKey) async {
   print("city search");
   final places =
-      new GoogleMapsPlaces(apiKey: "AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A");
+      new GoogleMapsPlaces(apiKey: apiKey);
   PlacesSearchResponse response = await places.searchByText(cityName);
   Navigator.push(
       context,
@@ -81,8 +78,7 @@ void searchCity(BuildContext context, String cityName) async {
                         .elementAt(0)
                         .photos
                         .elementAt(0)
-                        .photoReference +
-                    apiKEY,
+                        .photoReference + "&key=" + apiKey,
                 name: response.results.elementAt(0).formattedAddress,
               )));
 }

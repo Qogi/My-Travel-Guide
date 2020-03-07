@@ -1,6 +1,7 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:my_travel_guide/firebase/cloud_firestore.dart';
 import 'package:my_travel_guide/locales/locales.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
@@ -46,7 +47,7 @@ class _LandmarkPage extends State<LandmarkPage> {
 
   void init() async {
     prefs = await SharedPreferences.getInstance();
-
+    await DotEnv().load('.env');
     _saveValues();
   }
 
@@ -159,15 +160,15 @@ class _LandmarkPage extends State<LandmarkPage> {
             _buildOption(
                 "assets/images/search.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context))),
+                    builder: (context) => placePickerIntent(context, DotEnv().env['GOOGLE_API_KEY']))),
             _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context))),
+                    builder: (context) => placePickerIntent(context, DotEnv().env['GOOGLE_API_KEY']))),
             _buildOption(
                 "assets/images/add_location.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context)))
+                    builder: (context) => placePickerIntent(context, DotEnv().env['GOOGLE_API_KEY'])))
           ],
         ),
       ),

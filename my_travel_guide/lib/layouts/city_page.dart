@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
 import 'package:my_travel_guide/layouts/city_map_page.dart';
@@ -17,8 +18,7 @@ const String baseUrl =
     "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 const String imageURL =
     'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
-const String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
-const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
+
 
 class CityPage extends StatefulWidget {
   String imageRef;
@@ -59,7 +59,6 @@ class _CityPageState extends State<CityPage> {
       init();
       setLatLng();
       loadLandmarks(cityLat, cityLng, context);
-
       buildListOfLandmark(landmarks);
     });
   }
@@ -71,6 +70,7 @@ class _CityPageState extends State<CityPage> {
 
   void init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    await DotEnv().load('.env');
     _saveValues();
   }
 
@@ -153,7 +153,7 @@ class _CityPageState extends State<CityPage> {
                   cursorColor: Colors.white,
                   onSubmitted: (String cityName) {
 //                          searchCity(context,cityName );
-                    searchCity(context, cityName);
+                    searchCity(context, cityName,  DotEnv().env['GOOGLE_API_KEY']);
                   },
                   decoration: InputDecoration.collapsed(
                       hintText: "Search...",
@@ -273,7 +273,7 @@ class _CityPageState extends State<CityPage> {
                   child: Image(
                     width: 110.0,
                     fit: BoxFit.cover,
-                    image: NetworkImage(getLandmarkImage(result)),
+                    image: NetworkImage(getLandmarkImage(result, DotEnv().env['GOOGLE_API_KEY'])),
                   ),
                 ),
               )
@@ -292,9 +292,9 @@ class _CityPageState extends State<CityPage> {
     }
   }
 
-  String getLandmarkImage(Result result) {
+  String getLandmarkImage(Result result, String apiKey) {
     if (result.photos != null) {
-      return imageURL + result.photos.elementAt(0).photoReference + apiKEY;
+      return imageURL + result.photos.elementAt(0).photoReference + "&key=" + apiKey;
     } else {
       return "";
     }
@@ -308,9 +308,8 @@ class _CityPageState extends State<CityPage> {
     }
   }
 
-  void loadLandmarks(
-      double latitude, double longitude, BuildContext context) async {
-    print(latitude);
+  void loadLandmarks(double latitude, double longitude, BuildContext context) async {
+    String _API_KEY = DotEnv().env['GOOGLE_API_KEY'];
     String url =
         '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=point+of+interest';
     final response = await http.get(url);

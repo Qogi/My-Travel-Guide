@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:my_travel_guide/models/result.dart';
 import 'package:my_travel_guide/models/error.dart';
@@ -24,7 +25,6 @@ class PlacesSearchMap extends StatefulWidget {
 }
 
 class _PlaceSearchMap extends State<PlacesSearchMap> {
-  static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   static double latitude;
   static double longitude;
   CameraPosition _myLocation;
@@ -94,8 +94,9 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
     controller.setMapStyle(value);
   }
 
-  void searchNearby(
-      double latitude, double longitude, BuildContext context) async {
+  void searchNearby(double latitude, double longitude, BuildContext context) async {
+    await DotEnv().load('.env');
+    String _API_KEY = DotEnv().env['GOOGLE_API_KEY'];
     setState(() {
       markers.clear();
     });
