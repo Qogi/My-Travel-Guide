@@ -12,15 +12,17 @@ final List<String> slideshowList = [
 ];
 
 class ImageSlideshow extends StatelessWidget {
-  bool isVisible = true;
+  bool isButtonVisible = true;
 
-  ImageSlideshow({this.isVisible});
+  ImageSlideshow({this.isButtonVisible});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return CarouselSlider(
       viewportFraction: 0.9,
+      autoPlayAnimationDuration: Duration(milliseconds: 1000),
+      autoPlayCurve: Curves.easeInOut,
       aspectRatio: 2.0,
       autoPlay: true,
       height: 300.0,
@@ -41,7 +43,7 @@ class ImageSlideshow extends StatelessWidget {
                   ),
                 ),
                 Visibility(
-                    visible: isVisible ?? true,
+                    visible: isButtonVisible ?? true,
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: RaisedButton(

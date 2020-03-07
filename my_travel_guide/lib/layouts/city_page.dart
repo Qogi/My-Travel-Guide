@@ -1,17 +1,24 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
-import 'package:my_travel_guide/components/home_page_grid.dart';
 import 'package:my_travel_guide/layouts/city_map_page.dart';
 import 'package:my_travel_guide/layouts/home_page.dart';
 import 'package:my_travel_guide/models/place_response.dart';
 import 'package:my_travel_guide/models/result.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 String cityName = "City", cityImageUrl = "";
 double cityLat = 0.0, cityLng = 0.0;
+
+const String baseUrl =
+    "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+const String imageURL =
+    'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
+const String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
+const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
 
 class CityPage extends StatefulWidget {
   String imageRef;
@@ -31,18 +38,11 @@ class CityPage extends StatefulWidget {
 class _CityPageState extends State<CityPage> {
   SharedPreferences sharedPreferences;
   final myController = TextEditingController();
-
-  List<Result> landmarks;
-  static const String baseUrl =
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-  static const String _API_KEY = 'AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
-  String imageURL =
-      'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
-  String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
   static double latitude;
   static double longitude;
+  List<Result> landmarks;
 
-  Text _buildRatingStars(double rating) {
+  Text buildRatingStars(double rating) {
     String stars = '';
     for (int i = 0; i < rating.round(); i++) {
       stars += '⭐ ';
@@ -55,9 +55,13 @@ class _CityPageState extends State<CityPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    init();
-    setLatLng();
-    loadLandmarks(cityLat, cityLng, context);
+    setState(() {
+      init();
+      setLatLng();
+      loadLandmarks(cityLat, cityLng, context);
+
+      buildListOfLandmark(landmarks);
+    });
   }
 
   void setLatLng() {
@@ -72,19 +76,20 @@ class _CityPageState extends State<CityPage> {
 
   void _saveValues() {
     if (widget.name != "City") {
-      sharedPreferences.setString("cityName", widget.name);
-      cityName = widget.name;
-      sharedPreferences.setString("cityImageUrl", widget.imageRef);
-      cityImageUrl = widget.imageRef;
-      sharedPreferences.setDouble("cityLat", widget.lat);
-      cityLat = widget.lat;
-      sharedPreferences.setDouble("cityLng", widget.lng);
-      cityLng = widget.lng;
-      _buildCityCard(cityName, cityImageUrl, cityLat, cityLng);
-      loadLandmarks(cityLat, cityLng, context);
-      _buildListOfLandmark(landmarks);
+      setState(() {
+        sharedPreferences.setString("cityName", widget.name);
+        cityName = widget.name;
+        sharedPreferences.setString("cityImageUrl", widget.imageRef);
+        cityImageUrl = widget.imageRef;
+        sharedPreferences.setDouble("cityLat", widget.lat);
+        cityLat = widget.lat;
+        sharedPreferences.setDouble("cityLng", widget.lng);
+        cityLng = widget.lng;
+        buildCityCard(widget.name, cityImageUrl, cityLat, cityLng);
+        loadLandmarks(cityLat, cityLng, context);
+        buildListOfLandmark(landmarks);
+      });
     }
-
   }
 
   @override
@@ -93,14 +98,15 @@ class _CityPageState extends State<CityPage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          _buildCityCard(cityName, cityImageUrl, cityLat, cityLng),
-          _buildListOfLandmark(landmarks)
+          buildCityCard(cityName, cityImageUrl, cityLat, cityLng),
+          buildListOfLandmark(landmarks)
         ],
       ),
     );
   }
 
-  Widget _buildCityCard(String name, String cityImageUrl, double latitude, double longitude) {
+  Widget buildCityCard(
+      String name, String cityImageUrl, double latitude, double longitude) {
     return Stack(
       children: <Widget>[
         Container(
@@ -178,7 +184,10 @@ class _CityPageState extends State<CityPage> {
                   ),
                   Text(
                     cityName,
-                    style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               )
@@ -208,13 +217,13 @@ class _CityPageState extends State<CityPage> {
     );
   }
 
-  Widget _buildListOfLandmark(List<Result> landmarks) {
+  Widget buildListOfLandmark(List<Result> landmarks) {
     return Expanded(
       child: ListView.builder(
         padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
         itemCount: getLandmarkListSize(landmarks),
         itemBuilder: (BuildContext context, int index) {
-          Result result = landmarks.elementAt(index);
+          Result result = getLandmark(index);
           return Stack(
             children: <Widget>[
               Container(
@@ -250,7 +259,7 @@ class _CityPageState extends State<CityPage> {
                         result.vicinity,
                         style: TextStyle(color: Colors.grey),
                       ),
-                      _buildRatingStars(result.rating ?? 0.00),
+                      buildRatingStars(result.rating ?? 0.00),
                     ],
                   ),
                 ),
@@ -283,10 +292,10 @@ class _CityPageState extends State<CityPage> {
     }
   }
 
-  String getLandmarkImage(Result result){
-    if(result.photos != null){
-      return imageURL+result.photos.elementAt(0).photoReference+apiKEY;
-    }else{
+  String getLandmarkImage(Result result) {
+    if (result.photos != null) {
+      return imageURL + result.photos.elementAt(0).photoReference + apiKEY;
+    } else {
       return "";
     }
   }
@@ -299,8 +308,7 @@ class _CityPageState extends State<CityPage> {
     }
   }
 
-  void loadLandmarks(
-      double latitude, double longitude, BuildContext context) async {
+  void loadLandmarks(double latitude, double longitude, BuildContext context) async {
     print(latitude);
     String url =
         '$baseUrl?key=$_API_KEY&location=$latitude,$longitude&radius=15000&keyword=point+of+interest';
@@ -308,11 +316,11 @@ class _CityPageState extends State<CityPage> {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      _handleData(data);
+      handleData(data);
     }
   }
 
-  void _handleData(data) {
+  void handleData(data) {
     if (data['status'] == "REQUEST_DENIED") {
       print('error');
     } else if (data['status'] == "OK") {

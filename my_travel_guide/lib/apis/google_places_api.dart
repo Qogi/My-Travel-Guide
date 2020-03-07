@@ -1,4 +1,4 @@
-
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -9,9 +9,13 @@ import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:my_travel_guide/models/result.dart';
 
-String baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
+String baseURL =
+    'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
 String apiKEY = '&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
+const String baseUrl =
+    "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 
 String landmarkName,
     landmarkWebsite,
@@ -22,6 +26,7 @@ String landmarkName,
 Data data;
 
 List<String> landmarkInformation;
+List<Result> cityLandmarks = new List();
 
 String _buildRatingStars(double rating) {
   String stars = '';
@@ -46,11 +51,13 @@ PlacePicker placePickerIntent(BuildContext context) {
                         address: result.formattedAddress,
                         number: result.internationalPhoneNumber,
                         website: result.website,
-                        rating: _buildRatingStars(result.rating.toDouble()) ?? " ",
-                        openingHours: result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1),
-                        photoURL:  baseURL + result.photos.elementAt(0).photoReference + apiKEY),
-                    isVisible: true,
-
+                        rating:
+                            _buildRatingStars(result.rating.toDouble()) ?? " ",
+                        openingHours: result.openingHours.weekdayText
+                            .elementAt(DateTime.now().weekday - 1),
+                        photoURL: baseURL +
+                            result.photos.elementAt(0).photoReference +
+                            apiKEY),
                   ))).whenComplete(() {
         SystemNavigator.pop();
       });
@@ -71,63 +78,13 @@ void searchCity(BuildContext context, String cityName) async {
           builder: (context) => CityPage(
                 lat: response.results.elementAt(0).geometry.location.lat,
                 lng: response.results.elementAt(0).geometry.location.lng,
-                imageRef: baseURL + response.results.elementAt(0).photos.elementAt(0).photoReference + apiKEY,
+                imageRef: baseURL +
+                    response.results
+                        .elementAt(0)
+                        .photos
+                        .elementAt(0)
+                        .photoReference + apiKEY,
                 name: response.results.elementAt(0).formattedAddress,
               )));
 }
-
-
-//
-//void placePhoto() async {
-//  print("here2");
-//  String url =
-//      'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAAG0FIRNBTGnrLOcDWP5PX67kenTaAH_yeQmVromQyxTaSnAcEj7RcrQXhTxNqGmrdZoPZUMgAJClVvtYrhNO03c8jJIQMc6OtzJSUho0zN96bzb0bqC5JuUZqHgVS_3XEhBhVHg2CD43tA5GWhV8qnhuGhQucocCuCl31jAqgM0MR6sem4ZtmA&key=AIzaSyDvTSnPtwX2IdzTnHmjPdWwnGRY0BQHN9A';
-//  fetchPhotos(client, url)
-//}
-//
-//Future<http.Response> fetchPhotos(http.Client client, String url) async {
-//  return client.get(url);
-//}
-//
-//void _handleResponse(data) {
-//  print("here");
-//  print(data);
-//  // bad api key or otherwise
-//  if (data['status'] == "REQUEST_DENIED") {
-//    print('REQUEST_DENIED');
-//    // success
-//  } else if (data['status'] == "OK") {
-//    List<Result> results = PlaceResponse.parseResults(data['results']);
-//    print(results);
-//  } else {
-//    print(data);
-//  }
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

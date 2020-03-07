@@ -20,11 +20,11 @@ String name = "Landmark",
     photoURL = " ";
 
 class LandmarkPage extends StatefulWidget {
+
   final Data data;
-  bool isVisible = true;
   String landmarkImageURL = '';
 
-  LandmarkPage({this.data, this.isVisible, this.landmarkImageURL});
+  LandmarkPage({this.data, this.landmarkImageURL});
 
   @override
   State<StatefulWidget> createState() {
@@ -45,17 +45,11 @@ class _LandmarkPage extends State<LandmarkPage> {
   void init() async {
     prefs = await SharedPreferences.getInstance();
     _saveValues();
-    setPreviousState();
-  }
-
-  void setPreviousState() {
-    setState(() {});
   }
 
   void _saveValues() {
     print(widget.data.text);
     if (widget.data.text != "Landmark") {
-      widget.isVisible = true;
       name = widget.data.text;
       prefs.setString("name", name);
       openingHours = widget.data.openingHours;
