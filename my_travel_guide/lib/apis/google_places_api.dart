@@ -9,7 +9,7 @@ import 'package:my_travel_guide/layouts/landmark_page.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:my_travel_guide/models/result.dart';
 
-String baseURL =
+String baseImageUrl =
     'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
 String apiKeyBase = '&key=';
 const String baseUrl =
@@ -50,9 +50,8 @@ PlacePicker placePickerIntent(BuildContext context, String apiKey) {
                         website: result.website,
                         rating:
                             _buildRatingStars(result.rating.toDouble()) ?? " ",
-                        openingHours: result.openingHours.weekdayText
-                            .elementAt(DateTime.now().weekday - 1),
-                        photoURL: baseURL + result.photos.elementAt(0).photoReference+"&key="+apiKey),
+                        openingHours: result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1) ?? "No Information Available",
+                        photoURL: baseImageUrl + result.photos.elementAt(0).photoReference + "&key=" + apiKey),
                   ))).whenComplete(() {
         SystemNavigator.pop();
       });
@@ -73,7 +72,7 @@ void searchCity(BuildContext context, String cityName, String apiKey) async {
           builder: (context) => CityPage(
                 lat: response.results.elementAt(0).geometry.location.lat,
                 lng: response.results.elementAt(0).geometry.location.lng,
-                imageRef: baseURL +
+                imageRef: baseImageUrl +
                     response.results
                         .elementAt(0)
                         .photos

@@ -1,4 +1,3 @@
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -22,12 +21,10 @@ String name = "Landmark",
     photoURL = " ";
 
 class LandmarkPage extends StatefulWidget {
-
   final Data data;
   String landmarkImageURL = '';
-  BannerAd banner;
 
-  LandmarkPage({this.data, this.landmarkImageURL, this.banner});
+  LandmarkPage({this.data, this.landmarkImageURL});
 
   @override
   State<StatefulWidget> createState() {
@@ -47,40 +44,47 @@ class _LandmarkPage extends State<LandmarkPage> {
 
   void init() async {
     prefs = await SharedPreferences.getInstance();
-    await DotEnv().load('.env');
     _saveValues();
+    loadDotEnv();
+  }
+
+  void loadDotEnv() async {
+    await DotEnv().load('.env');
   }
 
   void _saveValues() {
-    print(widget.data.text);
+    print( " saving" + widget.data.text);
     if (widget.data.text != "Landmark") {
-      name = widget.data.text;
-      prefs.setString("name", name);
-      openingHours = widget.data.openingHours;
-      prefs.setString("openingHours", openingHours);
-      address = _buildAddress();
-      prefs.setString("address", address);
-      rating = widget.data.rating;
-      prefs.setString("rating", rating);
-      number = widget.data.number;
-      prefs.setString("number", number);
-      website = widget.data.website;
-      prefs.setString("website", website);
-      photoURL = widget.data.photoURL;
-      prefs.setString("photoURL", photoURL);
-      _buildLandmarkImage(photoURL);
-      _buildCard(openingHours, rating, number, _buildAddress(), website);
+      setState(() {
+        name = widget.data.text;
+        prefs.setString("name", name);
+        openingHours = widget.data.openingHours;
+        prefs.setString("openingHours", openingHours);
+        address = _buildAddress();
+        prefs.setString("address", address);
+        rating = widget.data.rating;
+        prefs.setString("rating", rating);
+        number = widget.data.number;
+        prefs.setString("number", number);
+        website = widget.data.website;
+        prefs.setString("website", website);
+        photoURL = widget.data.photoURL;
+        prefs.setString("photoURL", photoURL);
+        _buildLandmarkImage(photoURL);
+        _buildCard(openingHours, rating, number, _buildAddress(), website);
+      });
+
     }
   }
 
   String _buildAddress() {
     return widget.data.address
-        .substring(0, widget.data.address.length.toInt() ~/ 1.5)
-        .toString() +
+            .substring(0, widget.data.address.length.toInt() ~/ 1.5)
+            .toString() +
         "\n" +
         widget.data.address
             .substring(widget.data.address.length.toInt() ~/ 2 + 1,
-            widget.data.address.length.toInt())
+                widget.data.address.length.toInt())
             .toString();
   }
 
@@ -152,7 +156,7 @@ class _LandmarkPage extends State<LandmarkPage> {
       padding: EdgeInsets.only(left: 10, right: 10),
       child: Card(
         shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         elevation: 7.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,15 +164,18 @@ class _LandmarkPage extends State<LandmarkPage> {
             _buildOption(
                 "assets/images/search.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context, DotEnv().env['GOOGLE_API_KEY']))),
+                    builder: (context) => placePickerIntent(
+                        context, DotEnv().env['GOOGLE_API_KEY']))),
             _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context, DotEnv().env['GOOGLE_API_KEY']))),
+                    builder: (context) => placePickerIntent(
+                        context, DotEnv().env['GOOGLE_API_KEY']))),
             _buildOption(
                 "assets/images/add_location.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(context, DotEnv().env['GOOGLE_API_KEY'])))
+                    builder: (context) => placePickerIntent(
+                        context, DotEnv().env['GOOGLE_API_KEY'])))
           ],
         ),
       ),
@@ -183,39 +190,32 @@ class _LandmarkPage extends State<LandmarkPage> {
       padding: EdgeInsets.all(10),
       child: Card(
         shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         elevation: 7.0,
         child: Column(
           children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _buildRow(AppLocalizations
-                    .of(context)
-                    .information, "",
+                _buildRow(AppLocalizations.of(context).information, "",
                     TextStyle(color: Colors.black, fontSize: 12.0)),
-                _buildRow(AppLocalizations
-                    .of(context)
-                    .openingHours, openingHours,
+                _buildRow(
+                    AppLocalizations.of(context).openingHours,
+                    openingHours,
                     TextStyle(color: Colors.black, fontSize: 12.0)),
-                _buildRow(AppLocalizations
-                    .of(context)
-                    .address, address,
+                _buildRow(AppLocalizations.of(context).address, address,
                     TextStyle(color: Colors.black, fontSize: 12.0)),
-                _buildRow(AppLocalizations
-                    .of(context)
-                    .rating, rating,
+                _buildRow(AppLocalizations.of(context).rating, rating,
                     TextStyle(color: Colors.black, fontSize: 12.0)),
-                _buildRow(AppLocalizations
-                    .of(context)
-                    .number, number,
+                _buildRow(AppLocalizations.of(context).number, number,
                     TextStyle(color: Colors.black, fontSize: 12.0)),
-                _buildRow(AppLocalizations
-                    .of(context)
-                    .website, website, TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Colors.blue,
-                    fontSize: 12.0)),
+                _buildRow(
+                    AppLocalizations.of(context).website,
+                    website,
+                    TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue,
+                        fontSize: 12.0)),
               ],
             )
           ],
@@ -229,7 +229,6 @@ class _LandmarkPage extends State<LandmarkPage> {
         padding: EdgeInsets.only(left: 15, top: 20),
         child: Row(
           children: <Widget>[
-
             Text(
               rowName,
               style: TextStyle(color: Colors.grey, fontSize: 12.0),
@@ -238,13 +237,17 @@ class _LandmarkPage extends State<LandmarkPage> {
               width: 5,
             ),
             InkWell(
-              onTap: (){if(rowName == "Website"){_launchURL(rowValue);};},
+              onTap: () {
+                if (rowName == "Website") {
+                  _launchURL(rowValue);
+                }
+                ;
+              },
               child: Text(
                 rowValue,
                 style: textStyle,
               ),
             )
-
           ],
         ));
   }
@@ -262,8 +265,8 @@ class _LandmarkPage extends State<LandmarkPage> {
                 width: 23.5,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(url),
-                    )),
+                  image: AssetImage(url),
+                )),
               )
             ])));
   }
@@ -289,8 +292,8 @@ class _LandmarkPage extends State<LandmarkPage> {
                 width: 23.5,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(url),
-                    )),
+                  image: AssetImage(url),
+                )),
               )
             ])));
   }
