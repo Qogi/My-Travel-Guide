@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
-import 'package:my_travel_guide/layouts/city_map_page.dart';
 import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/layouts/landmark_page.dart';

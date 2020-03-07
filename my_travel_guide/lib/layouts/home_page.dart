@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -16,12 +18,50 @@ main() {
   runApp(HomePage());
 }
 
+const String testDevice = '';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  static final MobileAdTargetingInfo mobileAdTargetingInfo =
+      new MobileAdTargetingInfo(
+    keywords: <String>['travel', 'holidays'],
+    childDirected: false,
+  );
+
+  BannerAd _bannerAd;
+
+  BannerAd createBannerAd() {
+    return new BannerAd(
+        adUnitId: BannerAd.testAdUnitId,
+        size: AdSize.banner,
+        targetingInfo: mobileAdTargetingInfo,
+        listener: (MobileAdEvent event) {
+          print(event);
+        });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    FirebaseAdMob.instance
+        .initialize(appId: "ca-app-pub-4366992646548791~2487384199");
+    _bannerAd = createBannerAd()
+      ..load()
+      ..show();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _bannerAd.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -57,21 +97,22 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 23.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5,
-                  fontFamily: "Pompiere"
-              ),
+                  fontFamily: "Pompiere"),
             ),
           ),
           ImageSlideshow(),
           SizedBox(
-            height: 25.0,
+            height: 5.0,
           ),
           Container(
             height: 450.0,
             width: double.infinity,
             child: PageView(
-              children: <Widget>[RowsAndColumns(context)],
+              children: <Widget>[
+                RowsAndColumns(context),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

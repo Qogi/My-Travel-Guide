@@ -16,6 +16,10 @@
         android:icon="@mipmap/ic_launcher">
 
         <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4366992646548791/4921975846"/>
+
+        <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="label" />
 

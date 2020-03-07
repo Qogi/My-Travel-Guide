@@ -68,10 +68,27 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLoginLayout(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Background(),
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/sign_in_page_bg.jpg"),
+              fit: BoxFit.fill
+            )
+          ),
+        ),
         Align(
           alignment: Alignment.topCenter,
-          child: AppLogo(),
+          child: FadeAnimation(
+              1.2,
+              Container(
+                margin: EdgeInsets.only(top: 10.0),
+                width: 150.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/logo_white.png'),
+                    )),
+              )),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -106,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
     return FadeAnimation(
         1.6,
         Container(
-            margin: EdgeInsets.only(right: 85, left: 80),
+            margin: EdgeInsets.only(right: 85, left: 85),
             child: RaisedButton(
               color: Colors.white,
               onPressed: () {
@@ -160,31 +177,3 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class AppLogo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FadeAnimation(
-        1.2,
-        Container(
-          margin: EdgeInsets.only(top: 10.0),
-          width: 150.0,
-          height: 150.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/images/logo_white.png'),
-          )),
-        ));
-  }
-}
-
-class Background extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/sign_in_page_bg.jpg'),
-              fit: BoxFit.fill)),
-    );
-  }
-}
