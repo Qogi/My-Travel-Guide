@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_guide/components/places_search_map.dart';
 import 'package:my_travel_guide/components/search_filter.dart';
-import 'package:my_travel_guide/layouts/city_page.dart';
+
 
 void main() => runApp(CityMapPage());
 

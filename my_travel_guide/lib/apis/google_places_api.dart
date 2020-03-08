@@ -48,6 +48,8 @@ PlacePicker placePickerIntent(BuildContext context, String apiKey) {
                         rating:
                             _buildRatingStars(result.rating.toDouble()) ?? " ",
                         openingHours: getLandmarkOpeningHours(result.openingHours),
+                        lat: result.geometry.location.lat,
+                        lng: result.geometry.location.lng,
                         photoURL: baseImageUrl + result.photos.elementAt(0).photoReference + "&key=" + apiKey),
                   ))).whenComplete(() {
         SystemNavigator.pop();

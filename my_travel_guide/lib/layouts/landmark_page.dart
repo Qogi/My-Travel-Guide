@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:my_travel_guide/firebase/cloud_firestore.dart';
+import 'package:my_travel_guide/layouts/city_map_page.dart';
 import 'package:my_travel_guide/locales/locales.dart';
 import 'package:my_travel_guide/models/landmark_information.dart';
 import 'package:my_travel_guide/apis/google_places_api.dart';
@@ -169,8 +170,7 @@ class _LandmarkPage extends State<LandmarkPage> {
             _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
-                    builder: (context) => placePickerIntent(
-                        context, DotEnv().env['GOOGLE_API_KEY']))),
+                    builder: (context) => CityMapPage(lat: widget.data.lat, lng: widget.data.lng, keyword: "Museum",))),
             _buildAddToLandmark()
           ],
         ),
