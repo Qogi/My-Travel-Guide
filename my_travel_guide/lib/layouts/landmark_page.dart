@@ -171,11 +171,7 @@ class _LandmarkPage extends State<LandmarkPage> {
                 MaterialPageRoute(
                     builder: (context) => placePickerIntent(
                         context, DotEnv().env['GOOGLE_API_KEY']))),
-            _buildOption(
-                "assets/images/add_location.png",
-                MaterialPageRoute(
-                    builder: (context) => placePickerIntent(
-                        context, DotEnv().env['GOOGLE_API_KEY'])))
+            _buildAddToLandmark()
           ],
         ),
       ),
@@ -279,10 +275,10 @@ class _LandmarkPage extends State<LandmarkPage> {
     }
   }
 
-  Widget _buildAddToLandmark(String url) {
+  Widget _buildAddToLandmark() {
     return InkWell(
         onTap: () {
-          addLandmarkToTimeline(widget.data.id, name, "12/10/2010");
+          addLandmarkToTimeline(widget.data.id, widget.data.text, "12/10/2010");
         },
         child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -292,7 +288,7 @@ class _LandmarkPage extends State<LandmarkPage> {
                 width: 23.5,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage(url),
+                  image: AssetImage("assets/images/add_location.png"),
                 )),
               )
             ])));

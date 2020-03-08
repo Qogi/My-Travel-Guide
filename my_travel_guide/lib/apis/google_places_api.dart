@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,12 +17,6 @@ String apiKeyBase = '&key=';
 const String baseUrl =
     "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 
-String landmarkName,
-    landmarkWebsite,
-    landmarkNumber,
-    landmarkAddress,
-    landmarkRating,
-    landmarkOpeningHours;
 Data data;
 
 List<String> landmarkInformation;
@@ -44,13 +40,14 @@ PlacePicker placePickerIntent(BuildContext context, String apiKey) {
           MaterialPageRoute(
               builder: (context) => LandmarkPage(
                     data: Data(
+                        id: result.placeId,
                         text: result.name,
                         address: result.formattedAddress,
                         number: result.internationalPhoneNumber,
-                        website: result.website,
+                        website: result.website ?? "Information Not Available",
                         rating:
                             _buildRatingStars(result.rating.toDouble()) ?? " ",
-                        openingHours: result.openingHours.weekdayText.elementAt(DateTime.now().weekday - 1) ?? "No Information Available",
+                        openingHours: getLandmarkOpeningHours(result.openingHours),
                         photoURL: baseImageUrl + result.photos.elementAt(0).photoReference + "&key=" + apiKey),
                   ))).whenComplete(() {
         SystemNavigator.pop();
@@ -59,6 +56,14 @@ PlacePicker placePickerIntent(BuildContext context, String apiKey) {
     initialPosition: LatLng(48.858372, 2.294481),
     useCurrentLocation: true,
   );
+}
+
+String getLandmarkOpeningHours(OpeningHoursDetail openingHoursDetail){
+  if(openingHoursDetail != null){
+    return openingHoursDetail.weekdayText.elementAt(DateTime.now().weekday - 1);
+  }else{
+    return "Information Not Available";
+  }
 }
 
 void searchCity(BuildContext context, String cityName, String apiKey) async {
@@ -81,3 +86,32 @@ void searchCity(BuildContext context, String cityName, String apiKey) async {
                 name: response.results.elementAt(0).formattedAddress,
               )));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
