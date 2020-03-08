@@ -3,12 +3,18 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:my_travel_guide/layouts/city_page.dart';
 import 'package:my_travel_guide/models/result.dart';
 import 'package:my_travel_guide/models/error.dart';
 import 'package:my_travel_guide/models/place_response.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+
+String baseImageUrl =
+    'https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=';
+String apiKeyBase = '&key=';
 
 class PlacesSearchMap extends StatefulWidget {
   final String keyword;
@@ -33,7 +39,12 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    loadDotEnv();
     setLatLng();
+  }
+
+  void loadDotEnv() async {
+    await DotEnv().load(".env");
   }
 
   void setLatLng() {
@@ -155,14 +166,15 @@ class _PlaceSearchMap extends State<PlacesSearchMap> {
   }
 
   showAlertDialog(
-      BuildContext context, String placeName, String details, String url) {
+      BuildContext context, String placeName, String details, String photoRef) {
     showDialog(
         context: context,
         builder: (BuildContext context) => NetworkGiffyDialog(
               image: Image.network(
-                "https://media.giphy.com/media/xUOwG3nVH6Of928xJm/source.gif",
+                imageURL + photoRef + apiKeyBase + DotEnv().env['GOOGLE_API_KEY'],
                 width: 100,
                 height: 100,
+                fit: BoxFit.cover,
               ),
               title: Text(
                 placeName,
