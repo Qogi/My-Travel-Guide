@@ -12,6 +12,7 @@ import 'package:my_travel_guide/locales/locales.dart';
 
 main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     localizationsDelegates: [
       AppLocalizationsDelegate(),
       GlobalMaterialLocalizations.delegate,

@@ -5,7 +5,6 @@ import 'package:my_travel_guide/components/home_page_grid.dart';
 import 'package:my_travel_guide/components/image_slideshow.dart';
 import 'package:my_travel_guide/layouts/settings_page.dart';
 
-
 main() {
   runApp(HomePage());
 }
@@ -18,10 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   BannerAd _bannerAd;
 
-  static final MobileAdTargetingInfo mobileAdTargetingInfo = new MobileAdTargetingInfo(
+  static final MobileAdTargetingInfo mobileAdTargetingInfo =
+      new MobileAdTargetingInfo(
     keywords: <String>['travel', 'holidays'],
     childDirected: false,
   );
@@ -37,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -49,8 +47,7 @@ class _HomePageState extends State<HomePage> {
     print("hidng");
     Future.delayed(const Duration(milliseconds: 500), () {
       _bannerAd?.dispose();
-      _bannerAd= null;
-
+      _bannerAd = null;
     });
   }
 
@@ -111,7 +108,10 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,
             child: PageView(
               children: <Widget>[
-                RowsAndColumns(context: context, bannerAd: _bannerAd,),
+                RowsAndColumns(
+                  context: context,
+                  bannerAd: _bannerAd,
+                ),
               ],
             ),
           ),
@@ -120,4 +120,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

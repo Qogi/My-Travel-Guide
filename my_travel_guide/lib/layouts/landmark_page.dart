@@ -19,7 +19,10 @@ String name = "Landmark",
     rating = " ",
     number = " ",
     website = " ",
-    photoURL = " ";
+    photoURL = " ",
+    id = "";
+
+double lat = 0.0, lng = 0.0;
 
 class LandmarkPage extends StatefulWidget {
   final Data data;
@@ -36,6 +39,7 @@ class LandmarkPage extends StatefulWidget {
 }
 
 class _LandmarkPage extends State<LandmarkPage> {
+  DateTime selectedDate = DateTime.now();
   SharedPreferences prefs;
 
   initState() {
@@ -54,9 +58,11 @@ class _LandmarkPage extends State<LandmarkPage> {
   }
 
   void _saveValues() {
-    print( " saving" + widget.data.text);
+    print(" saving" + widget.data.text);
     if (widget.data.text != "Landmark") {
       setState(() {
+        prefs.setString("id", id);
+        id = widget.data.id;
         name = widget.data.text;
         prefs.setString("name", name);
         openingHours = widget.data.openingHours;
@@ -70,11 +76,14 @@ class _LandmarkPage extends State<LandmarkPage> {
         website = widget.data.website;
         prefs.setString("website", website);
         photoURL = widget.data.photoURL;
+        prefs.setDouble("lat", lat);
+        lat = widget.data.lat;
+        prefs.setDouble("lng", lng);
+        lng = widget.data.lng;
         prefs.setString("photoURL", photoURL);
         _buildLandmarkImage(photoURL);
         _buildCard(openingHours, rating, number, _buildAddress(), website);
       });
-
     }
   }
 
@@ -170,7 +179,11 @@ class _LandmarkPage extends State<LandmarkPage> {
             _buildOption(
                 "assets/images/map.png",
                 MaterialPageRoute(
-                    builder: (context) => CityMapPage(lat: widget.data.lat, lng: widget.data.lng, keyword: "Museum",))),
+                    builder: (context) => CityMapPage(
+                          lat: lat,
+                          lng: lng,
+                          keyword: "Museum",
+                        ))),
             _buildAddToLandmark()
           ],
         ),
@@ -275,10 +288,26 @@ class _LandmarkPage extends State<LandmarkPage> {
     }
   }
 
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101)).whenComplete(() => {addLandmarkToTimeline(id, name, selectedDate.toString())});
+
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
   Widget _buildAddToLandmark() {
+    DateTime selectedDate = DateTime.now();
+
     return InkWell(
         onTap: () {
-          addLandmarkToTimeline(widget.data.id, widget.data.text, "12/10/2010");
+//          addLandmarkToTimeline(id, name, "12/10/2010");
+          _selectDate(context);
         },
         child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
