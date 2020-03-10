@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -58,33 +59,35 @@ class _LandmarkPage extends State<LandmarkPage> {
   }
 
   void _saveValues() {
-    print(" saving" + widget.data.text);
-    if (widget.data.text != "Landmark") {
-      setState(() {
-        prefs.setString("id", id);
-        id = widget.data.id;
-        name = widget.data.text;
-        prefs.setString("name", name);
-        openingHours = widget.data.openingHours;
-        prefs.setString("openingHours", openingHours);
-        address = _buildAddress();
-        prefs.setString("address", address);
-        rating = widget.data.rating;
-        prefs.setString("rating", rating);
-        number = widget.data.number;
-        prefs.setString("number", number);
-        website = widget.data.website;
-        prefs.setString("website", website);
-        photoURL = widget.data.photoURL;
-        prefs.setDouble("lat", lat);
-        lat = widget.data.lat;
-        prefs.setDouble("lng", lng);
-        lng = widget.data.lng;
-        prefs.setString("photoURL", photoURL);
-        _buildLandmarkImage(photoURL);
-        _buildCard(openingHours, rating, number, _buildAddress(), website);
-      });
+    if(widget.data != null){
+      if (widget.data.text != "Landmark") {
+        setState(() {
+          prefs.setString("id", id);
+          id = widget.data.id;
+          name = widget.data.text;
+          prefs.setString("name", name);
+          openingHours = widget.data.openingHours;
+          prefs.setString("openingHours", openingHours);
+          address = _buildAddress();
+          prefs.setString("address", address);
+          rating = widget.data.rating;
+          prefs.setString("rating", rating);
+          number = widget.data.number;
+          prefs.setString("number", number);
+          website = widget.data.website;
+          prefs.setString("website", website);
+          photoURL = widget.data.photoURL;
+          prefs.setDouble("lat", lat);
+          lat = widget.data.lat;
+          prefs.setDouble("lng", lng);
+          lng = widget.data.lng;
+          prefs.setString("photoURL", photoURL);
+          _buildLandmarkImage(photoURL);
+          _buildCard(openingHours, rating, number, _buildAddress(), website);
+        });
+      }
     }
+
   }
 
   String _buildAddress() {
@@ -132,6 +135,17 @@ class _LandmarkPage extends State<LandmarkPage> {
                     fontFamily: "Pompiere",
                     letterSpacing: 1.5,
                   ),
+                ),
+              ),
+              Container(
+                height: 150,
+                width: 150,
+                alignment: Alignment.bottomRight,
+                margin: EdgeInsets.only(top: 200.0, left: 230),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/options.png")
+                  )
                 ),
               ),
               _buildLandmarkImage(photoURL),
@@ -302,11 +316,8 @@ class _LandmarkPage extends State<LandmarkPage> {
   }
 
   Widget _buildAddToLandmark() {
-    DateTime selectedDate = DateTime.now();
-
     return InkWell(
         onTap: () {
-//          addLandmarkToTimeline(id, name, "12/10/2010");
           _selectDate(context);
         },
         child: Padding(

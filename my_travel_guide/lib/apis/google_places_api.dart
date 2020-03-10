@@ -22,31 +22,36 @@ Data data;
 List<String> landmarkInformation;
 List<Result> cityLandmarks = new List();
 
-String _buildRatingStars(double rating) {
-  String stars = '';
-  for (int i = 0; i < rating.round(); i++) {
-    stars += '⭐ ';
+String _buildRatingStars(PickResult result) {
+
+  if(result.rating != null){
+    String stars = '';
+    for (int i = 0; i < result.rating.round(); i++) {
+      stars += '⭐ ';
+    }
+    stars.trim();
+    return stars;
   }
-  stars.trim();
-  return stars;
+
+  return "Information Not Available";
 }
 
 PlacePicker placePickerIntent(BuildContext context, String apiKey) {
   return PlacePicker(
     apiKey: apiKey,
     onPlacePicked: (result) {
+      print(result.name + "\n" + getLandmarkOpeningHours(result.openingHours) + "\n" + _buildRatingStars(result) + "\n" + result.placeId + "\n" +result.geometry.location.lat.toString() + "\n" + result.website.toString()  );
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => LandmarkPage(
                     data: Data(
                         id: result.placeId,
-                        text: result.name,
-                        address: result.formattedAddress,
-                        number: result.internationalPhoneNumber,
-                        website: result.website ?? "Information Not Available",
-                        rating:
-                            _buildRatingStars(result.rating.toDouble()) ?? " ",
+                        text: result.name ?? "Landmark",
+                        address: getLandmarkAddress(result) ,
+                        number: getLandmarkNumber(result),
+                        website: getLandmarkWebsite(result),
+                        rating: _buildRatingStars(result),
                         openingHours: getLandmarkOpeningHours(result.openingHours),
                         lat: result.geometry.location.lat,
                         lng: result.geometry.location.lng,
@@ -58,6 +63,30 @@ PlacePicker placePickerIntent(BuildContext context, String apiKey) {
     initialPosition: LatLng(48.858372, 2.294481),
     useCurrentLocation: true,
   );
+}
+
+String getLandmarkWebsite(PickResult result) {
+  if(result.website != null){
+    return result.website.toString();
+  }else{
+    return "Information Not Available";
+  }
+}
+
+String getLandmarkAddress(PickResult result) {
+  if(result.formattedAddress != null){
+    return result.formattedAddress.toString();
+  }else{
+    return "Information Not Available";
+  }
+}
+
+String getLandmarkNumber(PickResult result) {
+  if(result.formattedPhoneNumber != null){
+    return result.formattedPhoneNumber.toString();
+  }else{
+    return "Information Not Available";
+  }
 }
 
 String getLandmarkOpeningHours(OpeningHoursDetail openingHoursDetail){

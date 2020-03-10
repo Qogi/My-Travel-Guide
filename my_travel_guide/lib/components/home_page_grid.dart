@@ -73,7 +73,13 @@ class RowsAndColumns extends StatelessWidget {
                   AppLocalizations.of(context).landmark,
                   'assets/images/options.png',
                   MaterialPageRoute(
-                      builder: (context) => LandmarkPage(data: data,  landmarkImageURL: '')),
+                      builder: (context) => LandmarkPage(data: new Data(
+                          text: "Landmark",
+                          address: " ",
+                          number: " ",
+                          website: " ",
+                          rating: " ",
+                          openingHours: " "),  landmarkImageURL: '')),
                   160.0, 160.0, 110.0, 110.0),
               _buildCard(
                   AppLocalizations.of(context).cities,
