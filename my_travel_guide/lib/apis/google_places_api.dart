@@ -40,7 +40,6 @@ PlacePicker placePickerIntent(BuildContext context, String apiKey) {
   return PlacePicker(
     apiKey: apiKey,
     onPlacePicked: (result) {
-      print(result.name + "\n" + getLandmarkOpeningHours(result.openingHours) + "\n" + _buildRatingStars(result) + "\n" + result.placeId + "\n" +result.geometry.location.lat.toString() + "\n" + result.website.toString()  );
       Navigator.push(
           context,
           MaterialPageRoute(
